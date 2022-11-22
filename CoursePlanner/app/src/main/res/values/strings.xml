@@ -6,6 +6,7 @@
     <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
+    <string name="logOut">Log Out</string>
     <string name="adminAddCourseSubmit">New Course Submit</string>
     <string name="adminAddCourse">Please fill the information about the new course</string>
     <string name="adminAddCourseName">Course Name</string>
@@ -14,4 +15,7 @@
     <string name="adminAddPre">Prerequisite</string>
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="studentToAddCourse">Add Completed Courses</string>
+    <string name="studentToTakenCourseDisplay">Completed Courses</string>
+    <string name="studentToGenerateTimeline">Generate Timeline</string>
 </resources>
