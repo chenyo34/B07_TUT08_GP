@@ -24,9 +24,13 @@
     <string name="adminCourseListDisplay">Course List Display</string>
     <string name="adminEditDisplay">Edit Display</string>
     <string name="adminActivityAddCourse">Add Course</string>
+    <string name="Course_input">Course Code</string>
+    <string name="Sumbit_button">Sumbit</string>
+    <string name="Return_button">Previous</string>
+    <string name="add_course_textview">Type to add courses</string>
 
 
-<!--    <string name = "banner">Course Planner</string>-->
+    <!--    <string name = "banner">Course Planner</string>-->
 <!--    <string name = "banner_description">Register</string>-->
 <!--    <string name="loginasAdmin">Log in as admin</string>-->
 
