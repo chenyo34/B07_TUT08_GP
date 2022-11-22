@@ -6,7 +6,12 @@
     <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
-
+    <string name="adminAddCourseSubmit">New Course Submit</string>
+    <string name="adminAddCourse">Please fill the information about the new courses</string>
+    <string name="adminAddCourseName">Course Name</string>
+    <string name="adminAddCourseCode">Course Code</string>
+    <string name="adminAddOffering">Offering Session</string>
+    <string name="adminAddPre">Prerequisite</string>
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 </resources>
