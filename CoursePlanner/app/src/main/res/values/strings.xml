@@ -21,4 +21,8 @@
 
     <string name = "banner">Log in</string>
     <string name = "banner_description">Log in page</string>
+    <string name="Course_input">Course Code</string>
+    <string name="Sumbit_button">Sumbit</string>
+    <string name="Return_button">Previous</string>
+    <string name="add_course_textview">Type here to add courses</string>
 </resources>
