@@ -18,6 +18,8 @@
     <string name="studentToAddCourse">Add Completed Courses</string>
     <string name="studentToTakenCourseDisplay">Completed Courses</string>
     <string name="studentToGenerateTimeline">Generate Timeline</string>
+    <string name = "banner">Log in</string>
+    <string name = "banner_description">Log in page</string>
     <string name="adminCourseListDisplay">Course List Display</string>
     <string name="adminEditDisplay">Edit Display</string>
     <string name="adminActivityAddCourse">Add Course</string>
