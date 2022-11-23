@@ -25,7 +25,7 @@
     <string name="adminEditDisplay">Edit Display</string>
     <string name="adminActivityAddCourse">Add Course</string>
     <string name="Course_input">Course Code</string>
-    <string name="Sumbit_button">Sumbit</string>
+    <string name="Sumbit_button">Submit</string>
     <string name="Return_button">Previous</string>
     <string name="add_course_textview">Type to add courses</string>
 
@@ -42,5 +42,8 @@
     <string name="i_am_an_admin">I am an admin</string>
     <string name="register_user">REGISTER USER</string>
     <string name="full_name">Full Name</string>
+    <string name="add_course_button">Add</string>
+    <string name="timeline_submit_button">Submit</string>
+    <string name="timeline_add_button">Add</string>
 
 </resources>
