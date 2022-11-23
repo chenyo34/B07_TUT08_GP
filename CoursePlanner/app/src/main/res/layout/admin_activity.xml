@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/adminActivityLogOutButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="2dp"
@@ -15,10 +15,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button4" />
+        app:layout_constraintTop_toBottomOf="@+id/adminActivityCourseListDisplayButton" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/adminActivityCourseListDisplayButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="2dp"
@@ -27,10 +27,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button5" />
+        app:layout_constraintTop_toBottomOf="@+id/adminActivityEditDisplayButton" />
 
     <Button
-        android:id="@+id/button5"
+        android:id="@+id/adminActivityEditDisplayButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="7dp"
@@ -39,10 +39,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button6" />
+        app:layout_constraintTop_toBottomOf="@+id/adminActivityAddCourseButton" />
 
     <Button
-        android:id="@+id/button6"
+        android:id="@+id/adminActivityAddCourseButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/adminActivityAddCourse"
