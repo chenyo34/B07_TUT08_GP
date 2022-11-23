@@ -26,9 +26,16 @@
     <string name="app_name">CoursePlanner</string>
     <string name="banner">Log in</string>
     <string name="banner_description">Log in page</string>
+    <string name="default_web_client_id" translatable="false">889023112925-37904euij0jn7rcrkqusli34mj3b06iv.apps.googleusercontent.com</string>
     <string name="email_address">Email Address</string>
+    <string name="firebase_database_url" translatable="false">https://b07groupproject-default-rtdb.firebaseio.com</string>
     <string name="first_fragment_label">First Fragment</string>
     <string name="full_name">Full Name</string>
+    <string name="gcm_defaultSenderId" translatable="false">889023112925</string>
+    <string name="google_api_key" translatable="false">AIzaSyDVIGwtxlk8DR7GzN8N7JJpbwGMW1NdkEQ</string>
+    <string name="google_app_id" translatable="false">1:889023112925:android:e1c3e9ee9ae30c1c659d34</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyDVIGwtxlk8DR7GzN8N7JJpbwGMW1NdkEQ</string>
+    <string name="google_storage_bucket" translatable="false">b07groupproject.appspot.com</string>
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="i_am_an_admin">I am an admin</string>
@@ -39,6 +46,7 @@
     <string name="next">Next</string>
     <string name="password">PassWord</string>
     <string name="previous">Previous</string>
+    <string name="project_id" translatable="false">b07groupproject</string>
     <string name="register_user">REGISTER USER</string>
     <string name="remember_me">Remember me</string>
     <string name="second_fragment_label">Second Fragment</string>
