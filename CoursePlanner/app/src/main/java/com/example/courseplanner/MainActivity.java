@@ -18,6 +18,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.courseplanner.databinding.ActivityMainBinding;
+import com.google.firebase.auth.FirebaseAuth;
 
 import android.view.Menu;
 import android.view.MenuItem;
@@ -40,6 +41,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private CheckBox boxRememberMe;
     private TextView tvRegister;
     private TextView tvAdminLogin;
+
+    private FirebaseAuth mAuth;
+
+
+//    Haven't create the Presenter class
+//    private Presenter presenter;
+
 
 
     @Override
@@ -64,7 +72,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tvAdminLogin = (TextView) findViewById(R.id.adminLogin);
         tvAdminLogin.setOnClickListener(this);
 
-        preferences = getSharedPreferences("b07", Context.MODE_PRIVATE);
+        preferences = getSharedPreferences("b07GroupProject", Context.MODE_PRIVATE);
         editor = preferences.edit();
 
         btnLogIn.setOnClickListener(new View.OnClickListener() {
