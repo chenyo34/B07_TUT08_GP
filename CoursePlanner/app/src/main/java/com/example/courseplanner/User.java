@@ -4,45 +4,49 @@ import java.util.Objects;
 
 public class User {
     private String name;
+    private String email;
     private String UTORid;
-    private String gender;
+
+    public User() {
+
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     public String getName() {
         return name;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public String getUTORid() {
-        return UTORid;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
+    public String getUTORid() {
+        return UTORid;
+    }
+
     public void setUTORid(String UTORid) {
         this.UTORid = UTORid;
     }
 
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public User(String name, String username, String UTORid) {
+    public User(String name, String email, String UTORid) {
         this.name = name;
-        this.UTORid = username;
-        this.gender = UTORid;
+        this.email = email;
+        this.UTORid = UTORid;
     }
 
     @Override
     public String toString() {
         return "User{" +
                 "name='" + name + '\'' +
-                ", username='" + UTORid + '\'' +
-                ", password='" + gender + '\'' +
+                ", email='" + email + '\'' +
+                ", UTORid='" + UTORid + '\'' +
                 '}';
     }
 }
