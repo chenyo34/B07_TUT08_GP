@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">b07gp</string>
+    <string name="action_settings">Settings</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <!-- String used for log in and sign up pages -->
+    <string name="banner">Log in</string>
+    <string name="loginTitle">Course Planner</string>
+    <string name="loginDescription">Register</string>
+    <string name="adminLogin">Log in as admin</string>
+    <string name="signup">Sign Up</string>
+    <string name="email_address">Email Address</string>
+    <string name="password">PassWord</string>
+    <string name="login">LOGIN</string>
+    <string name="remember_me">Remember me</string>
+    <string name="i_am_an_admin">I am an admin</string>
+    <string name="register_user">REGISTER USER</string>
+    <string name="full_name">Full Name</string>
+
+
+</resources>
