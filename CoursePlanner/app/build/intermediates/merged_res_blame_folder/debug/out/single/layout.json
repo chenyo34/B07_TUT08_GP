@@ -1,0 +1,82 @@
+[
+    {
+        "merged": "com.example.courseplanner.app-mergeDebugResources-40:/layout/login_page.xml",
+        "source": "com.example.courseplanner.app-main-43:/layout/login_page.xml"
+    },
+    {
+        "merged": "/Users/zhanghaoqian/.gradle/daemon/7.4/com.example.courseplanner.app-mergeDebugResources-40:/layout/student_timeline_display.xml",
+        "source": "/Users/zhanghaoqian/.gradle/daemon/7.4/com.example.courseplanner.app-main-43:/layout/student_timeline_display.xml"
+    },
+    {
+        "merged": "/Users/zhanghaoqian/.gradle/daemon/7.4/com.example.courseplanner.app-mergeDebugResources-40:/layout/fragment_first.xml",
+        "source": "/Users/zhanghaoqian/.gradle/daemon/7.4/com.example.courseplanner.app-main-43:/layout/fragment_first.xml"
+    },
+    {
+        "merged": "/Users/zhanghaoqian/.gradle/daemon/7.4/com.example.courseplanner.app-mergeDebugResources-40:/layout/admin_activity.xml",
+        "source": "/Users/zhanghaoqian/.gradle/daemon/7.4/com.example.courseplanner.app-main-43:/layout/admin_activity.xml"
+    },
+    {
+        "merged": "/Users/zhanghaoqian/.gradle/daemon/7.4/com.example.courseplanner.app-mergeDebugResources-40:/layout/login_page.xml",
+        "source": "/Users/zhanghaoqian/.gradle/daemon/7.4/com.example.courseplanner.app-main-43:/layout/login_page.xml"
+    },
+    {
+        "merged": "/Users/zhanghaoqian/.gradle/daemon/7.4/com.example.courseplanner.app-mergeDebugResources-40:/layout/admin_add_course.xml",
+        "source": "/Users/zhanghaoqian/.gradle/daemon/7.4/com.example.courseplanner.app-main-43:/layout/admin_add_course.xml"
+    },
+    {
+        "merged": "com.example.courseplanner.app-mergeDebugResources-40:/layout/activity_main.xml",
+        "source": "com.example.courseplanner.app-main-43:/layout/activity_main.xml"
+    },
+    {
+        "merged": "/Users/zhanghaoqian/.gradle/daemon/7.4/com.example.courseplanner.app-mergeDebugResources-40:/layout/student_taken_course_display.xml",
+        "source": "/Users/zhanghaoqian/.gradle/daemon/7.4/com.example.courseplanner.app-main-43:/layout/student_taken_course_display.xml"
+    },
+    {
+        "merged": "/Users/zhanghaoqian/.gradle/daemon/7.4/com.example.courseplanner.app-mergeDebugResources-40:/layout/content_main.xml",
+        "source": "/Users/zhanghaoqian/.gradle/daemon/7.4/com.example.courseplanner.app-main-43:/layout/content_main.xml"
+    },
+    {
+        "merged": "/Users/zhanghaoqian/.gradle/daemon/7.4/com.example.courseplanner.app-mergeDebugResources-40:/layout/admin_edit_page.xml",
+        "source": "/Users/zhanghaoqian/.gradle/daemon/7.4/com.example.courseplanner.app-main-43:/layout/admin_edit_page.xml"
+    },
+    {
+        "merged": "/Users/zhanghaoqian/.gradle/daemon/7.4/com.example.courseplanner.app-mergeDebugResources-40:/layout/fragment_second.xml",
+        "source": "/Users/zhanghaoqian/.gradle/daemon/7.4/com.example.courseplanner.app-main-43:/layout/fragment_second.xml"
+    },
+    {
+        "merged": "/Users/zhanghaoqian/.gradle/daemon/7.4/com.example.courseplanner.app-mergeDebugResources-40:/layout/signin_page.xml",
+        "source": "/Users/zhanghaoqian/.gradle/daemon/7.4/com.example.courseplanner.app-main-43:/layout/signin_page.xml"
+    },
+    {
+        "merged": "/Users/zhanghaoqian/.gradle/daemon/7.4/com.example.courseplanner.app-mergeDebugResources-40:/layout/activity_register.xml",
+        "source": "/Users/zhanghaoqian/.gradle/daemon/7.4/com.example.courseplanner.app-main-43:/layout/activity_register.xml"
+    },
+    {
+        "merged": "/Users/zhanghaoqian/.gradle/daemon/7.4/com.example.courseplanner.app-mergeDebugResources-40:/layout/student_add_course.xml",
+        "source": "/Users/zhanghaoqian/.gradle/daemon/7.4/com.example.courseplanner.app-main-43:/layout/student_add_course.xml"
+    },
+    {
+        "merged": "/Users/zhanghaoqian/.gradle/daemon/7.4/com.example.courseplanner.app-mergeDebugResources-40:/layout/student_activity.xml",
+        "source": "/Users/zhanghaoqian/.gradle/daemon/7.4/com.example.courseplanner.app-main-43:/layout/student_activity.xml"
+    },
+    {
+        "merged": "/Users/zhanghaoqian/.gradle/daemon/7.4/com.example.courseplanner.app-mergeDebugResources-40:/layout/activity_main.xml",
+        "source": "/Users/zhanghaoqian/.gradle/daemon/7.4/com.example.courseplanner.app-main-43:/layout/activity_main.xml"
+    },
+    {
+        "merged": "com.example.courseplanner.app-mergeDebugResources-40:/layout/activity_register.xml",
+        "source": "com.example.courseplanner.app-main-43:/layout/activity_register.xml"
+    },
+    {
+        "merged": "com.example.courseplanner.app-mergeDebugResources-40:/layout/signin_page.xml",
+        "source": "com.example.courseplanner.app-main-43:/layout/signin_page.xml"
+    },
+    {
+        "merged": "/Users/zhanghaoqian/.gradle/daemon/7.4/com.example.courseplanner.app-mergeDebugResources-40:/layout/activity_main_1.xml",
+        "source": "/Users/zhanghaoqian/.gradle/daemon/7.4/com.example.courseplanner.app-main-43:/layout/activity_main_1.xml"
+    },
+    {
+        "merged": "/Users/zhanghaoqian/.gradle/daemon/7.4/com.example.courseplanner.app-mergeDebugResources-40:/layout/admin_course_list_display.xml",
+        "source": "/Users/zhanghaoqian/.gradle/daemon/7.4/com.example.courseplanner.app-main-43:/layout/admin_course_list_display.xml"
+    }
+]

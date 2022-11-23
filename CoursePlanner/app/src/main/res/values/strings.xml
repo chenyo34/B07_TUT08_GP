@@ -19,8 +19,8 @@
     <string name="studentToTakenCourseDisplay">Completed Courses</string>
     <string name="studentToGenerateTimeline">Generate Timeline</string>
 
-    <string name = "banner">Log in</string>
-    <string name = "banner_description">Log in page</string>
+    <string name="banner">Log in</string>
+    <string name="banner_description">Log in page</string>
     <string name="adminCourseListDisplay">Course List Display</string>
     <string name="adminEditDisplay">Edit Display</string>
     <string name="adminActivityAddCourse">Add Course</string>
@@ -30,8 +30,17 @@
     <string name="add_course_textview">Type to add courses</string>
 
 
-    <!--    <string name = "banner">Course Planner</string>-->
-<!--    <string name = "banner_description">Register</string>-->
-<!--    <string name="loginasAdmin">Log in as admin</string>-->
+    <!-- String used for log in and sign up pages -->
+    <string name="loginTitle">Course Planner</string>
+    <string name="loginDescription">Register</string>
+    <string name="adminLogin">Log in as admin</string>
+    <string name="signup">Sign Up</string>
+    <string name="email_address">Email Address</string>
+    <string name="password">PassWord</string>
+    <string name="login">LOGIN</string>
+    <string name="remember_me">Remember me</string>
+    <string name="i_am_an_admin">I am an admin</string>
+    <string name="register_user">REGISTER USER</string>
+    <string name="full_name">Full Name</string>
 
 </resources>

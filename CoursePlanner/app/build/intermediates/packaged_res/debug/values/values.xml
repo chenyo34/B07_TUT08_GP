@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="white">#FFFFFFFF</color>
+    <dimen name="fab_margin">16dp</dimen>
+    <string name="Course_input">Course Code</string>
+    <string name="Return_button">Previous</string>
+    <string name="Sumbit_button">Sumbit</string>
+    <string name="action_settings">Settings</string>
+    <string name="add_course_textview">Type to add courses</string>
+    <string name="adminActivityAddCourse">Add Course</string>
+    <string name="adminAddCourse">Please fill the information about the new course</string>
+    <string name="adminAddCourseCode">Course Code</string>
+    <string name="adminAddCourseName">Course Name</string>
+    <string name="adminAddCourseSubmit">New Course Submit</string>
+    <string name="adminAddOffering">Offering Session</string>
+    <string name="adminAddPre">Prerequisite</string>
+    <string name="adminCourseListDisplay">Course List Display</string>
+    <string name="adminEditDisplay">Edit Display</string>
+    <string name="adminLogin">Log in as admin</string>
+    <string name="app_name">CoursePlanner</string>
+    <string name="banner">Log in</string>
+    <string name="banner_description">Log in page</string>
+    <string name="email_address">Email Address</string>
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="full_name">Full Name</string>
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="i_am_an_admin">I am an admin</string>
+    <string name="logOut">Log Out</string>
+    <string name="login">LOGIN</string>
+    <string name="loginDescription">Register</string>
+    <string name="loginTitle">Course Planner</string>
+    <string name="next">Next</string>
+    <string name="password">PassWord</string>
+    <string name="previous">Previous</string>
+    <string name="register_user">REGISTER USER</string>
+    <string name="remember_me">Remember me</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="signup">Sign Up</string>
+    <string name="studentToAddCourse">Add Completed Courses</string>
+    <string name="studentToGenerateTimeline">Generate Timeline</string>
+    <string name="studentToTakenCourseDisplay">Completed Courses</string>
+    <style name="Theme.CoursePlanner" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        
+        <item name="colorPrimary">@color/teal_200</item>
+        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorOnPrimary">@color/white</item>
+        
+        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondaryVariant">@color/teal_700</item>
+        <item name="colorOnSecondary">@color/black</item>
+        
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        
+    </style>
+    <style name="Theme.CoursePlanner.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+    <style name="Theme.CoursePlanner.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <style name="Theme.CoursePlanner.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+</resources>

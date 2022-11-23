@@ -1,0 +1,113 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.example.courseplanner"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="21"
+8-->/Users/zhanghaoqian/Documents/GitHub/B07_TUT08_GP/CoursePlanner/app/src/main/AndroidManifest.xml
+9        android:targetSdkVersion="32" />
+9-->/Users/zhanghaoqian/Documents/GitHub/B07_TUT08_GP/CoursePlanner/app/src/main/AndroidManifest.xml
+10
+11    <application
+11-->/Users/zhanghaoqian/Documents/GitHub/B07_TUT08_GP/CoursePlanner/app/src/main/AndroidManifest.xml:5:5-37:19
+12        android:allowBackup="true"
+12-->/Users/zhanghaoqian/Documents/GitHub/B07_TUT08_GP/CoursePlanner/app/src/main/AndroidManifest.xml:6:9-35
+13        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+13-->[androidx.core:core:1.8.0] /Users/zhanghaoqian/.gradle/caches/transforms-3/87a796fe63836d99a2198ac6a6284cb3/transformed/core-1.8.0/AndroidManifest.xml:24:18-86
+14        android:dataExtractionRules="@xml/data_extraction_rules"
+14-->/Users/zhanghaoqian/Documents/GitHub/B07_TUT08_GP/CoursePlanner/app/src/main/AndroidManifest.xml:7:9-65
+15        android:debuggable="true"
+16        android:fullBackupContent="@xml/backup_rules"
+16-->/Users/zhanghaoqian/Documents/GitHub/B07_TUT08_GP/CoursePlanner/app/src/main/AndroidManifest.xml:8:9-54
+17        android:icon="@mipmap/ic_launcher"
+17-->/Users/zhanghaoqian/Documents/GitHub/B07_TUT08_GP/CoursePlanner/app/src/main/AndroidManifest.xml:9:9-43
+18        android:label="@string/app_name"
+18-->/Users/zhanghaoqian/Documents/GitHub/B07_TUT08_GP/CoursePlanner/app/src/main/AndroidManifest.xml:10:9-41
+19        android:roundIcon="@mipmap/ic_launcher_round"
+19-->/Users/zhanghaoqian/Documents/GitHub/B07_TUT08_GP/CoursePlanner/app/src/main/AndroidManifest.xml:11:9-54
+20        android:supportsRtl="true"
+20-->/Users/zhanghaoqian/Documents/GitHub/B07_TUT08_GP/CoursePlanner/app/src/main/AndroidManifest.xml:12:9-35
+21        android:testOnly="true"
+22        android:theme="@style/Theme.CoursePlanner" >
+22-->/Users/zhanghaoqian/Documents/GitHub/B07_TUT08_GP/CoursePlanner/app/src/main/AndroidManifest.xml:13:9-51
+23        <activity
+23-->/Users/zhanghaoqian/Documents/GitHub/B07_TUT08_GP/CoursePlanner/app/src/main/AndroidManifest.xml:15:9-21:20
+24            android:name="com.example.courseplanner.RegisterActivity"
+24-->/Users/zhanghaoqian/Documents/GitHub/B07_TUT08_GP/CoursePlanner/app/src/main/AndroidManifest.xml:16:13-45
+25            android:exported="false" >
+25-->/Users/zhanghaoqian/Documents/GitHub/B07_TUT08_GP/CoursePlanner/app/src/main/AndroidManifest.xml:17:13-37
+26            <meta-data
+26-->/Users/zhanghaoqian/Documents/GitHub/B07_TUT08_GP/CoursePlanner/app/src/main/AndroidManifest.xml:18:13-20:36
+27                android:name="android.app.lib_name"
+27-->/Users/zhanghaoqian/Documents/GitHub/B07_TUT08_GP/CoursePlanner/app/src/main/AndroidManifest.xml:19:17-52
+28                android:value="" />
+28-->/Users/zhanghaoqian/Documents/GitHub/B07_TUT08_GP/CoursePlanner/app/src/main/AndroidManifest.xml:20:17-33
+29        </activity>
+30        <activity
+30-->/Users/zhanghaoqian/Documents/GitHub/B07_TUT08_GP/CoursePlanner/app/src/main/AndroidManifest.xml:22:9-36:20
+31            android:name="com.example.courseplanner.MainActivity"
+31-->/Users/zhanghaoqian/Documents/GitHub/B07_TUT08_GP/CoursePlanner/app/src/main/AndroidManifest.xml:23:13-41
+32            android:exported="true"
+32-->/Users/zhanghaoqian/Documents/GitHub/B07_TUT08_GP/CoursePlanner/app/src/main/AndroidManifest.xml:24:13-36
+33            android:label="@string/app_name"
+33-->/Users/zhanghaoqian/Documents/GitHub/B07_TUT08_GP/CoursePlanner/app/src/main/AndroidManifest.xml:25:13-45
+34            android:theme="@style/Theme.CoursePlanner.NoActionBar" >
+34-->/Users/zhanghaoqian/Documents/GitHub/B07_TUT08_GP/CoursePlanner/app/src/main/AndroidManifest.xml:26:13-67
+35            <intent-filter>
+35-->/Users/zhanghaoqian/Documents/GitHub/B07_TUT08_GP/CoursePlanner/app/src/main/AndroidManifest.xml:27:13-31:29
+36                <action android:name="android.intent.action.MAIN" />
+36-->/Users/zhanghaoqian/Documents/GitHub/B07_TUT08_GP/CoursePlanner/app/src/main/AndroidManifest.xml:28:17-69
+36-->/Users/zhanghaoqian/Documents/GitHub/B07_TUT08_GP/CoursePlanner/app/src/main/AndroidManifest.xml:28:25-66
+37
+38                <category android:name="android.intent.category.LAUNCHER" />
+38-->/Users/zhanghaoqian/Documents/GitHub/B07_TUT08_GP/CoursePlanner/app/src/main/AndroidManifest.xml:30:17-77
+38-->/Users/zhanghaoqian/Documents/GitHub/B07_TUT08_GP/CoursePlanner/app/src/main/AndroidManifest.xml:30:27-74
+39            </intent-filter>
+40
+41            <meta-data
+41-->/Users/zhanghaoqian/Documents/GitHub/B07_TUT08_GP/CoursePlanner/app/src/main/AndroidManifest.xml:18:13-20:36
+42                android:name="android.app.lib_name"
+42-->/Users/zhanghaoqian/Documents/GitHub/B07_TUT08_GP/CoursePlanner/app/src/main/AndroidManifest.xml:19:17-52
+43                android:value="" />
+43-->/Users/zhanghaoqian/Documents/GitHub/B07_TUT08_GP/CoursePlanner/app/src/main/AndroidManifest.xml:20:17-33
+44        </activity>
+45
+46        <provider
+46-->[androidx.emoji2:emoji2:1.2.0] /Users/zhanghaoqian/.gradle/caches/transforms-3/c03fa7bc00a04a375204b573f0966d9f/transformed/emoji2-1.2.0/AndroidManifest.xml:24:9-32:20
+47            android:name="androidx.startup.InitializationProvider"
+47-->[androidx.emoji2:emoji2:1.2.0] /Users/zhanghaoqian/.gradle/caches/transforms-3/c03fa7bc00a04a375204b573f0966d9f/transformed/emoji2-1.2.0/AndroidManifest.xml:25:13-67
+48            android:authorities="com.example.courseplanner.androidx-startup"
+48-->[androidx.emoji2:emoji2:1.2.0] /Users/zhanghaoqian/.gradle/caches/transforms-3/c03fa7bc00a04a375204b573f0966d9f/transformed/emoji2-1.2.0/AndroidManifest.xml:26:13-68
+49            android:exported="false" >
+49-->[androidx.emoji2:emoji2:1.2.0] /Users/zhanghaoqian/.gradle/caches/transforms-3/c03fa7bc00a04a375204b573f0966d9f/transformed/emoji2-1.2.0/AndroidManifest.xml:27:13-37
+50            <meta-data
+50-->[androidx.emoji2:emoji2:1.2.0] /Users/zhanghaoqian/.gradle/caches/transforms-3/c03fa7bc00a04a375204b573f0966d9f/transformed/emoji2-1.2.0/AndroidManifest.xml:29:13-31:52
+51                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+51-->[androidx.emoji2:emoji2:1.2.0] /Users/zhanghaoqian/.gradle/caches/transforms-3/c03fa7bc00a04a375204b573f0966d9f/transformed/emoji2-1.2.0/AndroidManifest.xml:30:17-75
+52                android:value="androidx.startup" />
+52-->[androidx.emoji2:emoji2:1.2.0] /Users/zhanghaoqian/.gradle/caches/transforms-3/c03fa7bc00a04a375204b573f0966d9f/transformed/emoji2-1.2.0/AndroidManifest.xml:31:17-49
+53            <meta-data
+53-->[androidx.lifecycle:lifecycle-process:2.4.1] /Users/zhanghaoqian/.gradle/caches/transforms-3/0ce9e5f033589fdf0ab757f82f7808ec/transformed/lifecycle-process-2.4.1/AndroidManifest.xml:31:13-33:52
+54                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+54-->[androidx.lifecycle:lifecycle-process:2.4.1] /Users/zhanghaoqian/.gradle/caches/transforms-3/0ce9e5f033589fdf0ab757f82f7808ec/transformed/lifecycle-process-2.4.1/AndroidManifest.xml:32:17-78
+55                android:value="androidx.startup" />
+55-->[androidx.lifecycle:lifecycle-process:2.4.1] /Users/zhanghaoqian/.gradle/caches/transforms-3/0ce9e5f033589fdf0ab757f82f7808ec/transformed/lifecycle-process-2.4.1/AndroidManifest.xml:33:17-49
+56        </provider>
+57
+58        <uses-library
+58-->[androidx.window:window:1.0.0] /Users/zhanghaoqian/.gradle/caches/transforms-3/073f10b23065a04cd4c659168bad23fb/transformed/window-1.0.0/AndroidManifest.xml:25:9-27:40
+59            android:name="androidx.window.extensions"
+59-->[androidx.window:window:1.0.0] /Users/zhanghaoqian/.gradle/caches/transforms-3/073f10b23065a04cd4c659168bad23fb/transformed/window-1.0.0/AndroidManifest.xml:26:13-54
+60            android:required="false" />
+60-->[androidx.window:window:1.0.0] /Users/zhanghaoqian/.gradle/caches/transforms-3/073f10b23065a04cd4c659168bad23fb/transformed/window-1.0.0/AndroidManifest.xml:27:13-37
+61        <uses-library
+61-->[androidx.window:window:1.0.0] /Users/zhanghaoqian/.gradle/caches/transforms-3/073f10b23065a04cd4c659168bad23fb/transformed/window-1.0.0/AndroidManifest.xml:28:9-30:40
+62            android:name="androidx.window.sidecar"
+62-->[androidx.window:window:1.0.0] /Users/zhanghaoqian/.gradle/caches/transforms-3/073f10b23065a04cd4c659168bad23fb/transformed/window-1.0.0/AndroidManifest.xml:29:13-51
+63            android:required="false" />
+63-->[androidx.window:window:1.0.0] /Users/zhanghaoqian/.gradle/caches/transforms-3/073f10b23065a04cd4c659168bad23fb/transformed/window-1.0.0/AndroidManifest.xml:30:13-37
+64    </application>
+65
+66</manifest>
