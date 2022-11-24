@@ -4,6 +4,8 @@ public class User {
     String name;
     String email;
 
+    String ID;
+
     public User(String name, String email) {
         this.name = name;
         this.email = email;
@@ -23,6 +25,14 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public void setID(String ID) {
+        this.ID = ID;
+    }
+
+    public String getID() {
+        return ID;
     }
 
     @Override
