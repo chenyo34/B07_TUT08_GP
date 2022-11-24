@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.FirebaseAuth;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -33,7 +34,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button btnLogIn;
     private CheckBox boxRememberMe;
     private TextView loginDescription;
+    private FirebaseAuth mAuth;
 
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -49,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnLogIn.setOnClickListener(this);
         loginDescription.setOnClickListener(this);
 
-//        mAuth = FirebaseAuth.getInstance();
+        mAuth = FirebaseAuth.getInstance();
 
 //        presenter = new Presenter(new Model(), this);
     }
@@ -58,7 +61,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.loginDescription:
-                System.out.println("HERE_0");
                 startActivity(new Intent(this, MainActivity2.class));
                 break;
             case R.id.btnLogin:
