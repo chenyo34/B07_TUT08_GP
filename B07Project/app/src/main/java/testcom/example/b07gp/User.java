@@ -1,8 +1,10 @@
 package testcom.example.b07gp;
 
-public class User {
-    String name;
-    String email;
+import java.io.Serializable;
+
+public class User implements Serializable {
+    public String name;
+    public String email;
 
     public User(String name, String email) {
         this.name = name;

@@ -1,5 +1,6 @@
 package testcom.example.b07gp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -11,6 +12,13 @@ import android.widget.EditText;
 //import android.widget.ProgressBar;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.w3c.dom.Text;
 
@@ -24,6 +32,8 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
 
     private ProgressBar progressBar;
 
+    private FirebaseAuth mAuth;
+
 
     @Override
 //    protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +43,6 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
 //    }
 
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
@@ -49,6 +58,8 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
 
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         progressBar.setVisibility(View.GONE);
+
+        mAuth = FirebaseAuth.getInstance();
     }
 
     @Override
@@ -86,6 +97,45 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
             TextPassWord.requestFocus();
             return;
         }
+
+        if(password.length() < 6) {
+            TextPassWord.setError("Minimum Password length is 6 characters");
+            TextPassWord.requestFocus();
+            return;
+        }
+        //end of validate
+        progressBar.setVisibility(View.VISIBLE);
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if(task.isSuccessful()){
+                            User user = new User(name, email);
+                            FirebaseDatabase.getInstance().getReference("Users")
+                                    .child(mAuth.getCurrentUser().getUid())
+                                    .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful()){
+                                                Toast.makeText(MainActivity2.this, "user has been registered successfully", Toast.LENGTH_LONG).show();
+                                                progressBar.setVisibility((View.GONE));
+
+                                                //redirect to the login page
+                                                startActivity(new Intent(MainActivity2.this, MainActivity2.class));
+                                            } else {
+                                                Toast.makeText(MainActivity2.this, "Fail to create a user", Toast.LENGTH_LONG).show();
+                                                progressBar.setVisibility((View.GONE));
+                                            }
+                                        }
+                                    });
+                        } else {
+                            Toast.makeText(MainActivity2.this, "Fail to register", Toast.LENGTH_LONG).show();
+                            progressBar.setVisibility(View.GONE);
+                        }
+                    }
+                });
+
+
 
 
     }
