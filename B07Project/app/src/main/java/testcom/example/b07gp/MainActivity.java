@@ -1,17 +1,14 @@
 package testcom.example.b07gp;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.view.View;
@@ -21,7 +18,6 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import testcom.example.b07gp.databinding.ActivityMainBinding;
 
 import android.view.Menu;
 import android.view.MenuItem;
@@ -29,13 +25,14 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.CheckBox;
 
 import org.w3c.dom.Text;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     private EditText editEmail, editPassword;
+    private SharedPreferences preferences;
     private SharedPreferences.Editor editor;
     private Button btnLogIn;
     private CheckBox boxRememberMe;
@@ -54,13 +51,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnLogIn = (Button) findViewById(R.id.btnLogin);
         loginDescription = (TextView) findViewById(R.id.loginDescription);
 
-//        checkSharedPreference();
+        boxRememberMe = (CheckBox) findViewById(R.id.checkboxRemember);
+        preferences = getSharedPreferences("b07GroupProject", Context.MODE_PRIVATE);
+        editor = preferences.edit();
+
+        checkSharedPreference();
         btnLogIn.setOnClickListener(this);
         loginDescription.setOnClickListener(this);
 
         mAuth = FirebaseAuth.getInstance();
+
 //        presenter = new Presenter(new Model(), this);
+
     }
+
+    private void checkSharedPreference() {
+
+        String remember = preferences.getString(getString(R.string.remember_me), "False");
+        String email = preferences.getString(getString(R.string.email_address), "");
+        String password = preferences.getString(getString(R.string.password), "");
+
+        editEmail.setText(email);
+        editPassword.setText(password);
+        boxRememberMe.setChecked(remember.equals("True"));
+    }
+
 
     @Override
     public void onClick(View view) {
@@ -69,59 +84,39 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(new Intent(this, MainActivity2.class));
                 break;
             case R.id.btnLogin:
-                logIn();
+                startActivity(new Intent(this, AdminActivity.class));
+//                startActivity(new Intent(this, StudentActivity.class));
+//                logIn();
                 break;
         }
     }
 
     private void logIn(){
-//        boolean rememberBox = false;
-//        String email = "";
-//        String password = "";
-//
-//        if(boxRememberMe.isChecked()){
-//            rememberBox = true;
-//            email = editEmail.getText().toString();
-//            password = editPassword.getText().toString();
-//        }
+        boolean rememberBox = false;
+        String email = "";
+        String password = "";
 
-        String email = editEmail.getText().toString().trim();
-        String password = editPassword.getText().toString().trim();
+        if(boxRememberMe.isChecked()){
+            rememberBox = true;
+            email = editEmail.getText().toString();
+            password = editPassword.getText().toString();
+        }
 
-
-        editor.putBoolean("rememberBox", boxRememberMe.isChecked());
-        editor.putString("email", boxRememberMe.isChecked() ? email : "");
-        editor.putString("password", boxRememberMe.isChecked() ? password : "");
+        editor.putBoolean("rememberBox", rememberBox);
+        editor.putString("email", email);
+        editor.putString("password", password);
         editor.apply();
+    }
 
-        if (email.isEmpty()) {
-            editEmail.setError("Email is required");
-            editEmail.requestFocus();
-            return;
-        }
+    public void ToStudentPages(String UserID) {
+        Intent intent = new Intent(MainActivity.this, StudentActivity.class);
+        intent.putExtra(getString(R.string.UserKey),UserID);
+        startActivity(intent);
+    }
 
-        if(password.isEmpty()) {
-            editPassword.setError("Password is required");
-            editPassword.requestFocus();
-            return;
-        }
-
-        if(password.length() < 6) {
-            editPassword.setError("Minimum Password length is 6 characters");
-            editPassword.requestFocus();
-            return;
-        }
-
-        mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()){
-                    //TO : DO
-                    //startActivity(new Intent(MainActivity.this, DashboardActivity.class));
-                } else {
-                    Toast.makeText(MainActivity.this, "Failed to login", Toast.LENGTH_LONG).show();
-                }
-            }
-        });
+    public void ToAdminPages(String UserID) {
+        Intent intent = new Intent(MainActivity.this, AdminActivity.class);
+        intent.putExtra(getString(R.string.UserKey),UserID);
+        startActivity(intent);
     }
 }
