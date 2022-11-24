@@ -6,4 +6,50 @@
     android:layout_height="match_parent"
     tools:context=".AdminActivity">
 
+    <Button
+        android:id="@+id/adminActLogOutButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="50dp"
+        android:text="logOut"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/adminActCourseListDisplayButton" />
+
+    <Button
+        android:id="@+id/adminActCourseListDisplayButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="50dp"
+        android:text="adminCourseListDisplay"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/adminActEditDisplayButton" />
+
+    <Button
+        android:id="@+id/adminActEditDisplayButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="7dp"
+        android:layout_marginTop="50dp"
+        android:text="dminEditDisplay"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.487"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/adminActAddCourseButton" />
+
+    <Button
+        android:id="@+id/adminActAddCourseButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="adminActivityAddCourse"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.257" />
 </androidx.constraintlayout.widget.ConstraintLayout>
