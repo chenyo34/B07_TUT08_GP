@@ -10,6 +10,12 @@ public class Student extends User{
         return TakenCourses;
     }
 
+
+    public Student(String name, String email, ArrayList<String> takenCourses) {
+        super(name, email);
+        TakenCourses = takenCourses;
+    }
+
     public void setTakenCourses(ArrayList<String> takenCourses) {
         this.TakenCourses = takenCourses;
     }
@@ -19,17 +25,4 @@ public class Student extends User{
     }
 
 
-    @Override
-    public String toString() {
-        return "Student{" +
-                "TakenCourses=" + TakenCourses +
-                ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                '}';
-    }
-
-    public Student(String name, String email) {
-        super(name, email);
-        this.TakenCourses = new ArrayList<>();
-    }
 }

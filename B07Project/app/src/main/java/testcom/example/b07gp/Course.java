@@ -1,18 +1,22 @@
 package testcom.example.b07gp;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Objects;
 
 public class Course {
+
     String CourseCode;
     String CourseName;
-    HashSet<String> OfferingSessions;
+    ArrayList<String> OfferingSessions;
+    ArrayList<String> Precourses;
 
-
-    public Course(String courseCode, String courseName, HashSet<String> offeringSessions) {
+    public Course(String courseCode, String courseName,
+                  ArrayList<String> offeringSessions, ArrayList<String> precourses) {
         CourseCode = courseCode;
         CourseName = courseName;
         OfferingSessions = offeringSessions;
+        Precourses = precourses;
     }
 
     public String getCourseCode() {
@@ -31,24 +35,34 @@ public class Course {
         CourseName = courseName;
     }
 
-    public HashSet<String> getOfferingSessions() {
+    public ArrayList<String> getOfferingSessions() {
         return OfferingSessions;
     }
 
-    public void setOfferingSessions(HashSet<String> offeringSessions) {
+    public void setOfferingSessions(ArrayList<String> offeringSessions) {
         OfferingSessions = offeringSessions;
     }
 
+    public ArrayList<String> getPrecourses() {
+        return Precourses;
+    }
+
+    public void setPrecourses(ArrayList<String> precourses) {
+        Precourses = precourses;
+    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Course course = (Course) o;
-        return Objects.equals(CourseCode, course.CourseCode) || Objects.equals(CourseName, course.CourseName);
+        return Objects.equals(CourseCode, course.CourseCode);
     }
 
-
+    @Override
+    public int hashCode() {
+        return Objects.hash(CourseCode, CourseName, OfferingSessions, Precourses);
+    }
 
     @Override
     public String toString() {
