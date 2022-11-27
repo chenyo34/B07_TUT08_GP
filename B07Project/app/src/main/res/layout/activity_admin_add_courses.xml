@@ -29,12 +29,16 @@
         app:layout_constraintStart_toEndOf="@+id/checkBoxSummer"
         app:layout_constraintTop_toBottomOf="@+id/adminAddPrereq" />
 
+    <!--    app:layout_constraintBottom_toBottomOf="@+id/adminAddCourseTextView"-->
+    <!--    app:layout_constraintStart_toStartOf="parent"-->
+    <!--    app:layout_constraintTop_toBottomOf="@+id/textview_first"-->
+
     <TextView
         android:id="@+id/adminAddCourseTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="96dp"
+        android:layout_marginTop="92dp"
         android:fontFamily="sans-serif-condensed"
         android:text="@string/adminAddCourse"
         android:textSize="30sp"
@@ -42,20 +46,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!--    app:layout_constraintBottom_toBottomOf="@+id/adminAddCourseTextView"-->
-    <!--    app:layout_constraintStart_toStartOf="parent"-->
-    <!--    app:layout_constraintTop_toBottomOf="@+id/textview_first"-->
-
     <EditText
         android:id="@+id/adminAddCourseName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="23dp"
+        android:layout_marginTop="30dp"
         android:ems="10"
+        android:hint="@string/adminAddCourseName"
         android:inputType="textPersonName"
         android:minHeight="48dp"
-        android:hint="@string/adminAddCourseName"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/adminAddCourseTextView" />
 
@@ -72,31 +72,31 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/adminAddCourseName" />
 
-    <EditText
-        android:id="@+id/adminAddOffering"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="23dp"
-        android:ems="18"
-        android:inputType="textPersonName"
-        android:minHeight="48dp"
-        android:hint="@string/adminAddOffering"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/adminAddCourseCode" />
+<!--    <EditText-->
+<!--        android:id="@+id/adminAddOffering"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="30dp"-->
+<!--        android:layout_marginTop="23dp"-->
+<!--        android:ems="18"-->
+<!--        android:inputType="textPersonName"-->
+<!--        android:minHeight="48dp"-->
+<!--        android:hint="@string/adminAddOffering"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/adminAddCourseCode" />-->
 
     <EditText
         android:id="@+id/adminAddPrereq"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="23dp"
+        android:layout_marginTop="30dp"
         android:ems="18"
+        android:hint="@string/adminAddPrereq"
         android:inputType="textPersonName"
         android:minHeight="48dp"
-        android:hint="@string/adminAddPrereq"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/adminAddOffering" />
+        app:layout_constraintTop_toBottomOf="@+id/adminAddCourseCode" />
 
     <Button
         android:id="@+id/adminAddCoursePrevious"
@@ -111,7 +111,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toEndOf="@+id/adminAddCourseButton"
         app:layout_constraintTop_toBottomOf="@+id/adminAddPrereq"
-        app:layout_constraintVertical_bias="0.726" />
+        app:layout_constraintVertical_bias="0.7" />
 
     <Button
         android:id="@+id/adminAddCourseButton"
