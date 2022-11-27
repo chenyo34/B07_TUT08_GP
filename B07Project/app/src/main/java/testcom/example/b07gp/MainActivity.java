@@ -26,6 +26,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.CheckBox;
+import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
@@ -38,6 +39,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private CheckBox boxRememberMe;
     private TextView loginDescription;
     private FirebaseAuth mAuth;
+
+    private Model model;
+    private Presenter presenter;
 
     
     @Override
@@ -61,12 +65,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         mAuth = FirebaseAuth.getInstance();
 
-//        presenter = new Presenter(new Model(), this);
 
+        model = Model.getInstance();
+
+        presenter = new Presenter(new Model(), this);
     }
 
     private void checkSharedPreference() {
-
         String remember = preferences.getString(getString(R.string.remember_me), "False");
         String email = preferences.getString(getString(R.string.email_address), "");
         String password = preferences.getString(getString(R.string.password), "");
@@ -85,38 +90,65 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.btnLogin:
 //                startActivity(new Intent(this, AdminActivity.class));
-                startActivity(new Intent(this, StudentActivity.class));
-//                logIn();
+//                startActivity(new Intent(this, StudentActivity.class));
+                logIn();
                 break;
         }
     }
 
     private void logIn(){
+        //set initial value for input
         boolean rememberBox = false;
         String email = "";
         String password = "";
 
+
+        //get user input
+
         if(boxRememberMe.isChecked()){
+            email = editEmail.getText().toString().trim();
+            password = editPassword.getText().toString().trim();
             rememberBox = true;
-            email = editEmail.getText().toString();
-            password = editPassword.getText().toString();
         }
 
+        email = editEmail.getText().toString().trim();
+        password = editPassword.getText().toString().trim();
+
+        //don't know yet what is this shit
         editor.putBoolean("rememberBox", rememberBox);
         editor.putString("email", email);
         editor.putString("password", password);
         editor.apply();
+
+
+        //call presenter
+        presenter.login(email, password);
+
+        //authentication
+        //begin using model, lead this user to student or admin
+//        model.authenticate(email, password, (User user) -> {
+//            if (user == null)
+//                Toast.makeText(this, "Failed to log in", Toast.LENGTH_LONG).show();
+//            else if (user.type.equals("student"))
+//                ToStudentPages(user.UTORid);
+//            else
+//                ToAdminPages(user.UTORid);
+//        }
     }
 
-    public void ToStudentPages(String UserID) {
+    public void ToStudentPages(String UTORid) {
         Intent intent = new Intent(MainActivity.this, StudentActivity.class);
-        intent.putExtra(getString(R.string.UserKey),UserID);
+        intent.putExtra(getString(R.string.UserKey),UTORid);
         startActivity(intent);
     }
 
-    public void ToAdminPages(String UserID) {
+    public void ToAdminPages(String UTORid) {
         Intent intent = new Intent(MainActivity.this, AdminActivity.class);
-        intent.putExtra(getString(R.string.UserKey),UserID);
+        intent.putExtra(getString(R.string.UserKey),UTORid);
         startActivity(intent);
+    }
+
+    public void failedToLogin() {
+        Toast.makeText(this, "Failed to log in", Toast.LENGTH_LONG).show();
     }
 }

@@ -34,21 +34,20 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
     private Button btnRegister;
     private EditText TextName, TextEmail, TextPassWord;
     private ProgressBar progressBar;
+    private CheckBox adminOrNot;
     private FirebaseAuth mAuth;
+
+    boolean ornot;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-
 //        checkBoxAdmin.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 //            @Override
 //            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
 //                editTextBirthOrSpecialty.setText("");
 //            }
 //        });
-
-
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
 
@@ -62,6 +61,9 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
 
         btnRegister = (Button) findViewById(R.id.register_user);
         btnRegister.setOnClickListener(this);
+
+        adminOrNot = (CheckBox) findViewById(R.id.checkboxRemember);
+        adminOrNot.setOnClickListener(this);
 
         TextName = (EditText) findViewById(R.id.editTextFullName);
         TextEmail = (EditText) findViewById(R.id.editTextEmail);
@@ -80,10 +82,15 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
             case R.id.register_user:
                 register();
                 break;
+            case R.id.checkboxRemember:
+                if(ornot == true) ornot = false;
+                else ornot = true;
+                break;
         }
     }
 
     private void register() {
+        //get user's input
         String name = TextName.getText().toString().trim();
         String email = TextEmail.getText().toString().trim();
         String password = TextPassWord.getText().toString().trim();
@@ -101,32 +108,37 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
             return;
         }
 
-        if(password.isEmpty()) {
+        if (password.isEmpty()) {
             TextPassWord.setError("Password is required");
             TextPassWord.requestFocus();
             return;
         }
 
-        if(password.length() < 6) {
+        if (password.length() < 6) {
             TextPassWord.setError("Minimum Password length is 6 characters");
             TextPassWord.requestFocus();
             return;
         }
         //end of validate
         progressBar.setVisibility(View.VISIBLE);
+
+
+
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()){
-
-                            User user = new User(name, email);
+                        //if it is successful
+                        if (task.isSuccessful()) {
+                            String type = "";
+                            type = (ornot) ? ("admin") : ("student");
+                            User user = new User(name, email, password, type);
                             FirebaseDatabase.getInstance().getReference("Users")
                                     .child(mAuth.getCurrentUser().getUid())
                                     .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
-                                            if (task.isSuccessful()){
+                                            if (task.isSuccessful()) {
                                                 Toast.makeText(MainActivity2.this, "user has been registered successfully", Toast.LENGTH_LONG).show();
                                                 progressBar.setVisibility((View.GONE));
 
@@ -145,6 +157,7 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
                         }
                     }
                 });
+    }
 //    private void register() {
 //
 //        FirebaseDatabase.getInstance().getReference("1123-1046").setValue("test");
@@ -250,8 +263,4 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
 //                        }
 //                    }
 //                });
-
-
-
-    }
 }
