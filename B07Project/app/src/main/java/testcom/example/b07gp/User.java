@@ -3,13 +3,32 @@ package testcom.example.b07gp;
 public class User {
     String name;
     String email;
+    String password;
+    String type;
+    String UTORid;
 
-    String ID;
-
-    public User(String name, String email) {
+    public User(String name, String email, String password, String type, String UTROid) {
         this.name = name;
         this.email = email;
+        this.password = password;
+        this.type = type;
+        this.UTORid = UTROid;
     }
+
+    //----
+    public User(String name, String email, String password) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+    }
+
+    public User(String name, String email, String password, String type) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.type = type;
+    }
+    //----
 
     public String getName() {
         return name;
@@ -27,12 +46,28 @@ public class User {
         this.email = email;
     }
 
-    public void setID(String ID) {
-        this.ID = ID;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public String getID() {
-        return ID;
+    public String getPassword() {
+        return password;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setUTORid(String UTORid) {
+        this.UTORid = UTORid;
+    }
+
+    public String getUTORid() {
+        return UTORid;
     }
 
     @Override
