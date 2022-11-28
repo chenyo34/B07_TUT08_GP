@@ -1,18 +1,23 @@
 package testcom.example.b07gp;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Objects;
 
 public class Course {
     String CourseCode;
     String CourseName;
-    HashSet<String> OfferingSessions;
+    ArrayList<String> OfferingSessions;
+    ArrayList<String> Precourses;
 
 
-    public Course(String courseCode, String courseName, HashSet<String> offeringSessions) {
+    public Course(String courseCode, String courseName,
+                  ArrayList<String> offeringSessions,
+                  ArrayList<String> precourses) {
         CourseCode = courseCode;
         CourseName = courseName;
         OfferingSessions = offeringSessions;
+        Precourses = precourses;
     }
 
     public String getCourseCode() {
@@ -31,14 +36,21 @@ public class Course {
         CourseName = courseName;
     }
 
-    public HashSet<String> getOfferingSessions() {
+    public ArrayList<String> getOfferingSessions() {
         return OfferingSessions;
     }
 
-    public void setOfferingSessions(HashSet<String> offeringSessions) {
+    public void setOfferingSessions(ArrayList<String> offeringSessions) {
         OfferingSessions = offeringSessions;
     }
 
+    public ArrayList<String> getPrecourses() {
+        return Precourses;
+    }
+
+    public void setPrecourses(ArrayList<String> precourses) {
+        Precourses = precourses;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -49,12 +61,33 @@ public class Course {
     }
 
 
-
     @Override
     public String toString() {
-        return "Course{" +
-                "CourseCode='" + CourseCode + '\'' +
-                ", CourseName='" + CourseName + '\'' +
-                '}';
+
+        String strOfferSession = "";
+        for (String offsession: OfferingSessions ) {
+            System.out.println(offsession);
+            strOfferSession += offsession + " ";
+        }
+
+
+        String strPrecourses = "";
+        if (Precourses.isEmpty()) {
+            strPrecourses = "No Prerequisites are needed. ";
+        } else {
+            System.out.println("here");
+            strPrecourses += "Those are precourses:\n";
+            for (String precourse: Precourses) {
+                strPrecourses += precourse + "";
+            }
+        }
+
+        return "Course Code is:  \n" + CourseCode + "\n" +
+                "                \n" +
+                "Course Name is: \n" + CourseName + "\n" +
+                "                \n" +
+                "It will be offered in " + strOfferSession + "\n" +
+                "                \n" +
+                strPrecourses ;
     }
 }
