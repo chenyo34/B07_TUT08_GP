@@ -7,12 +7,38 @@
     tools:context=".AdminAddCourses">
 
 
+    <CheckBox
+        android:id="@+id/checkBoxSummer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp"
+        android:text="Summer"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/adminAddPrereq" />
+
+    <CheckBox
+        android:id="@+id/checkBoxFall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
+        android:text="Fall"
+        app:layout_constraintEnd_toStartOf="@+id/checkBoxWinter"
+        app:layout_constraintStart_toEndOf="@+id/checkBoxSummer"
+        app:layout_constraintTop_toBottomOf="@+id/adminAddPrereq" />
+
+    <!--    app:layout_constraintBottom_toBottomOf="@+id/adminAddCourseTextView"-->
+    <!--    app:layout_constraintStart_toStartOf="parent"-->
+    <!--    app:layout_constraintTop_toBottomOf="@+id/textview_first"-->
+
     <TextView
         android:id="@+id/adminAddCourseTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="96dp"
+        android:layout_marginTop="92dp"
         android:fontFamily="sans-serif-condensed"
         android:text="@string/adminAddCourse"
         android:textSize="30sp"
@@ -20,20 +46,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!--    app:layout_constraintBottom_toBottomOf="@+id/adminAddCourseTextView"-->
-    <!--    app:layout_constraintStart_toStartOf="parent"-->
-    <!--    app:layout_constraintTop_toBottomOf="@+id/textview_first"-->
-
     <EditText
         android:id="@+id/adminAddCourseName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="23dp"
+        android:layout_marginTop="30dp"
         android:ems="10"
+        android:hint="@string/adminAddCourseName"
         android:inputType="textPersonName"
         android:minHeight="48dp"
-        android:text="@string/adminAddCourseName"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/adminAddCourseTextView" />
 
@@ -46,35 +68,35 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:minHeight="48dp"
-        android:text="@string/adminAddCourseCode"
+        android:hint="@string/adminAddCourseCode"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/adminAddCourseName" />
 
-    <EditText
-        android:id="@+id/adminAddOffering"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="23dp"
-        android:ems="18"
-        android:inputType="textPersonName"
-        android:minHeight="48dp"
-        android:text="@string/adminAddOffering"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/adminAddCourseCode" />
+    <!--    <EditText-->
+    <!--        android:id="@+id/adminAddOffering"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginStart="30dp"-->
+    <!--        android:layout_marginTop="23dp"-->
+    <!--        android:ems="18"-->
+    <!--        android:inputType="textPersonName"-->
+    <!--        android:minHeight="48dp"-->
+    <!--        android:hint="@string/adminAddOffering"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/adminAddCourseCode" />-->
 
     <EditText
         android:id="@+id/adminAddPrereq"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="23dp"
+        android:layout_marginTop="30dp"
         android:ems="18"
+        android:hint="@string/adminAddPrereq"
         android:inputType="textPersonName"
         android:minHeight="48dp"
-        android:text="@string/adminAddPrereq"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/adminAddOffering" />
+        app:layout_constraintTop_toBottomOf="@+id/adminAddCourseCode" />
 
     <Button
         android:id="@+id/adminAddCoursePrevious"
@@ -85,20 +107,32 @@
         android:text="@string/previous"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.583"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/adminAddCourseButton" />
+        app:layout_constraintStart_toEndOf="@+id/adminAddCourseButton"
+        app:layout_constraintTop_toBottomOf="@+id/adminAddPrereq"
+        app:layout_constraintVertical_bias="0.7" />
 
     <Button
         android:id="@+id/adminAddCourseButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="23dp"
-        android:layout_marginEnd="12dp"
+        android:layout_marginStart="44dp"
         android:text="@string/adminAddCourseSubmit"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/adminAddPrereq"
-        app:layout_constraintVertical_bias="0.14" />
+        app:layout_constraintVertical_bias="0.675" />
+
+    <CheckBox
+        android:id="@+id/checkBoxWinter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="30dp"
+        android:text="Winter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/adminAddPrereq" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

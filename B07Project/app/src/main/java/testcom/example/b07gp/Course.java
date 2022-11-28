@@ -72,13 +72,13 @@ public class Course {
 
 
         String strPrecourses = "";
-        if (Precourses.isEmpty()) {
+        if ((Precourses.size() == 1) && (Precourses.get(0) == "")) {
             strPrecourses = "No Prerequisites are needed. ";
         } else {
             System.out.println("here");
             strPrecourses += "Those are precourses:\n";
             for (String precourse: Precourses) {
-                strPrecourses += precourse + "";
+                strPrecourses += precourse + " ";
             }
         }
 

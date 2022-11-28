@@ -35,7 +35,7 @@ import java.util.List;
 
 public class AdminAddCourses extends AppCompatActivity implements View.OnClickListener {
 
-    private EditText adminAddCourseName,adminAddCourseCode,adminAddOffering,adminAddPrereq;
+    private EditText adminAddCourseName,adminAddCourseCode,adminAddPrereq;
     private Button adminAddCourseButton, adminAddCoursePrevious;
     private FirebaseAuth mAuth;
     private CheckBox checkWinter, checkSummer, checkFall;
@@ -86,18 +86,6 @@ public class AdminAddCourses extends AppCompatActivity implements View.OnClickLi
         String [] Prerequisite = adminAddPrereq.getText().toString().trim().
                 replace(" ", "").split(",");
 
-        ArrayList<String> Prercourses = new ArrayList<>(List.of(Prerequisite));
-        ArrayList<String> Offersessions = new ArrayList<>();
-        if (checkFall.isChecked()) {
-            Offersessions.add("Fall");
-        }
-        if (checkSummer.isChecked()) {
-            Offersessions.add("Summer");
-        }
-        if (checkWinter.isChecked()) {
-            Offersessions.add("Winter");
-        }
-
         // Check the Required for the new added Courses
         if(Coursename.isEmpty()) {
             adminAddCourseName.setError("CourseCode is required");
@@ -109,6 +97,19 @@ public class AdminAddCourses extends AppCompatActivity implements View.OnClickLi
             adminAddCourseCode.setError("CourseName is required!");
             adminAddCourseCode.requestFocus();
             return;
+        }
+
+        //Check and Fill the Offered sessions by checkboxes
+        ArrayList<String> Offersessions = new ArrayList<>();
+
+        if (checkFall.isChecked()) {
+            Offersessions.add("Fall");
+        }
+        if (checkSummer.isChecked()) {
+            Offersessions.add("Summer");
+        }
+        if (checkWinter.isChecked()) {
+            Offersessions.add("Winter");
         }
 
 
@@ -129,8 +130,8 @@ public class AdminAddCourses extends AppCompatActivity implements View.OnClickLi
             return;
         }
 
-        // Check if the Precourse is not provided
-
+        // Collect the Precourses list
+        ArrayList<String> Prercourses = new ArrayList<>(List.of(Prerequisite));
 
 
         // Write a message to the database
