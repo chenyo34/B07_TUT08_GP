@@ -16,14 +16,14 @@ public class AdminEditDisplay extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_edit_display);
 
-        previous = (Button) findViewById(R.id.adminEditPrevious);
+        previous = (Button) findViewById(R.id.admitCourseListDisplayPreviousButton);
         previous.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()){
-            case R.id.adminEditPrevious:
+            case R.id.admitCourseListDisplayPreviousButton:
                 startActivity(new Intent(this, AdminActivity.class));
         }
     }
