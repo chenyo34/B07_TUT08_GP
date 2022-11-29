@@ -1,21 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#FFFFFF"
     tools:context=".StudentListDisplay">
 
+    <!--text view for completed courses-->
+
+    <TextView
+        android:id="@+id/studentTakenCourseTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:fontFamily="sans-serif-condensed"
+        android:text="  Taken Courses"
+        android:textSize="34sp"
+        android:textStyle="bold" />
+
+    <!--button for to add taken course layout-->
+
     <Button
-        android:id="@+id/studentTakenCourseDisplayReturn"
+        android:id="@+id/studentToAddTakenCourseButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="12dp"
         android:layout_marginBottom="16dp"
-        android:text="@string/previous"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:text="Add" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <!--button for return to student activity layout-->
+    <Button
+        android:id="@+id/studentTakenCourseReturnButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="12dp"
+        android:layout_marginBottom="16dp"
+        android:text="Previous" />
+
+    <!--list view to display list of completed courses-->
+    <ListView
+        android:id="@+id/studentTakenCourseListView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/studentTakenCourseTextView"
+        android:layout_marginTop="2dp" />
+
+
+    <!--    <Button-->
+    <!--        android:id="@+id/add_course_add_button"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginBottom="396dp"-->
+    <!--        android:text="add_course_button"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintEnd_toStartOf="@+id/add_course_submit_button"-->
+    <!--        app:layout_constraintHorizontal_bias="0.433"-->
+    <!--        app:layout_constraintStart_toStartOf="parent" />-->
+
+</RelativeLayout>
