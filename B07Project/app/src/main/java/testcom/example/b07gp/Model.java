@@ -43,14 +43,18 @@ public class Model {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(!task.isSuccessful()) {
-                    callback.accept(null);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                        callback.accept(null);
+                    }
                 } else {
                     //log in successful
                     userRef.child(Objects.requireNonNull(auth.getUid())).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             User user = snapshot.getValue(User.class);
-                            callback.accept(user);
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                                callback.accept(user);
+                            }
                         }
 
                         @Override

@@ -81,9 +81,9 @@ public class AdminAddCourses extends AppCompatActivity implements View.OnClickLi
     }
 
     private void addCourse() {
-        String Coursename = adminAddCourseName.getText().toString().trim();
-        String Coursecode = adminAddCourseCode.getText().toString().trim();
-        String [] Prerequisite = adminAddPrereq.getText().toString().trim().
+        String Coursename = adminAddCourseName.getText().toString().toUpperCase().trim();
+        String Coursecode = adminAddCourseCode.getText().toString().toUpperCase().trim();
+        String [] Prerequisite = adminAddPrereq.getText().toString().toUpperCase().trim().
                 replace(" ", "").split(",");
 
         // Check the Required for the new added Courses
