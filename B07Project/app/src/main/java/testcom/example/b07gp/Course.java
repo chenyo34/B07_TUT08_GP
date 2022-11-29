@@ -63,31 +63,11 @@ public class Course {
 
     @Override
     public String toString() {
-
-        String strOfferSession = "";
-        for (String offsession: OfferingSessions ) {
-            System.out.println(offsession);
-            strOfferSession += offsession + " ";
-        }
-
-
-        String strPrecourses = "";
-        if ((Precourses.size() == 1) && (Precourses.get(0) == "")) {
-            strPrecourses = "No Prerequisites are needed. ";
-        } else {
-            System.out.println("here");
-            strPrecourses += "Those are precourses:\n";
-            for (String precourse: Precourses) {
-                strPrecourses += precourse + " ";
-            }
-        }
-
-        return "Course Code is:  \n" + CourseCode + "\n" +
-                "                \n" +
-                "Course Name is: \n" + CourseName + "\n" +
-                "                \n" +
-                "It will be offered in " + strOfferSession + "\n" +
-                "                \n" +
-                strPrecourses ;
+        return "Course{" +
+                "CourseCode='" + CourseCode + '\'' +
+                ", CourseName='" + CourseName + '\'' +
+                ", OfferingSessions=" + OfferingSessions +
+                ", Precourses=" + Precourses +
+                '}';
     }
 }
