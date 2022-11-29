@@ -1,5 +1,7 @@
 package testcom.example.b07gp;
 
+import android.os.Build;
+
 import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -12,7 +14,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Objects;
+import java.util.Queue;
 import java.util.function.Consumer;
 
 public class Model {
@@ -52,6 +59,52 @@ public class Model {
                         }
                     });
                 }
+            }
+        });
+    }
+
+    public void getCourse(String courseCode, Consumer<User> callback) {
+        userRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                //create a hashmap
+                HashMap<String, Course> allCourses = new HashMap<>();
+                for(DataSnapshot cns : snapshot.getChildren()) {
+                    Course c = cns.getValue(Course.class);
+                    allCourses.put(c.CourseCode, c);
+                }
+
+                //create the final result
+                List<Course> result = new ArrayList<Course>();
+
+                //create the queue
+                Queue<String> q = new LinkedList<String>();
+
+                //add that course
+                q.offer(courseCode);
+
+                while (!q.isEmpty()) {
+                    //dequeue that course
+                    String cur = q.poll();
+                    //get the course from hashmap
+                    Course curCourse = allCourses.get(courseCode);
+                    result.add((allCourses.get(cur)));
+                    //for loop the pre of this course
+                    for (String code : curCourse.Precourses) {
+                        //add it into the queue
+                        q.offer(code);
+                    }
+                }
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    callback.accept((User) result);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
             }
         });
     }
