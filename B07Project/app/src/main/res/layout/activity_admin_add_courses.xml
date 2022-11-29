@@ -29,9 +29,6 @@
         app:layout_constraintStart_toEndOf="@+id/checkBoxSummer"
         app:layout_constraintTop_toBottomOf="@+id/adminAddPrereq" />
 
-    <!--    app:layout_constraintBottom_toBottomOf="@+id/adminAddCourseTextView"-->
-    <!--    app:layout_constraintStart_toStartOf="parent"-->
-    <!--    app:layout_constraintTop_toBottomOf="@+id/textview_first"-->
 
     <TextView
         android:id="@+id/adminAddCourseTextView"
@@ -72,18 +69,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/adminAddCourseName" />
 
-    <!--    <EditText-->
-    <!--        android:id="@+id/adminAddOffering"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_marginStart="30dp"-->
-    <!--        android:layout_marginTop="23dp"-->
-    <!--        android:ems="18"-->
-    <!--        android:inputType="textPersonName"-->
-    <!--        android:minHeight="48dp"-->
-    <!--        android:hint="@string/adminAddOffering"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toBottomOf="@+id/adminAddCourseCode" />-->
 
     <EditText
         android:id="@+id/adminAddPrereq"
@@ -107,22 +92,20 @@
         android:text="@string/previous"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.583"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/adminAddCourseButton"
         app:layout_constraintTop_toBottomOf="@+id/adminAddPrereq"
-        app:layout_constraintVertical_bias="0.7" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/adminAddCourseButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="44dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
         android:text="@string/adminAddCourseSubmit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/adminAddPrereq"
-        app:layout_constraintVertical_bias="0.675" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <CheckBox
         android:id="@+id/checkBoxWinter"
