@@ -75,7 +75,7 @@ public class AdminAddCourses extends AppCompatActivity implements View.OnClickLi
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.adminAddCoursePrevious:
-                startActivity(new Intent(this, AdminActivity.class));
+                startActivity(new Intent(this, AdminListDisplay.class));
                 break;
             case R.id.adminAddCourseButton:
                 addCourse();
