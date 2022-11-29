@@ -32,6 +32,11 @@
     <string name="adminAddCourseCode">Course Code</string>
     <string name="adminAddOffering">Offering Session</string>
     <string name="adminAddPrereq">Prerequisite</string>
+    <string name="return_button">Previous</string>
+    <string name="timeline_submit_button">Submit</string>
+    <string name="timeline_add_button">Add</string>
+    <string name="add_course_textview">Add wanted course</string>
+    <string name="course_input">Course Code</string>
 
 
 </resources>
