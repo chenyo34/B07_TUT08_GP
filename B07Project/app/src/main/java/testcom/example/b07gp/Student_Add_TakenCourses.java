@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -75,7 +76,7 @@ public class Student_Add_TakenCourses extends AppCompatActivity implements View.
 
         builder.setCancelable(true);
         builder.setTitle("Confirm the name of the New Course");
-        builder.setMessage(CourseCode.toString());
+        builder.setMessage(Html.fromHtml("<font color = '#E10C0C'>" + CourseCode + "</font>"));
 
 
         String finalCourseCode = CourseCode;
