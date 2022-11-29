@@ -7,7 +7,7 @@
     tools:context=".StudentTimelineDisplay">
 
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/textInputEditText"
+        android:id="@+id/plannCourse"
         android:layout_width="177dp"
         android:layout_height="51dp"
         android:fontFamily="sans-serif-condensed"
@@ -41,7 +41,7 @@
         android:textColor="@color/cardview_dark_background"
         android:textSize="30sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/textInputEditText"
+        app:layout_constraintBottom_toTopOf="@+id/plannCourse"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
