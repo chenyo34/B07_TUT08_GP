@@ -8,7 +8,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.AlteredCharSequence;
+import android.text.Html;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -141,12 +144,36 @@ public class AdminAddCourses extends AppCompatActivity implements View.OnClickLi
         Course newCourse = new Course(Coursecode, Coursename, Offersessions, Prercourses);
 
 
+        String strOfferSession = "";
+        for (String offsession: newCourse.OfferingSessions ) {
+            System.out.println(offsession);
+            strOfferSession += offsession + " ";
+        }
+
+
+        String strPrecourses = "";
+        if ((newCourse.Precourses.size() == 1) && (newCourse.Precourses.get(0) == "")) {
+            strPrecourses = "No Prerequisites are needed. ";
+        } else {
+            System.out.println("here");
+            strPrecourses += "Those are precourses:\n";
+            for (String precourse: newCourse.getPrecourses()) {
+                strPrecourses += precourse + " ";
+            }
+        }
 
         AlertDialog.Builder builder = new AlertDialog.Builder(AdminAddCourses.this);
 
         builder.setCancelable(true);
         builder.setTitle("Confirm information of New Course");
-        builder.setMessage(newCourse.toString());
+        builder.setMessage("Course Code is:  \n" + newCourse.getCourseCode() + "\n" +
+                "                \n" +
+                "Course Name is: \n" + newCourse.getCourseName() + "\n" +
+                "                \n" +
+                "It will be offered in " + strOfferSession + "\n" +
+                "                \n" +
+                strPrecourses);
+
         builder.setPositiveButton("Confirm",
                 new DialogInterface.OnClickListener() {
                     @Override
@@ -162,7 +189,7 @@ public class AdminAddCourses extends AppCompatActivity implements View.OnClickLi
                                     "Course:" + Coursecode + "Added",
                                     Toast.LENGTH_LONG).show();
 //
-//                                    startActivity(new Intent(AdminAddCourses.this, AdminAddCourses.class));
+                                    startActivity(new Intent(AdminAddCourses.this, AdminAddCourses.class));
                                 } else {
                                     Toast.makeText(AdminAddCourses.this,
                                     "Fail to add current course.",
@@ -186,48 +213,10 @@ public class AdminAddCourses extends AppCompatActivity implements View.OnClickLi
 
         AlertDialog dialog = builder.create();
         dialog.show();
+        dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.DKGRAY);
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.DKGRAY);
 
 
-
-//        myref.setValue(newCourse).addOnCompleteListener(new OnCompleteListener<Void>() {
-//            @Override
-//            public void onComplete(@NonNull Task<Void> task) {
-//                if (task.isSuccessful()) {
-//
-//                    AlertDialog.Builder builder = new AlertDialog.Builder(AdminAddCourses.this);
-//
-//                    builder.setCancelable(true);
-//                    builder.setTitle("Title");
-//                    builder.setMessage("Message");
-//                    builder.setPositiveButton("Confirm",
-//                            new DialogInterface.OnClickListener() {
-//                                @Override
-//                                public void onClick(DialogInterface dialog, int which) {
-//                                    // Actual Action after user's double-confirmed
-//                                    Toast.makeText(AdminAddCourses.this,
-//                                            "Course:" + Coursecode + "Added",
-//                                            Toast.LENGTH_LONG).show();
-//
-//                                    startActivity(new Intent(AdminAddCourses.this, AdminAddCourses.class));
-//                                }
-//                            });
-//
-//                    builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
-//                        @Override
-//                        public void onClick(DialogInterface dialog, int which) {
-//                        }
-//                    });
-//
-//                    AlertDialog dialog = builder.create();
-//                    dialog.show();
-//
-//                } else {
-//                    Toast.makeText(AdminAddCourses.this,
-//                            "Fail to add current course.",
-//                            Toast.LENGTH_LONG).show();
-//                }
-//            }
-//        });
 
 
 
