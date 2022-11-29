@@ -10,7 +10,6 @@
     <string name="previous">Previous</string>
 
 
-
     <!-- String used for log in and sign up pages -->
     <string name="banner">Log in</string>
     <string name="loginTitle">Course Planner</string>
@@ -37,6 +36,7 @@
     <string name="timeline_add_button">Add</string>
     <string name="add_course_textview">Add wanted course</string>
     <string name="course_input">Course Code</string>
+    <string name="Timeline_table_return">Previous</string>
 
 
 </resources>
