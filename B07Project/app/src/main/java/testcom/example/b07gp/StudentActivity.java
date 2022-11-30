@@ -2,6 +2,8 @@ package testcom.example.b07gp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,18 +13,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class StudentActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private Button stuActivityAddCourseButton,stuActTakenCourseDisplayButton,
+    private Button stuActTakenCourseDisplayButton,
                     stuActLogOutButton,stuActGenerateTimelineButton;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student);
-
-        stuActivityAddCourseButton = (Button) findViewById(R.id.stuActAddCourseButton);
-        stuActivityAddCourseButton.setOnClickListener(this);
 
         stuActTakenCourseDisplayButton = (Button) findViewById(R.id.stuActTakenCourseDisplayButton);
         stuActTakenCourseDisplayButton .setOnClickListener(this);
@@ -48,10 +46,6 @@ public class StudentActivity extends AppCompatActivity implements View.OnClickLi
             }
             case R.id.stuActTakenCourseDisplayButton:{
                 startActivity(new Intent(this,StudentListDisplay.class));
-                break;
-            }
-            case R.id.stuActAddCourseButton:{
-                startActivity(new Intent(this,Student_Add_TakenCourses.class));
                 break;
             }
         }

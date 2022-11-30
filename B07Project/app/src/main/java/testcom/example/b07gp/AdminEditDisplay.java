@@ -18,7 +18,7 @@ import java.util.concurrent.atomic.AtomicReference;
 
 public class AdminEditDisplay extends AppCompatActivity implements View.OnClickListener{
 
-    private Button previous, changeSave, coursesDelete;
+    private Button changeSave, coursesDelete;
     EditText edTxtCode, edTxtName, edTxtPrep;
     CheckBox Summer, Fall, Winter;
     String code;
@@ -79,18 +79,11 @@ public class AdminEditDisplay extends AppCompatActivity implements View.OnClickL
 //            edTxtName.setText(c0.CourseName);
 //            edTxtPrep.setText(c0.Precourses.toString());
 //        });
-
-
-        previous = (Button) findViewById(R.id.admitCourseListDisplayPreviousButton);
-        previous.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()){
-            case R.id.admitCourseListDisplayPreviousButton:
-                startActivity(new Intent(this, AdminActivity.class));
-                break;
             case R.id.adminCourseDelete:
                 model.DeletecourseByCode(code, this, (String deletecode) -> {
                     if (deletecode == null) {

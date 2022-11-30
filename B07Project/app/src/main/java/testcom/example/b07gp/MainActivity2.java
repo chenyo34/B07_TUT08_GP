@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -38,15 +40,32 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
     private FirebaseAuth mAuth;
     boolean isAdmin;
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        return true;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
         mAuth = FirebaseAuth.getInstance();
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         signup = (TextView) findViewById(R.id.signup);
         signup.setOnClickListener(this);

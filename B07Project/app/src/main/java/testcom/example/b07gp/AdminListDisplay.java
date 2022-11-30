@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -22,7 +24,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 
 public class AdminListDisplay extends AppCompatActivity implements View.OnClickListener {
-    private Button previous;
     private Button addCourse;
 
     private ListView listView;
@@ -31,14 +32,27 @@ public class AdminListDisplay extends AppCompatActivity implements View.OnClickL
     private FirebaseDatabase database;
     private DatabaseReference databaseRefer;
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        return true;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_list_display);
 
-        previous = (Button) findViewById(R.id.admitCourseListDisplayPreviousButton);
-        previous.setOnClickListener(this);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         addCourse = (Button) findViewById(R.id.adminListDisplayAddCourseButton);
         addCourse.setOnClickListener(this);
@@ -108,9 +122,6 @@ public class AdminListDisplay extends AppCompatActivity implements View.OnClickL
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.admitCourseListDisplayPreviousButton:
-                startActivity(new Intent(this, AdminActivity.class));
-                break;
             case R.id.adminListDisplayAddCourseButton:
                 startActivity(new Intent(this,AdminAddCourses.class));
                 break;

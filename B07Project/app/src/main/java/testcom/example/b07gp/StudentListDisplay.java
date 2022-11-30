@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ArrayAdapter;
@@ -24,7 +26,6 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class StudentListDisplay extends AppCompatActivity implements View.OnClickListener{
 
-    private Button stuTakenCourseReturn;
     private Button stuAddTakenCourseButton;
     private ListView stuTakenCoursesLV;
     private FirebaseAuth mAuth;
@@ -33,9 +34,26 @@ public class StudentListDisplay extends AppCompatActivity implements View.OnClic
     private DatabaseReference myRef;
 
     @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        return true;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_list_display);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -43,9 +61,6 @@ public class StudentListDisplay extends AppCompatActivity implements View.OnClic
 
         stuAddTakenCourseButton = (Button) findViewById(R.id.studentToAddTakenCourseButton);;
         stuAddTakenCourseButton.setOnClickListener(this);
-
-        stuTakenCourseReturn = (Button) findViewById(R.id.studentTakenCourseReturnButton);
-        stuTakenCourseReturn.setOnClickListener(this);
 
         myTakenCourses = new ArrayList<>();
 
@@ -55,9 +70,6 @@ public class StudentListDisplay extends AppCompatActivity implements View.OnClic
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.studentTakenCourseReturnButton:
-                startActivity(new Intent(this, StudentActivity.class));
-                break;
             case R.id.studentToAddTakenCourseButton:
                 startActivity(new Intent(this, Student_Add_TakenCourses.class));
                 break;
@@ -98,5 +110,13 @@ public class StudentListDisplay extends AppCompatActivity implements View.OnClic
             }
         });
         stuTakenCoursesLV.setAdapter(adapter);
+    }
+
+    public void FloatOnClick(View view) {
+        switch (view.getId()) {
+            case R.id.floatingActionButton:
+                startActivity(new Intent(this, Student_Add_TakenCourses.class));
+                break;
+        }
     }
 }

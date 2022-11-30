@@ -9,6 +9,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,23 +27,36 @@ import java.util.List;
 
 public class Student_Add_TakenCourses extends AppCompatActivity implements View.OnClickListener {
 
-    private Button stuTakenCourseReturn;
     private Button stuAddTakenCourseButton;
     private EditText stuAddTakenCourseET;
     private FirebaseAuth mAuth;
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        return true;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_add_taken_courses);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         mAuth = FirebaseAuth.getInstance();
         //Add taken course button
         stuAddTakenCourseButton = (Button) findViewById(R.id.studentAddTakenCourseButton);;
         stuAddTakenCourseButton.setOnClickListener(this);
-
-        stuTakenCourseReturn = (Button) findViewById(R.id.studentAddTakenCourseReturn);
-        stuTakenCourseReturn.setOnClickListener(this);
 
         // Insert Taken CourseCode
         stuAddTakenCourseET = (EditText) findViewById(R.id.studentAddCompletedCoursesEditText);
@@ -51,9 +66,6 @@ public class Student_Add_TakenCourses extends AppCompatActivity implements View.
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.studentAddTakenCourseReturn:
-                startActivity(new Intent(this, StudentListDisplay.class));
-                break;
             case R.id.studentAddTakenCourseButton:
                 addTakenCourse();
         }
@@ -76,7 +88,8 @@ public class Student_Add_TakenCourses extends AppCompatActivity implements View.
 
         builder.setCancelable(true);
         builder.setTitle("Confirm the name of the New Course");
-        builder.setMessage(Html.fromHtml("<font color = '#E10C0C'>" + CourseCode + "</font>"));
+        String colored = "<font color = '#E10C0C'>" + CourseCode + "</font>";
+        builder.setMessage(Html.fromHtml(colored));
 
 
         String finalCourseCode = CourseCode;

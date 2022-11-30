@@ -12,6 +12,8 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.text.AlteredCharSequence;
 import android.text.Html;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -39,15 +41,31 @@ import java.util.List;
 public class AdminAddCourses extends AppCompatActivity implements View.OnClickListener {
 
     private EditText adminAddCourseName,adminAddCourseCode,adminAddPrereq;
-    private Button adminAddCourseButton, adminAddCoursePrevious;
+    private Button adminAddCourseButton;
     private FirebaseAuth mAuth;
     private CheckBox checkWinter, checkSummer, checkFall;
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        return true;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_add_courses);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         // EditText Fields Input-Extraction
         adminAddCourseCode = (EditText) findViewById(R.id.adminAddCourseCode);
@@ -64,19 +82,11 @@ public class AdminAddCourses extends AppCompatActivity implements View.OnClickLi
         // Hold the buttons on current view
         adminAddCourseButton = (Button) findViewById(R.id.adminAddCourseButton);
         adminAddCourseButton.setOnClickListener(this);
-
-        adminAddCoursePrevious = (Button) findViewById(R.id.adminAddCoursePrevious);
-        adminAddCoursePrevious.setOnClickListener(this);
-
-
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()){
-            case R.id.adminAddCoursePrevious:
-                startActivity(new Intent(this, AdminListDisplay.class));
-                break;
             case R.id.adminAddCourseButton:
                 addCourse();
                 break;
@@ -166,13 +176,14 @@ public class AdminAddCourses extends AppCompatActivity implements View.OnClickLi
 
         builder.setCancelable(true);
         builder.setTitle("Confirm information of New Course");
-        builder.setMessage("Course Code is:  \n" + newCourse.getCourseCode() + "\n" +
+        String confirmInfo = "Course Code is:  \n" + "<font color = '#E10C0C'>" + newCourse.getCourseCode() + "</font>"+ "\n" +
                 "                \n" +
-                "Course Name is: \n" + newCourse.getCourseName() + "\n" +
+                "Course Name is: \n" + "<font color = '#E10C0C'>" + newCourse.getCourseName() + "</font>" + "\n" +
                 "                \n" +
-                "It will be offered in " + strOfferSession + "\n" +
+                "It will be offered in " + "<font color = '#E10C0C'>" + strOfferSession + "</font>" + "\n" +
                 "                \n" +
-                strPrecourses);
+                "<font color = '#E10C0C'>" + strPrecourses + "</font>";
+        builder.setMessage(Html.fromHtml(confirmInfo));
 
         builder.setPositiveButton("Confirm",
                 new DialogInterface.OnClickListener() {
@@ -215,12 +226,5 @@ public class AdminAddCourses extends AppCompatActivity implements View.OnClickLi
         dialog.show();
         dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.DKGRAY);
         dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.DKGRAY);
-
-
-
-
-
-
-
     }
 }
