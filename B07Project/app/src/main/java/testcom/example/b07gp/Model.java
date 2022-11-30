@@ -1,8 +1,15 @@
 package testcom.example.b07gp;
 
+import android.content.Context;
+import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Build;
+import android.text.Html;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -33,7 +40,7 @@ public class Model {
     Model() {
         userRef = FirebaseDatabase.getInstance().getReference("Users");
         auth = FirebaseAuth.getInstance();
-        coursesRef = FirebaseDatabase.getInstance().getReference("CoursesCurrentProvided");
+        coursesRef = FirebaseDatabase.getInstance().getReference("CurrentProvidedCourses");
 
     }
 
@@ -123,14 +130,14 @@ public class Model {
         });
     }
 
-    public void getCoursebyName(String coursecode, Consumer<Course> callback) {
+    public void getCourseByCode(String coursecode, Consumer<Course> callback) {
+
 
         coursesRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot cns : snapshot.getChildren()) {
                     if (cns.toString().equals(coursecode)) {
-
                         System.out.println(cns.toString());
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                             callback.accept(cns.getValue(Course.class));
@@ -144,7 +151,83 @@ public class Model {
 
             }
         });
-
-
     }
+
+
+    public void DeletecourseByCode(String code, Context view, Consumer<String> callback) {
+        System.out.println("deleting");
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(view);
+
+        builder.setCancelable(true);
+        builder.setTitle("The course will be removed permanently.");
+        builder.setMessage(Html.fromHtml("<font color=#00000>"+code+"</font>"));
+
+        builder.setPositiveButton("Removed", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                coursesRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                        System.out.println("inside the data changes");
+//                        System.out.println(code);
+//                        System.out.println(snapshot.hasChild("MATA67"));
+                        if (snapshot.hasChild(code)) {
+                            coursesRef.child(code).removeValue();
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                                callback.accept(code);
+                            }
+                        } else {
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                                callback.accept(null);
+                            }
+                        }
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+            };
+
+
+
+        });
+        builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int i) {
+                Toast.makeText(view,
+                        "The remove has been cancelled.",
+                        Toast.LENGTH_LONG
+                ).show();
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+        dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.DKGRAY);
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.DKGRAY);
+    }
+
+    public void changeCourseInfo(String code, Context view, Consumer<Course> callback) {
+        System.out.println("updating");
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(view);
+
+        builder.setCancelable(true);
+        builder.setTitle("The course will be removed permanently.");
+        builder.setMessage(Html.fromHtml("<font color=#00000>"+code+"</font>"));
+
+        builder.setPositiveButton("Apply the changes",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                });
+    }
+
+
 }
