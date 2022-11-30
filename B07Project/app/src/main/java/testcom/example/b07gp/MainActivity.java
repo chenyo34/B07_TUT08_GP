@@ -43,10 +43,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Model model;
     private Presenter presenter;
 
+    //private boolean remembermeBox;
+
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -54,31 +55,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         editPassword = (EditText) findViewById(R.id.editTextPassword);
         btnLogIn = (Button) findViewById(R.id.btnLogin);
         loginDescription = (TextView) findViewById(R.id.loginDescription);
-
         boxRememberMe = (CheckBox) findViewById(R.id.checkboxRemember);
         preferences = getSharedPreferences("b07GroupProject", Context.MODE_PRIVATE);
         editor = preferences.edit();
-
         checkSharedPreference();
         btnLogIn.setOnClickListener(this);
         loginDescription.setOnClickListener(this);
-
         mAuth = FirebaseAuth.getInstance();
-
-
         model = Model.getInstance();
-
         presenter = new Presenter(new Model(), this);
+
+        //remembermeBox  = false;
     }
 
     private void checkSharedPreference() {
         String remember = preferences.getString(getString(R.string.remember_me), "False");
         String email = preferences.getString(getString(R.string.email_address), "");
         String password = preferences.getString(getString(R.string.password), "");
-
         editEmail.setText(email);
         editPassword.setText(password);
-        boxRememberMe.setChecked(remember.equals("True"));
+        //boxRememberMe.setChecked(remember.equals("True"));
     }
 
 
@@ -89,51 +85,34 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(new Intent(this, MainActivity2.class));
                 break;
             case R.id.btnLogin:
-//                startActivity(new Intent(this, AdminActivity.class));
-//                startActivity(new Intent(this, StudentActivity.class));
                 logIn();
                 break;
+//            case R.id.checkboxRemember:
+//                remembermeBox = !remembermeBox;
         }
     }
 
     private void logIn(){
-        //set initial value for input
-        boolean rememberBox = false;
+        //boolean rememberBox = remembermeBox;
         String email = "";
         String password = "";
 
-
-        //get user input
-
-        if(boxRememberMe.isChecked()){
-            email = editEmail.getText().toString().trim();
-            password = editPassword.getText().toString().trim();
-            rememberBox = true;
-        }
+//        if(boxRememberMe.isChecked()){
+//            email = editEmail.getText().toString().trim();
+//            password = editPassword.getText().toString().trim();
+//            rememberBox = true;
+//        }
 
         email = editEmail.getText().toString().trim();
         password = editPassword.getText().toString().trim();
 
-        //don't know yet what is this shit
-        editor.putBoolean("rememberBox", rememberBox);
+        //editor.putBoolean("rememberBox", rememberBox);
         editor.putString("email", email);
         editor.putString("password", password);
         editor.apply();
 
-
         //call presenter
         presenter.login(email, password);
-
-        //authentication
-        //begin using model, lead this user to student or admin
-//        model.authenticate(email, password, (User user) -> {
-//            if (user == null)
-//                Toast.makeText(this, "Failed to log in", Toast.LENGTH_LONG).show();
-//            else if (user.type.equals("student"))
-//                ToStudentPages(user.UTORid);
-//            else
-//                ToAdminPages(user.UTORid);
-//        }
     }
 
     public void ToStudentPages(String UTORid) {
