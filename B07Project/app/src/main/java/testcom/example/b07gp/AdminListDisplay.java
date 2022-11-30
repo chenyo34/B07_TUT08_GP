@@ -54,10 +54,10 @@ public class AdminListDisplay extends AppCompatActivity implements View.OnClickL
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        addCourse = (Button) findViewById(R.id.adminListDisplayAddCourseButton);
-        addCourse.setOnClickListener(this);
-
-        addCourse = (Button) findViewById(R.id.adminListDisplayAddCourseButton);
+//        addCourse = (Button) findViewById(R.id.adminListDisplayAddCourseButton);
+//        addCourse.setOnClickListener(this);
+//
+//        addCourse = (Button) findViewById(R.id.adminListDisplayAddCourseButton);
 
         listView = (ListView) findViewById(R.id.adminListDisplayListview);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -121,10 +121,19 @@ public class AdminListDisplay extends AppCompatActivity implements View.OnClickL
 
     @Override
     public void onClick(View view) {
+//        switch (view.getId()) {
+//            case R.id.adminListDisplayAddCourseButton:
+//                startActivity(new Intent(this,AdminAddCourses.class));
+//                break;
+//        }
+    }
+
+    public void onFabClick(View view) {
         switch (view.getId()) {
-            case R.id.adminListDisplayAddCourseButton:
+            case R.id.test:
                 startActivity(new Intent(this,AdminAddCourses.class));
                 break;
         }
+
     }
 }
