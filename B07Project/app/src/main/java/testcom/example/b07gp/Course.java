@@ -20,6 +20,10 @@ public class Course {
         Precourses = precourses;
     }
 
+    public Course() {
+
+    }
+
     public String getCourseCode() {
         return CourseCode;
     }
