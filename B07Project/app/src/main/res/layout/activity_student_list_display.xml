@@ -49,8 +49,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/studentTakenCourseTextView"
-        android:layout_marginTop="4dp" />
+        android:layout_marginTop="4dp" >
 
+
+    </ListView>
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButton"
         android:layout_width="wrap_content"
@@ -63,6 +65,7 @@
         android:onClick="FloatOnClick"
         app:backgroundTint="#CFC6C6"
         app:srcCompat="@drawable/ic_action_name" />
+
 
 
     <!--    <Button-->
