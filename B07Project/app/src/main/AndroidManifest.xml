@@ -13,81 +13,88 @@
         android:theme="@style/Theme.B07gp"
         tools:targetApi="31">
         <activity
-            android:label="Admin-Add Course Page"
+            android:name=".StudentTimelineDisplay2"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".AdminAddCourses"
-            android:exported="false">
+            android:exported="false"
+            android:label="Admin-Add Course Page">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:label="Student-Add Course Page"
             android:name=".Student_Add_TakenCourses"
-            android:exported="false">
+            android:exported="false"
+            android:label="Student-Add Course Page">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:label="Admin-Course Edit Page"
             android:name=".AdminEditDisplay"
-            android:exported="false">
+            android:exported="false"
+            android:label="Admin-Course Edit Page">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:label="Student-Dashboard"
             android:name=".StudentActivity"
-            android:exported="false">
-             <meta-data
+            android:exported="false"
+            android:label="Student-Dashboard">
+            <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:label="Student-Course Planner Timeline Page"
             android:name=".StudentTimelineDisplay"
-            android:exported="false">
+            android:exported="false"
+            android:label="Student-Course Planner Timeline Page">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:label="Admin-Course List Dashboard"
             android:name=".AdminListDisplay"
-            android:exported="false">
+            android:exported="false"
+            android:label="Admin-Course List Dashboard">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:label="Student-Taken Courses Dashboard"
             android:name=".StudentListDisplay"
-            android:exported="false">
+            android:exported="false"
+            android:label="Student-Taken Courses Dashboard">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:label="Admin-Dashboard"
             android:name=".AdminActivity"
-            android:exported="false">
+            android:exported="false"
+            android:label="Admin-Dashboard">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:label="Sign-up Page"
             android:name=".MainActivity2"
-            android:exported="false">
+            android:exported="false"
+            android:label="Sign-up Page">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:label="Login Page"
             android:name=".MainActivity"
             android:exported="true"
+            android:label="Login Page"
             android:theme="@style/Theme.B07gp.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

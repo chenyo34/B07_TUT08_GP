@@ -41,7 +41,7 @@ public class StudentActivity extends AppCompatActivity implements View.OnClickLi
                 break;
             }
             case R.id.stuActGenerateTimelineButton:{
-                startActivity(new Intent(this,StudentTimelineDisplay.class));
+                startActivity(new Intent(this,StudentTimelineDisplay2.class));
                 break;
             }
             case R.id.stuActTakenCourseDisplayButton:{
