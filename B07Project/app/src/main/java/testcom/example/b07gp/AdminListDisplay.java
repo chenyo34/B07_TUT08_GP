@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -45,6 +46,13 @@ public class AdminListDisplay extends AppCompatActivity implements View.OnClickL
         addCourse = (Button) findViewById(R.id.adminListDisplayAddCourseButton);
 
         listView = (ListView) findViewById(R.id.adminListDisplayListview);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String code = arrayList.get(position);
+                redirectToAdminEdit(code);
+            }
+        });
 
 
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, arrayList);
@@ -89,6 +97,12 @@ public class AdminListDisplay extends AppCompatActivity implements View.OnClickL
         listView.setAdapter(adapter);
 
 
+    }
+
+    public void redirectToAdminEdit(String code) {
+        Intent intent = new Intent(this, AdminEditDisplay.class);
+        intent.putExtra("code", code);
+        startActivity(intent);
     }
 
     @Override

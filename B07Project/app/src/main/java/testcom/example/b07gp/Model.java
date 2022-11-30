@@ -38,22 +38,48 @@ public class Model {
         return instance;
     }
 
+//    DatabaseReference curRef = userRef.child(Objects.requireNonNull(auth.getUid()));
+//
+////                    System.out.println("Student1");
+//                    curRef.addListenerForSingleValueEvent(new ValueEventListener() {
+//        @Override
+//        public void onDataChange(@NonNull DataSnapshot snapshot) {
+//
+//            User curUser = new User();
+////                            System.out.println(snapshot.child("type").getValue());
+////                            System.out.println("Student2");
+//
+//
+//            if (Objects.equals(snapshot.child("type").getValue(), "student")) {
+//                System.out.println("i AM IN ");
+//                curUser = snapshot.getValue(Student.class);
+////                                System.out.println(curUser.toString());
+//            } else {
+//                curUser = snapshot.getValue(Admin.class);
+//            }
+
     public void authenticate(String email, String password, Consumer<User> callback) {
+
         auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                if(!task.isSuccessful()) {
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                if (!task.isSuccessful()) {
+                    System.out.println("cannot find");
+                    if ((Build.VERSION.SDK_INT >= Build.VERSION_CODES.N))
                         callback.accept(null);
-                    }
                 } else {
-                    //log in successful
-                    userRef.child(Objects.requireNonNull(auth.getUid())).addListenerForSingleValueEvent(new ValueEventListener() {
+                    userRef.child(auth.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             User user = snapshot.getValue(User.class);
-                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                                callback.accept(user);
+                            if (user.type.equals("admin")) {
+                                User admin = snapshot.getValue(Admin.class);
+                                if ((Build.VERSION.SDK_INT >= Build.VERSION_CODES.N))
+                                    callback.accept(admin);
+                            } else {
+                                User student = snapshot.getValue(Student.class);
+                                if ((Build.VERSION.SDK_INT >= Build.VERSION_CODES.N))
+                                    callback.accept(student);
                             }
                         }
 
@@ -82,7 +108,7 @@ public class Model {
                 List<Course> result = new ArrayList<Course>();
 
                 //create the queue
-                Queue<String> q = new LinkedList<String>();
+                Queue<String> q = new LinkedList<>();
 
                 //add that course
                 q.offer(courseCode);
@@ -103,7 +129,6 @@ public class Model {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                     callback.accept((User) result);
                 }
-
             }
 
             @Override

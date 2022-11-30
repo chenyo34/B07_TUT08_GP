@@ -6,6 +6,10 @@ public class Student extends User{
 
     ArrayList<String> TakenCourses;
 
+    public Student() {
+        TakenCourses = new ArrayList<>();
+    }
+
     @Override
     public String toString() {
         return "Student{" +

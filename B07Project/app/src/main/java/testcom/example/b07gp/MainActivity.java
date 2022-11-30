@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.btnLogin:
 //                startActivity(new Intent(this, AdminActivity.class));
-                startActivity(new Intent(this, StudentActivity.class));
+//                startActivity(new Intent(this, StudentActivity.class));
                 logIn();
                 break;
         }
