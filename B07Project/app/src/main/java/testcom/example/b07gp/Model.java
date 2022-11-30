@@ -22,14 +22,19 @@ import java.util.Objects;
 import java.util.Queue;
 import java.util.function.Consumer;
 
+import javax.security.auth.callback.Callback;
+
 public class Model {
     private static Model instance;
     private DatabaseReference userRef;
+    private DatabaseReference coursesRef;
     private FirebaseAuth auth;
 
     Model() {
         userRef = FirebaseDatabase.getInstance().getReference("Users");
         auth = FirebaseAuth.getInstance();
+        coursesRef = FirebaseDatabase.getInstance().getReference("CoursesCurrentProvided");
+
     }
 
     public static Model getInstance() {
@@ -37,26 +42,6 @@ public class Model {
             instance = new Model();
         return instance;
     }
-
-//    DatabaseReference curRef = userRef.child(Objects.requireNonNull(auth.getUid()));
-//
-////                    System.out.println("Student1");
-//                    curRef.addListenerForSingleValueEvent(new ValueEventListener() {
-//        @Override
-//        public void onDataChange(@NonNull DataSnapshot snapshot) {
-//
-//            User curUser = new User();
-////                            System.out.println(snapshot.child("type").getValue());
-////                            System.out.println("Student2");
-//
-//
-//            if (Objects.equals(snapshot.child("type").getValue(), "student")) {
-//                System.out.println("i AM IN ");
-//                curUser = snapshot.getValue(Student.class);
-////                                System.out.println(curUser.toString());
-//            } else {
-//                curUser = snapshot.getValue(Admin.class);
-//            }
 
     public void authenticate(String email, String password, Consumer<User> callback) {
 
@@ -138,19 +123,28 @@ public class Model {
         });
     }
 
-    //new change
-//    public void register(String name, String email, String password, String type, Consumer<User> callback) {
-//        auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-//            @Override
-//            public void onComplete(@NonNull Task<AuthResult> task) {
-//                if(!task.isSuccessful()) {
-//                    callback.accept(null);
-//                } else {
-//                    User user = new User(name, email, password, type);
-//                    user.UTORid = auth.getCurrentUser().getUid();
-//                    callback.accept(user);
-//                }
-//            }
-//        })
-//    }
+    public void getCoursebyName(String coursecode, Consumer<Course> callback) {
+
+        coursesRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot cns : snapshot.getChildren()) {
+                    if (cns.toString().equals(coursecode)) {
+
+                        System.out.println(cns.toString());
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                            callback.accept(cns.getValue(Course.class));
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+    }
 }
