@@ -117,18 +117,6 @@ public class Student_Add_TakenCourses extends AppCompatActivity implements View.
         AlertDialog dialog = builder.create();
         dialog.show();
 
-//        ref.child("Taken Courses").child(CourseCode).setValue(CourseCode).addOnCompleteListener(new OnCompleteListener<Void>() {
-//            @Override
-//            public void onComplete(@NonNull Task<Void> task) {
-//                if (task.isSuccessful()){
-//                    Toast.makeText(Student_Add_TakenCourses.this, "Course Added", Toast.LENGTH_LONG).show();
-//                    startActivity(new Intent(Student_Add_TakenCourses.this, Student_Add_TakenCourses.class));
-//
-//                } else {
-//                    Toast.makeText(Student_Add_TakenCourses.this, "Fail to add course", Toast.LENGTH_LONG).show();
-//                    startActivity(new Intent(Student_Add_TakenCourses.this, Student_Add_TakenCourses.class));
-//                }
-//            }
-//        });
+
     }
 }
