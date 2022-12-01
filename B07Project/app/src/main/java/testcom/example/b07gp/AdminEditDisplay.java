@@ -43,7 +43,7 @@ public class AdminEditDisplay extends AppCompatActivity implements View.OnClickL
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                finish();
+                startActivity(new Intent(this,AdminListDisplay.class));
                 return true;
         }
 
@@ -84,28 +84,6 @@ public class AdminEditDisplay extends AppCompatActivity implements View.OnClickL
         model = new Model();
 
         edTxtCode.setText(code);
-
-        model.getCourseByCode(code, (Course c0) -> {
-            System.out.println("1");
-            edTxtName.setText(c0.CourseName);
-            System.out.println("2");
-            System.out.println(c0);
-            edTxtPrep.setText(c0.getPrecourses().toString()
-                    .replace("[", " ")
-                    .replace("]", ""));
-            System.out.println("3");
-            if (c0.getOfferingSessions().contains("Winter")) {
-                Winter.setChecked(true);
-            }
-
-            if (c0.getOfferingSessions().contains("Summer")) {
-                Summer.setChecked(true);
-            }
-
-            if (c0.getOfferingSessions().contains("Fall")) {
-                Fall.setChecked(true);
-            }
-        });
 
     }
 
