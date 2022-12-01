@@ -4,12 +4,39 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".StudentTimelineDisplay2">
+    android:orientation="vertical"
+    tools:context=".AdminListDisplay">
+
+
+    <TextView
+        android:id="@+id/student_timeline_DisplayTextView"
+        android:text="Select wanted Course"
+        android:textSize="32sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="12dp"
+        />
+
+    <Button
+        android:id="@+id/timeline_sumbit_button2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="12dp"
+        android:text="@string/timeline_submit_button2" />
 
     <ListView
         android:id="@+id/listview_data"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:choiceMode="multipleChoice"/>
+        android:layout_height="match_parent"
+        android:choiceMode="multipleChoice"
+        android:layout_below="@id/student_timeline_DisplayTextView"
+        android:layout_above="@id/timeline_sumbit_button2" />
+<!--        android:layout_marginTop="-39dp">-->
 
 </RelativeLayout>

@@ -5,9 +5,11 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -19,7 +21,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
-public class StudentTimelineDisplay2 extends AppCompatActivity {
+public class StudentTimelineDisplay2 extends AppCompatActivity implements View.OnClickListener{
 
     ListView listView;
 
@@ -86,5 +88,16 @@ public class StudentTimelineDisplay2 extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.timeline_sumbit_button2: {
+                startActivity(new Intent(this, StudentTimelineTable.class));
+                break;
+            }
+        }
+
     }
 }
