@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".StuTakenCourseInfo">
+
+    <TextView
+        android:id="@+id/TakenCourseCodeTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:fontFamily="sans-serif-condensed"
+        android:text="  Taken Courses"
+        android:layout_marginTop="20dp"
+        android:textSize="34sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/TakenCourseNameTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:fontFamily="sans-serif-medium"
+        android:text="Course Name:\nInformation Not Provided"
+        android:textAlignment="center"
+        android:layout_below="@id/TakenCourseCodeTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:textSize="20sp"
+        />
+
+    <TextView
+        android:id="@+id/TakenCoursePrerequisite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:fontFamily="sans-serif-medium"
+        android:text="Prerequisite:\nInformation Not Provided"
+        android:textAlignment="center"
+        android:layout_below="@id/TakenCourseNameTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:textSize="20sp"
+        />
+
+    <TextView
+        android:id="@+id/TakenCourseSession"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:fontFamily="sans-serif-medium"
+        android:text="Offering Session:\nInformation Not Provided"
+        android:textAlignment="center"
+        android:layout_below="@id/TakenCoursePrerequisite"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:textSize="20sp"
+        />
+
+
+
+</RelativeLayout>

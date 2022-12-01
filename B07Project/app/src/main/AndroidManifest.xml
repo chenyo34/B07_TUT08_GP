@@ -13,6 +13,14 @@
         android:theme="@style/Theme.B07gp"
         tools:targetApi="31">
         <activity
+            android:name=".StuTakenCourseInfo"
+            android:exported="false"
+            android:label="Course Information Page">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".StudentTimelineDisplay2"
             android:exported="false">
             <meta-data
