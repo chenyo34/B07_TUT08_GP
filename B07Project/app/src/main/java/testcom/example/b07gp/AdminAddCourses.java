@@ -165,8 +165,6 @@ public class AdminAddCourses extends AppCompatActivity implements View.OnClickLi
         if ((newCourse.Precourses.size() == 1) && (newCourse.Precourses.get(0) == "")) {
             strPrecourses = "No Prerequisites are needed. ";
         } else {
-            System.out.println("here");
-            strPrecourses += "Those are precourses:\n";
             for (String precourse: newCourse.getPrecourses()) {
                 strPrecourses += precourse + " ";
             }
@@ -176,12 +174,9 @@ public class AdminAddCourses extends AppCompatActivity implements View.OnClickLi
 
         builder.setCancelable(true);
         builder.setTitle("Confirm information of New Course");
-        String confirmInfo = "Course Code is:  \n" + "<font color = '#E10C0C'>" + newCourse.getCourseCode() + "</font>"+ "\n" +
-                "                \n" +
-                "Course Name is: \n" + "<font color = '#E10C0C'>" + newCourse.getCourseName() + "</font>" + "\n" +
-                "                \n" +
-                "It will be offered in " + "<font color = '#E10C0C'>" + strOfferSession + "</font>" + "\n" +
-                "                \n" +
+        String confirmInfo = "Course Code is: " + "<font color = '#E10C0C'>" + newCourse.getCourseCode() + "</font>" +
+                "Course Name is: " + "<font color = '#E10C0C'>" + newCourse.getCourseName() + "</font>" +
+                "It will be offered in " + "<font color = '#E10C0C'>" + strOfferSession + "</font>" + "Those are precourses:" +
                 "<font color = '#E10C0C'>" + strPrecourses + "</font>";
         builder.setMessage(Html.fromHtml(confirmInfo));
 
