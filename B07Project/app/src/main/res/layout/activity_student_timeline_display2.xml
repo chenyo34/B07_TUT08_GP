@@ -21,7 +21,7 @@
         />
 
     <Button
-        android:id="@+id/timeline_sumbit_button2"
+        android:id="@+id/timeline_submit_button2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
@@ -36,7 +36,7 @@
         android:layout_height="match_parent"
         android:choiceMode="multipleChoice"
         android:layout_below="@id/student_timeline_DisplayTextView"
-        android:layout_above="@id/timeline_sumbit_button2" />
+        android:layout_above="@id/timeline_submit_button2" />
 <!--        android:layout_marginTop="-39dp">-->
 
 </RelativeLayout>
