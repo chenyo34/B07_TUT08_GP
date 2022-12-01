@@ -93,8 +93,8 @@ public class StudentTimelineDisplay2 extends AppCompatActivity implements View.O
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.timeline_sumbit_button2: {
-                startActivity(new Intent(this, StudentTimelineTable.class));
+            case R.id.timeline_submit_button2: {
+                startActivity(new Intent(this, StudentActivity.class));
                 break;
             }
         }
