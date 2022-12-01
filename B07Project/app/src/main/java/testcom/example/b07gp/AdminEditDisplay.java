@@ -1,9 +1,15 @@
 package testcom.example.b07gp;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,13 +18,21 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.sql.SQLOutput;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.function.Consumer;
 
 public class AdminEditDisplay extends AppCompatActivity implements View.OnClickListener{
 
-    private Button changeSave, coursesDelete;
+    private Button changeSave, coursesDelete, ShowInfo;
     EditText edTxtCode, edTxtName, edTxtPrep;
     CheckBox Summer, Fall, Winter;
     String code;
@@ -57,33 +71,47 @@ public class AdminEditDisplay extends AppCompatActivity implements View.OnClickL
         coursesDelete = findViewById(R.id.adminCourseDelete);
         coursesDelete.setOnClickListener(this);
 
+        ShowInfo = findViewById(R.id.ShowInfoBt);
+        ShowInfo.setOnClickListener(this);
+
         Summer = findViewById(R.id.checkBoxSummer);
         Fall = findViewById(R.id.checkBoxFall);
         Winter = findViewById(R.id.checkBoxWinter);
 
         code = getIntent().getStringExtra("code").trim();
-
+        String oriName = String.valueOf(FirebaseDatabase.getInstance().getReference("CurrentProvidedCourses").child(code).child("courseName").get().toString());
+        System.out.println(oriName);
         model = new Model();
 
         edTxtCode.setText(code);
 
-        /*
-        Yong Chen will modify this part soon
-         */
+        model.getCourseByCode(code, (Course c0) -> {
+            System.out.println("1");
+            edTxtName.setText(c0.CourseName);
+            System.out.println("2");
+            System.out.println(c0);
+            edTxtPrep.setText(c0.getPrecourses().toString()
+                    .replace("[", " ")
+                    .replace("]", ""));
+            System.out.println("3");
+            if (c0.getOfferingSessions().contains("Winter")) {
+                Winter.setChecked(true);
+            }
 
+            if (c0.getOfferingSessions().contains("Summer")) {
+                Summer.setChecked(true);
+            }
 
-//        System.out.println(FirebaseDatabase.getInstance().
-//                getReference("CurrentProvidedCourses").child(code).child("CourseName").get());
-//        model.getCourseByCode(code, (Course c0) -> {
-//            System.out.println("here");
-//            edTxtName.setText(c0.CourseName);
-//            edTxtPrep.setText(c0.Precourses.toString());
-//        });
+            if (c0.getOfferingSessions().contains("Fall")) {
+                Fall.setChecked(true);
+            }
+        });
+
     }
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.adminCourseDelete:
                 model.DeletecourseByCode(code, this, (String deletecode) -> {
                     if (deletecode == null) {
@@ -91,15 +119,39 @@ public class AdminEditDisplay extends AppCompatActivity implements View.OnClickL
                     } else {
                         deleteCompleted(deletecode);
                     }
-            });
+                });
+                break;
+            case R.id.ShowInfoBt:
+                System.out.println("inside previous button");
+                model.getCourseByCode(code, (Course c0) -> {
+                    System.out.println("1");
+                    edTxtName.setText(c0.CourseName);
+                    System.out.println("2");
+                    System.out.println(c0);
+                    edTxtPrep.setText(c0.getPrecourses().toString()
+                            .replace("[", " ")
+                            .replace("]", ""));
+                    System.out.println("3");
+                    if (c0.getOfferingSessions().contains("Winter")) {
+                        Winter.setChecked(true);
+                    }
+
+                    if (c0.getOfferingSessions().contains("Summer")) {
+                        Summer.setChecked(true);
+                    }
+
+                    if (c0.getOfferingSessions().contains("Fall")) {
+                        Fall.setChecked(true);
+                    }
+                });
                 break;
             case R.id.ChangesSaver:
-                /*
-                Working on the progress
-                 */
-//                model.changeCourseInfo(code, this, (Course c) -> {
-//
-//                });
+//                Course tem = new Course(code,
+//                        edTxtName.toString(),
+//                        offSessions,
+//                        new ArrayList<>(List.of(Prerequisite))
+//                );
+                changeCourseInfo();
                 break;
         }
     }
@@ -118,5 +170,144 @@ public class AdminEditDisplay extends AppCompatActivity implements View.OnClickL
             "Fail to delete",
             Toast.LENGTH_LONG).show();
         startActivity(intent);
+    }
+
+    public void changeCourseInfo() {
+
+        //Deal with the Updated OffSessions
+        ArrayList<String> offSessions = new ArrayList<>();
+        if (Winter.isChecked()) {
+            offSessions.add("Winter");
+        } else if (Fall.isChecked()) {
+            offSessions.add("Fall");
+        } else if (Summer.isChecked()) {
+            offSessions.add("Summer");
+        }
+
+
+        // Deal with the Updated Precourses
+        String[] Prerequisite = edTxtPrep.getText().toString()
+                    .toUpperCase()
+                    .trim()
+                    .replace(" ", "")
+                    .split(",");
+
+        System.out.println(Arrays.toString(Prerequisite));
+
+        // Deal with the Udpated Coursename
+        String Coursename = edTxtName.getText().toString().toUpperCase().trim();
+
+        // Check the Required for the new added Courses
+        if(Coursename.isEmpty()) {
+            edTxtName.setError("CourseCode is required");
+            edTxtName.requestFocus();
+            return;
+        }
+
+        //Check and Updated the Offered sessions by checkboxes
+        ArrayList<String> Offersessions = new ArrayList<>();
+
+        if (Fall.isChecked()) {
+            Offersessions.add("Fall");
+        }
+        if (Summer.isChecked()) {
+            Offersessions.add("Summer");
+        }
+        if (Winter.isChecked()) {
+            Offersessions.add("Winter");
+        }
+
+
+        if (Offersessions.size() == 0) {
+
+            Fall.setError("");
+            Fall.requestFocus();
+
+            Summer.setError("");
+            Summer.requestFocus();
+
+            Winter.setError("");
+            Winter.requestFocus();
+
+            Toast.makeText(AdminEditDisplay.this,
+                    "Please choose at least one session",
+                    Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        // Collect the Precourses list
+        ArrayList<String> Prercourses = new ArrayList<>(List.of(Prerequisite));
+
+
+        // Write a message to the database
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myref = database.getReference("CurrentProvidedCourses");
+
+        Course updatedCourse = new Course(code, Coursename, Offersessions, Prercourses);
+        System.out.println(updatedCourse);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(AdminEditDisplay.this);
+
+        String strPrecourses = "";
+        if ((updatedCourse.Precourses.size() == 1) && (updatedCourse.Precourses.get(0) == "")) {
+            strPrecourses = "No Prerequisites are needed. ";
+        } else {
+            for (String precourse: updatedCourse.getPrecourses()) {
+                strPrecourses += precourse + " ";
+            }
+        }
+
+        builder.setCancelable(true);
+        builder.setTitle("Update Info of"+ code + " Course");
+        String confirmInfo =  "Course Name is: "
+                + "<font color = '#E10C0C'>" + updatedCourse.getCourseName() + "</font>"
+                + "It will be offered in "
+                +  "<font color = '#E10C0C'>" + Offersessions + "</font>"
+                + "Those are precourses:"
+                + "<font color = '#E10C0C'>" + strPrecourses + "</font>";
+
+        builder.setMessage(Html.fromHtml(confirmInfo));
+
+        builder.setPositiveButton("Update",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        myref.child(code).setValue(updatedCourse).
+                                addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if (task.isSuccessful()) {
+
+                                            // Actual Action after user's double-confirmed
+                                            Toast.makeText(AdminEditDisplay.this,
+                                                    "Course:" + code + "Added",
+                                                    Toast.LENGTH_LONG).show();
+//
+                                            startActivity(new Intent(AdminEditDisplay.this, AdminListDisplay.class));
+                                        } else {
+                                            Toast.makeText(AdminEditDisplay.this,
+                                                    "Fail to add current course.",
+                                                    Toast.LENGTH_LONG).show();
+                                        }
+                                    }
+                                });
+                    }
+                });
+
+
+        builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(AdminEditDisplay.this,
+                        "The operation has been cancelled.",
+                        Toast.LENGTH_LONG
+                ).show();
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+        dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.DKGRAY);
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.DKGRAY);
     }
 }
