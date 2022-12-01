@@ -132,12 +132,13 @@ public class Model {
 
     public void getCourseByCode(String coursecode, Consumer<Course> callback) {
 
-
+        System.out.println("inside the getCourseByCode");
         coursesRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot cns : snapshot.getChildren()) {
-                    if (cns.toString().equals(coursecode)) {
+                    System.out.println(cns.getKey());
+                    if (Objects.equals(cns.getKey(), coursecode)) {
                         System.out.println(cns.toString());
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                             callback.accept(cns.getValue(Course.class));
