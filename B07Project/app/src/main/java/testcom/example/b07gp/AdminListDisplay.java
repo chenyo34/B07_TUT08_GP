@@ -36,7 +36,7 @@ public class AdminListDisplay extends AppCompatActivity implements View.OnClickL
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                finish();
+                startActivity(new Intent(this,AdminActivity.class));;
                 return true;
         }
 

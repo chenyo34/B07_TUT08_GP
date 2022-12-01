@@ -27,7 +27,7 @@ import java.util.List;
 
 public class Student_Add_TakenCourses extends AppCompatActivity implements View.OnClickListener {
 
-    private Button stuAddTakenCourseButton;
+    private Button stuAddTakenCourseButton, returnButton;
     private EditText stuAddTakenCourseET;
     private FirebaseAuth mAuth;
 
@@ -35,7 +35,7 @@ public class Student_Add_TakenCourses extends AppCompatActivity implements View.
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                finish();
+                startActivity(new Intent(this,StudentListDisplay.class));
                 return true;
         }
 
@@ -54,8 +54,8 @@ public class Student_Add_TakenCourses extends AppCompatActivity implements View.
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         mAuth = FirebaseAuth.getInstance();
-        //Add taken course button
-        stuAddTakenCourseButton = (Button) findViewById(R.id.studentAddTakenCourseButton);;
+
+        stuAddTakenCourseButton = (Button) findViewById(R.id.studentAddTakenCourseButton);
         stuAddTakenCourseButton.setOnClickListener(this);
 
         // Insert Taken CourseCode
@@ -68,6 +68,9 @@ public class Student_Add_TakenCourses extends AppCompatActivity implements View.
         switch (view.getId()) {
             case R.id.studentAddTakenCourseButton:
                 addTakenCourse();
+            //case R.id.studentAddTakenCourseReturn:
+                //startActivity(new Intent(this, StudentListDisplay.class));
+                //break;
         }
     }
 

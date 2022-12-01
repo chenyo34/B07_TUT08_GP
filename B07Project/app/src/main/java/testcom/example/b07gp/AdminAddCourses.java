@@ -49,7 +49,7 @@ public class AdminAddCourses extends AppCompatActivity implements View.OnClickLi
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                finish();
+                startActivity(new Intent(this,AdminListDisplay.class));
                 return true;
         }
 

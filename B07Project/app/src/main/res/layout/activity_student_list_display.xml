@@ -20,18 +20,6 @@
         android:textSize="34sp"
         android:textStyle="bold" />
 
-    <!--button for to add taken course layout-->
-
-    <Button
-        android:id="@+id/studentToAddTakenCourseButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="12dp"
-        android:layout_marginBottom="16dp"
-        android:text="Add" />
-
     <!--button for return to student activity layout-->
     <Button
         android:id="@+id/studentTakenCourseReturnButton"
