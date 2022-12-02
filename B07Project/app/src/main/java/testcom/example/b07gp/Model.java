@@ -5,6 +5,9 @@ import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Build;
 import android.text.Html;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
+import android.widget.CompoundButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -54,7 +57,6 @@ public class Model {
     }
 
     public void authenticate(String email, String password, Consumer<User> callback) {
-
         auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -73,8 +75,9 @@ public class Model {
                                     callback.accept(admin);
                             } else {
                                 User student = snapshot.getValue(Student.class);
-                                if ((Build.VERSION.SDK_INT >= Build.VERSION_CODES.N))
+                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                                     callback.accept(student);
+                                }
                             }
                         }
 
@@ -122,7 +125,36 @@ public class Model {
                 HashMap<String, Course> allCourses = new HashMap<>();
                 for(DataSnapshot cns : snapshot.getChildren()) {
                     Course c = cns.getValue(Course.class);
+<<<<<<< Updated upstream
                     allCourses.put(c.getCourseCode(), c);
+=======
+<<<<<<< HEAD
+                    allCourses.put(c.CourseCode, c);
+                }
+                //create the final result
+                List<Course> result = new ArrayList<Course>();
+
+                //create the queue
+                Queue<String> q = new LinkedList<>();
+
+                //add that course
+                q.offer(courseCode);
+
+                while (!q.isEmpty()) {
+                    //dequeue that course
+                    String cur = q.poll();
+                    //get the course from hashmap
+                    Course curCourse = allCourses.get(courseCode);
+                    result.add((allCourses.get(cur)));
+                    //for loop the pre of this course
+                    for (String code : curCourse.Precourses) {
+                        //add it into the queue
+                        q.offer(code);
+                    }
+=======
+                    allCourses.put(c.getCourseCode(), c);
+>>>>>>> 35f36cb3e6842778ae7897c08b51071fbef3d32c
+>>>>>>> Stashed changes
                 }
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {

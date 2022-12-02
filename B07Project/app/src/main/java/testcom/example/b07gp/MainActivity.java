@@ -23,48 +23,62 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.CheckBox;
 import android.widget.Toast;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 
 import org.w3c.dom.Text;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private EditText editEmail, editPassword;
     private SharedPreferences preferences;
     private SharedPreferences.Editor editor;
-    private Button btnLogIn;
-    private Button showHide;
-    private TextView loginDescription;
-    private FirebaseAuth mAuth;
 
-    private Model model;
     private Presenter presenter;
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         editEmail = (EditText) findViewById(R.id.editTextEmail);
+
         editPassword = (EditText) findViewById(R.id.editTextPassword);
-        btnLogIn = (Button) findViewById(R.id.btnLogin);
-        //showHide = (Button) findViewById(R.id.showHideBtn);
-        loginDescription = (TextView) findViewById(R.id.loginDescription);
+
+        Button btnLogIn = (Button) findViewById(R.id.btnLogin);
+        btnLogIn.setOnClickListener(this);
+
+        CheckBox showPassword = (CheckBox) findViewById(R.id.showPassword);
+        showPassword.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    editPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                } else {
+                    editPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                }
+            }
+        });
+
+        TextView loginDescription = (TextView) findViewById(R.id.loginDescription);
+        loginDescription.setOnClickListener(this);
+
         preferences = getSharedPreferences("b07GroupProject", Context.MODE_PRIVATE);
         editor = preferences.edit();
         checkSharedPreference();
-        btnLogIn.setOnClickListener(this);
-        loginDescription.setOnClickListener(this);
-        mAuth = FirebaseAuth.getInstance();
-        model = Model.getInstance();
+
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        Model model = Model.getInstance();
+
         presenter = new Presenter(new Model(), this);
     }
 
     private void checkSharedPreference() {
-        String remember = preferences.getString(getString(R.string.remember_me), "False");
         String email = preferences.getString(getString(R.string.email_address), "");
         String password = preferences.getString(getString(R.string.password), "");
         editEmail.setText(email);
@@ -74,7 +88,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.loginDescription:
                 startActivity(new Intent(this, MainActivity2.class));
                 break;

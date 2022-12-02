@@ -1,5 +1,7 @@
 package testcom.example.b07gp;
 
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.widget.Toast;
 
 public class Presenter {
