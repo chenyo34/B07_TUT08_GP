@@ -74,4 +74,9 @@ public class Course {
                 ", Precourses=" + Precourses +
                 '}';
     }
+
+
+    public boolean hasOffer(Semester semester) {
+        return this.OfferingSessions.contains(semester.session);
+    }
 }
