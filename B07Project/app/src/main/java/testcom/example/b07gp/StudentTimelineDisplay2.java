@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.google.firebase.database.ChildEventListener;
@@ -28,6 +29,8 @@ public class StudentTimelineDisplay2 extends AppCompatActivity implements View.O
     ArrayList<String> arrayList = new ArrayList<>();
 
     DatabaseReference ref;
+
+    private Button timeline_submit;
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -57,6 +60,8 @@ public class StudentTimelineDisplay2 extends AppCompatActivity implements View.O
 
         listView = (ListView) findViewById(R.id.listview_data);
         listView.setAdapter(arrayAdapter);
+        timeline_submit = (Button) findViewById(R.id.timeline_submit_button2);
+        timeline_submit.setOnClickListener(this);
 
         ref = FirebaseDatabase.getInstance().getReference().child("CurrentProvidedCourses");
         ref.addChildEventListener(new ChildEventListener() {
@@ -88,19 +93,24 @@ public class StudentTimelineDisplay2 extends AppCompatActivity implements View.O
 
             }
         });
-    }
-
-    public void onFabClick(View view) {
-        switch (view.getId()) {
-            case R.id.timeline_submit_button2:t:
-                startActivity(new Intent(this,StudentTimelineTable2.class));
-                break;
-        }
 
     }
+
+//    public void onFabClick(View view) {
+//        switch (view.getId()) {
+//            case R.id.timeline_submit_button2:t:
+//                startActivity(new Intent(this,StudentTimelineTable2.class));
+//                break;
+//        }
+//
+//    }
 
     @Override
     public void onClick(View v) {
-
+        switch (v.getId()) {
+            case R.id.timeline_submit_button2:t:
+            startActivity(new Intent(this,StudentTimelineTable2.class));
+                break;
+        }
     }
 }
