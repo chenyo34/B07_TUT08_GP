@@ -1,10 +1,18 @@
 package testcom.example.b07gp;
 
+import android.se.omapi.Session;
+
 import java.util.ArrayList;
+import java.util.List;
 
-public class Student extends User{
+public class Student extends User {
 
-    ArrayList<String> TakenCourses;
+    private ArrayList<String> TakenCourses;
+//    public String session;
+//    public int year;
+    Semester semester;
+
+
 
     public Student() {
         TakenCourses = new ArrayList<>();
@@ -19,9 +27,16 @@ public class Student extends User{
                 '}';
     }
 
-    public Student(String name, String email, String password, String type, String UTROid) {
+    public Student(String name,
+                   String email,
+                   String password,
+                   String type,
+                   String UTROid,
+                   Session semester) {
+
         super(name, email, password, type, UTROid);
         this.TakenCourses = new ArrayList<>();
+        this.semester = new Semester();
     }
 
     public ArrayList<String> getTakenCourses() {
@@ -32,7 +47,26 @@ public class Student extends User{
         this.TakenCourses = takenCourses;
     }
 
-    public void addTakenCourses(ArrayList<String> NewCourses) {
-        this.TakenCourses.addAll(NewCourses);
+    public void addTakenCourses(String course) {
+        this.TakenCourses.add(course);
+    }
+
+    public boolean hasTaken(String courseCode) {
+        return this.TakenCourses.contains(courseCode);
+    }
+    public boolean hasTaken(Course course) {
+        return this.TakenCourses.contains(course.getCourseCode());
+    }
+
+    public static boolean hasTaken(List<String> taken, Course course) {
+        return taken.contains(course.getCourseCode());
+    }
+
+    public static boolean canTake(List<String> fakeTaken, Course course) {
+        for (String pre: course.getPrecourses()) {
+            if (!fakeTaken.contains(pre))
+                return false;
+        }
+        return true;
     }
 }
