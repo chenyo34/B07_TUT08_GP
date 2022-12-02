@@ -1,10 +1,13 @@
 package testcom.example.b07gp;
 
+import static android.widget.Toast.makeText;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -24,12 +27,14 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class Student_Add_TakenCourses extends AppCompatActivity implements View.OnClickListener {
 
     private Button stuAddTakenCourseButton, returnButton;
     private EditText stuAddTakenCourseET;
-    private FirebaseAuth mAuth;
+    private String userID;
+    private Model model;
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -50,10 +55,10 @@ public class Student_Add_TakenCourses extends AppCompatActivity implements View.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_add_taken_courses);
+        model = Model.getInstance();
+        userID = getIntent().getStringExtra("UTORid");
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        mAuth = FirebaseAuth.getInstance();
 
         stuAddTakenCourseButton = (Button) findViewById(R.id.studentAddTakenCourseButton);
         stuAddTakenCourseButton.setOnClickListener(this);
@@ -75,14 +80,80 @@ public class Student_Add_TakenCourses extends AppCompatActivity implements View.
     }
 
     private void addTakenCourse(){
-        String CourseCode = stuAddTakenCourseET.getText().toString().trim().replace(" ","");
-        CourseCode = CourseCode.toUpperCase();
+        //get user's input
+        String courseCode = stuAddTakenCourseET.getText().toString().trim().replace(" ","").toUpperCase();
 
-        if(CourseCode.isEmpty()) {
+        //check user input if it is empty
+        if(courseCode.isEmpty()) {
             stuAddTakenCourseET.setError("CourseCode is required");
             stuAddTakenCourseET.requestFocus();
             return;
         }
+
+        //now try to get the course
+        model.getCourses((Map<String, Course> allCourses) -> {
+            //find the class corresponding to this course
+            List<Course> coursePath = model.getCoursePath(allCourses, courseCode);
+
+            //this course does not exist in the all courses
+            if (coursePath == null) {
+                stuAddTakenCourseET.setError("CourseCode does not exist");
+                stuAddTakenCourseET.requestFocus();
+                return;
+            }
+
+            //check the student if have already taken this course
+            model.getStudent(userID, (Student student) -> {
+                if (student.getTakenCourses().contains(courseCode)) {
+                    stuAddTakenCourseET.setError("already taken");
+                    stuAddTakenCourseET.requestFocus();
+                    return;
+                }
+
+                // check if all the prerequisite have taken
+                for (int i = 1; i < coursePath.size(); i++) {
+                    if (!student.getTakenCourses().contains(coursePath.get(i).getCourseCode())) {
+                        stuAddTakenCourseET.setError("Missing pre-course");
+                        stuAddTakenCourseET.requestFocus();
+                        return;
+                    }
+                }
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(Student_Add_TakenCourses.this);
+
+                builder.setCancelable(true);
+                builder.setTitle("Confirm the name of the New Course");
+                String colored = "<font color = '#E10C0C'>" + courseCode + "</font>";
+                builder.setMessage(Html.fromHtml(colored));
+
+
+                builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                //satisfy above conditions then we just add it
+                                student.addTakenCourses(courseCode);
+                                model.saveStudent(student, (Boolean success) -> {
+                                    if (!success) {
+                                        stuAddTakenCourseET.setError("failed to save info");
+                                        stuAddTakenCourseET.requestFocus();
+                                    } else {
+                                        Context context = getApplicationContext();
+                                        CharSequence text = "Successfully add this course!";
+                                        int duration = Toast.LENGTH_SHORT;
+                                        Toast toast = Toast.makeText(context, text, duration);
+                                        toast.show();
+                                        startActivity(new Intent(Student_Add_TakenCourses.this, Student_Add_TakenCourses.class));
+                                    }
+                                });
+
+                            }
+                        });
+            });
+        });
+
+
+
+        /*
         System.out.println(mAuth.getCurrentUser().getUid());
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference ref = database.getReference("Users").child(mAuth.getCurrentUser().getUid());
@@ -132,7 +203,7 @@ public class Student_Add_TakenCourses extends AppCompatActivity implements View.
 
         AlertDialog dialog = builder.create();
         dialog.show();
-
+        */
 
     }
 }
