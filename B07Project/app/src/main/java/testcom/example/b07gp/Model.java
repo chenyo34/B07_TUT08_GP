@@ -10,6 +10,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+//import androidx.core.util.Consumer;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -23,8 +24,10 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Queue;
 import java.util.function.Consumer;
@@ -85,7 +88,33 @@ public class Model {
         });
     }
 
-    public void getCourse(String courseCode, Consumer<User> callback) {
+    public void getStudent(String userID, Consumer<Student> callback) {
+        userRef.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Student s = snapshot.getValue(Student.class);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    callback.accept(s);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {}
+        });
+    }
+
+    public void saveStudent(Student student, Consumer<Boolean> callback) {
+        userRef.child(student.getUTORid()).setValue(student).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    callback.accept(task.isSuccessful());
+                }
+            }
+        });
+    }
+
+    public void getCourses(Consumer<Map<String, Course>> callback) {
         userRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -93,43 +122,66 @@ public class Model {
                 HashMap<String, Course> allCourses = new HashMap<>();
                 for(DataSnapshot cns : snapshot.getChildren()) {
                     Course c = cns.getValue(Course.class);
-                    allCourses.put(c.CourseCode, c);
-                }
-
-                //create the final result
-                List<Course> result = new ArrayList<Course>();
-
-                //create the queue
-                Queue<String> q = new LinkedList<>();
-
-                //add that course
-                q.offer(courseCode);
-
-                while (!q.isEmpty()) {
-                    //dequeue that course
-                    String cur = q.poll();
-                    //get the course from hashmap
-                    Course curCourse = allCourses.get(courseCode);
-                    result.add((allCourses.get(cur)));
-                    //for loop the pre of this course
-                    for (String code : curCourse.Precourses) {
-                        //add it into the queue
-                        q.offer(code);
-                    }
+                    allCourses.put(c.getCourseCode(), c);
                 }
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    callback.accept((User) result);
+                    callback.accept(allCourses);
                 }
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
+            public void onCancelled(@NonNull DatabaseError error) {}
         });
     }
 
+    public List<Course> getCoursePath(Map<String, Course> allCourses, String courseCode) {
+        if (!allCourses.containsKey(courseCode)) {
+            return null;
+        }
+
+        // create the final result
+        List<Course> result = new ArrayList<Course>();
+
+        //create the queue
+        Queue<String> q = new LinkedList<>();
+
+        //add that course
+        q.offer(courseCode);
+
+        while (!q.isEmpty()) {
+            //dequeue that course
+            String cur = q.poll();
+            //get the course from hashmap
+            Course curCourse = allCourses.get(cur);
+            result.add(curCourse);
+            //for loop the pre of this course
+            for (String next : curCourse.Precourses) {
+                //add it into the queue
+                q.offer(next);
+            }
+        }
+
+        return result;
+    }
+
+
+    public void getPrecourse(String coursecode, Consumer<ArrayList<String>> callback) {
+
+//        System.out.println("inside the getPrecourses Functions");
+//        HashSet<String> PreCLst = new HashSet<>();
+//        ArrayList<String> req = new ArrayList<>();
+//
+//        PreCLst.add(coursecode);
+//
+//        getCourseByCode(coursecode, (Course cur) -> {
+//            req.addAll(cur.Precourses);
+//        });
+//
+//
+//
+//        coursesRef.child(coursecode).
+    }
     public void getCourseByCode(String coursecode, Consumer<Course> callback) {
 
         System.out.println("inside the getCourseByCode");
@@ -138,11 +190,14 @@ public class Model {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot cns : snapshot.getChildren()) {
                     System.out.println(cns.getKey());
+                    System.out.println(coursecode);
                     if (Objects.equals(cns.getKey(), coursecode)) {
                         System.out.println(cns.toString());
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                             callback.accept(cns.getValue(Course.class));
                         }
+                    } else {
+                        System.out.println("Problem Detected");
                     }
                 }
             }
