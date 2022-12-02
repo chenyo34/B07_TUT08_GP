@@ -90,14 +90,17 @@ public class StudentTimelineDisplay2 extends AppCompatActivity implements View.O
         });
     }
 
-    @Override
-    public void onClick(View view) {
+    public void onFabClick(View view) {
         switch (view.getId()) {
-            case R.id.timeline_submit_button2: {
-                startActivity(new Intent(this, StudentActivity.class));
+            case R.id.timeline_submit_button2:t:
+                startActivity(new Intent(this,StudentTimelineTable2.class));
                 break;
-            }
         }
+
+    }
+
+    @Override
+    public void onClick(View v) {
 
     }
 }
