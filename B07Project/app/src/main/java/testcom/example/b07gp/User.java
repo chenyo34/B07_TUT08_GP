@@ -1,6 +1,8 @@
 package testcom.example.b07gp;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
     String name;
     String email;
     String password;
