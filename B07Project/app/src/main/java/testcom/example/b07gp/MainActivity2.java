@@ -100,10 +100,12 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
     }
 
     private void register() {
+        //get the user's input
         String name = TextName.getText().toString().trim();
         String email = TextEmail.getText().toString().trim();
         String password = TextPassWord.getText().toString().trim();
 
+        //check the violation
         if (name.isEmpty()) {
             TextName.setError("Name is required!");
             TextName.requestFocus();
@@ -135,6 +137,7 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
         }
 
         progressBar.setVisibility(View.VISIBLE);
+        //now start to create the user
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override

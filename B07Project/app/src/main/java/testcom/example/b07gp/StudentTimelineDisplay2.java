@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.google.firebase.database.ChildEventListener;
@@ -23,11 +24,14 @@ import java.util.ArrayList;
 
 public class StudentTimelineDisplay2 extends AppCompatActivity implements View.OnClickListener{
 
-    ListView listView;
+   private ListView listView;
 
-    ArrayList<String> arrayList = new ArrayList<>();
+    private ArrayList<String> arrayList = new ArrayList<>();
+    private ArrayList<String> selected_courses = new ArrayList<>();
 
-    DatabaseReference ref;
+    private DatabaseReference ref;
+
+    private Button timeline_submit;
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -57,6 +61,8 @@ public class StudentTimelineDisplay2 extends AppCompatActivity implements View.O
 
         listView = (ListView) findViewById(R.id.listview_data);
         listView.setAdapter(arrayAdapter);
+        timeline_submit = (Button) findViewById(R.id.timeline_submit_button2);
+        timeline_submit.setOnClickListener(this);
 
         ref = FirebaseDatabase.getInstance().getReference().child("CurrentProvidedCourses");
         ref.addChildEventListener(new ChildEventListener() {
@@ -88,16 +94,36 @@ public class StudentTimelineDisplay2 extends AppCompatActivity implements View.O
 
             }
         });
+
     }
 
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.timeline_submit_button2: {
-                startActivity(new Intent(this, StudentActivity.class));
-                break;
-            }
-        }
+//    public void onFabClick(View view) {
+//        switch (view.getId()) {
+//            case R.id.timeline_submit_button2:t:
+//                startActivity(new Intent(this,StudentTimelineTable2.class));
+//                break;
+//        }
+//
+//    }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.timeline_submit_button2:t:
+                for  (int i=0; i<listView.getCount(); i++){
+                    String course = listView.getItemAtPosition(i).toString();
+                    if (listView.isItemChecked(i) &&
+                            !(selected_courses.contains(course))){
+                        selected_courses.add(course);
+                    }
+                    else if(!(listView.isItemChecked(i))){
+                        selected_courses.remove(listView.getItemAtPosition(i).toString());
+                    }
+                }
+                Intent intent = new Intent(this,StudentTimelineTable2.class);
+                intent.putExtra("Wanted_course", selected_courses);
+            startActivity(intent);
+                break;
+        }
     }
 }
