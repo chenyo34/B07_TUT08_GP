@@ -78,7 +78,7 @@ public class AdminEditDisplay extends AppCompatActivity implements View.OnClickL
         Fall = findViewById(R.id.checkBoxFall);
         Winter = findViewById(R.id.checkBoxWinter);
 
-        code = getIntent().getStringExtra("code").trim();
+        code = getIntent().getStringExtra("code").trim().split(" ")[0];
         String oriName = String.valueOf(FirebaseDatabase.getInstance().getReference("CurrentProvidedCourses").child(code).child("courseName").get().toString());
         System.out.println(oriName);
         model = new Model();

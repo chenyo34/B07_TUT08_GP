@@ -80,7 +80,22 @@ public class AdminListDisplay extends AppCompatActivity implements View.OnClickL
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
 //                System.out.println("here");
 //                System.out.println(snapshot.getKey());
-                arrayList.add("    " + snapshot.getKey());
+//                arrayList.add("    " + snapshot.getKey());
+                ArrayList<String> off = (ArrayList<String>) snapshot.child("offeringSessions").getValue();
+                String abvOff = "";
+                if(off.contains("Fall")){
+                    abvOff += "Fall/";
+                }
+                if(off.contains("Winter")){
+                    abvOff += "Winter/";
+                }
+                if(off.contains("Summer")){
+                    abvOff += "Summer/";
+                }
+
+                arrayList.add("    " + snapshot.getKey() + " --" + abvOff + "--" + snapshot.child("precourses").getValue());
+
+
                 adapter.notifyDataSetChanged();
             }
 
