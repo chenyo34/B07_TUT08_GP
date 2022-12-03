@@ -69,7 +69,7 @@ public class StudentTimelineDisplay2 extends AppCompatActivity implements View.O
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 String value = snapshot.child("courseCode").getValue(String.class);
-                System.out.println(value);
+             //   System.out.println(value);
                 arrayList.add(value);
                 arrayAdapter.notifyDataSetChanged();
             }
