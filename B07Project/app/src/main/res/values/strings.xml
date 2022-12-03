@@ -44,6 +44,8 @@
     <string name="register">Register</string>
     <string name="timeline_submit_button2">Submit</string>
     <string name="timelinetable_textview">Your timeline</string>
+    <string name="adminName">TextView</string>
+    <string name="adminMail">TextView</string>
 
 
 </resources>

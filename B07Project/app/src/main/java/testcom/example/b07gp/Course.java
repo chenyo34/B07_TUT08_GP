@@ -75,6 +75,48 @@ public class Course {
                 '}';
     }
 
+    public String compStr(String current, String updated){
+        String changes = "";
+        if(!current.equals(updated)){
+            changes = updated;
+        }
+        return changes;
+    }
+
+    public String compAL(ArrayList<String> current, ArrayList<String> updated){
+        String changes;
+        String added = "";
+        String removed = "";
+        int i;
+        for(i=0; i<current.size(); i++){
+            if(!updated.contains(current.get(i))){
+                removed = removed + current.get(i) + " ";
+            }
+        }
+        if(!removed.equals("")){
+            removed = "Removed " + removed + "\n";
+        }
+        for(i=0; i<updated.size(); i++){
+            if(!current.contains(updated.get(i))){
+                added = added + updated.get(i) + " ";
+            }
+        }
+        if(!added.equals("")){
+            added = "Added " + added;
+        }
+        changes = removed + added;
+        return changes;
+    }
+
+    public ArrayList<String> modify(Course other){
+        ArrayList<String> changes = new ArrayList<>();
+        changes.add(compStr(this.CourseCode, other.CourseCode));
+        changes.add(compStr(this.CourseName, other.CourseName));
+        changes.add(compAL(this.Precourses, other.Precourses));
+        changes.add(compAL(this.OfferingSessions, other.OfferingSessions));
+        return changes;
+    }
+
 
     public boolean hasOffer(Semester semester) {
         return this.OfferingSessions.contains(semester.session);

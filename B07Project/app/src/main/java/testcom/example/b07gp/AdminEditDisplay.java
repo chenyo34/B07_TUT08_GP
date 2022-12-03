@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -23,12 +22,10 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
-import java.util.function.Consumer;
 
 public class AdminEditDisplay extends AppCompatActivity implements View.OnClickListener{
 
@@ -37,6 +34,7 @@ public class AdminEditDisplay extends AppCompatActivity implements View.OnClickL
     CheckBox Summer, Fall, Winter;
     String code;
     Model model;
+    Course oldCourse;
 
 
     @Override
@@ -84,7 +82,14 @@ public class AdminEditDisplay extends AppCompatActivity implements View.OnClickL
         model = new Model();
 
         edTxtCode.setText(code);
-
+        oldCourse = new Course();
+        oldCourse.setCourseCode(code);
+        model.getCourseByCode(code, (Course oldC) -> {
+            oldCourse.setCourseName(oldC.getCourseName());
+            System.out.println("Yoooooooo!!!!" + oldCourse.getCourseName());
+            oldCourse.setPrecourses(oldC.getPrecourses());
+            oldCourse.setOfferingSessions(oldC.getOfferingSessions());
+        });
     }
 
     @Override
@@ -221,8 +226,32 @@ public class AdminEditDisplay extends AppCompatActivity implements View.OnClickL
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myref = database.getReference("CurrentProvidedCourses");
 
+        System.out.println(oldCourse);
         Course updatedCourse = new Course(code, Coursename, Offersessions, Prercourses);
         System.out.println(updatedCourse);
+
+        ArrayList<String> changes = new ArrayList<>();
+        changes = oldCourse.modify(updatedCourse);
+        System.out.println(changes);
+        String codeChange = "";
+        String nameChange = "";
+        String preChange = "";
+        String sesChange = "";
+        if(!changes.get(0).equals("")){
+            codeChange = "Course Code changed: " + "\n" + "<font color = '#E10C0C'>" + changes.get(0) + "</font>"+"\n";
+        }
+        if(!changes.get(1).equals("")){
+            nameChange = "Course Name changed: " + "\n" + "<font color = '#E10C0C'>" + changes.get(1) + "</font>"+"\n";
+        }
+        if(!changes.get(2).equals("")){
+            preChange = "Course Prerequisite changed: " + "\n" + "<font color = '#E10C0C'>" + changes.get(2) + "</font>"+ "\n";
+        }
+        if(!changes.get(3).equals("")){
+            sesChange = "Course Offering Session changed: " + "\n" + "<font color = '#E10C0C'>" + changes.get(3) + "</font>" + "\n";
+        }
+        String mess = codeChange + nameChange + preChange + sesChange;
+        System.out.println(mess);
+
 
         AlertDialog.Builder builder = new AlertDialog.Builder(AdminEditDisplay.this);
 
@@ -236,7 +265,7 @@ public class AdminEditDisplay extends AppCompatActivity implements View.OnClickL
         }
 
         builder.setCancelable(true);
-        builder.setTitle("Update Info of"+ code + " Course");
+        builder.setTitle("Update Info of "+ code + " Course");
         String confirmInfo =  "Course Name is: "
                 + "<font color = '#E10C0C'>" + updatedCourse.getCourseName() + "</font>"
                 + "It will be offered in "
@@ -244,7 +273,7 @@ public class AdminEditDisplay extends AppCompatActivity implements View.OnClickL
                 + "Those are precourses:"
                 + "<font color = '#E10C0C'>" + strPrecourses + "</font>";
 
-        builder.setMessage(Html.fromHtml(confirmInfo));
+        builder.setMessage(Html.fromHtml(mess));
 
         builder.setPositiveButton("Update",
                 new DialogInterface.OnClickListener() {
