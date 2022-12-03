@@ -25,6 +25,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -56,7 +57,7 @@ public class Student_Add_TakenCourses extends AppCompatActivity implements View.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_add_taken_courses);
         model = Model.getInstance();
-        userID = getIntent().getStringExtra("UTORid");
+        userID = getIntent().getStringExtra("userID");
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -73,15 +74,14 @@ public class Student_Add_TakenCourses extends AppCompatActivity implements View.
         switch (view.getId()) {
             case R.id.studentAddTakenCourseButton:
                 addTakenCourse();
-            //case R.id.studentAddTakenCourseReturn:
-                //startActivity(new Intent(this, StudentListDisplay.class));
-                //break;
         }
     }
 
     private void addTakenCourse(){
         //get user's input
         String courseCode = stuAddTakenCourseET.getText().toString().trim().replace(" ","").toUpperCase();
+
+        System.out.println(courseCode);
 
         //check user input if it is empty
         if(courseCode.isEmpty()) {
@@ -92,8 +92,11 @@ public class Student_Add_TakenCourses extends AppCompatActivity implements View.
 
         //now try to get the course
         model.getCourses((Map<String, Course> allCourses) -> {
+
+            System.out.println("Try to get the course");
             //find the class corresponding to this course
             List<Course> coursePath = model.getCoursePath(allCourses, courseCode);
+            System.out.println("woguole");
 
             //this course does not exist in the all courses
             if (coursePath == null) {
@@ -104,6 +107,7 @@ public class Student_Add_TakenCourses extends AppCompatActivity implements View.
 
             //check the student if have already taken this course
             model.getStudent(userID, (Student student) -> {
+                System.out.println("Check the whether can take?");
                 if (student.getTakenCourses().contains(courseCode)) {
                     stuAddTakenCourseET.setError("already taken");
                     stuAddTakenCourseET.requestFocus();
@@ -112,6 +116,7 @@ public class Student_Add_TakenCourses extends AppCompatActivity implements View.
 
                 // check if all the prerequisite have taken
                 for (int i = 1; i < coursePath.size(); i++) {
+                    System.out.println("Check the prerequisite");
                     if (!student.getTakenCourses().contains(coursePath.get(i).getCourseCode())) {
                         stuAddTakenCourseET.setError("Missing pre-course");
                         stuAddTakenCourseET.requestFocus();
@@ -131,23 +136,47 @@ public class Student_Add_TakenCourses extends AppCompatActivity implements View.
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 //satisfy above conditions then we just add it
-                                student.addTakenCourses(courseCode);
-                                model.saveStudent(student, (Boolean success) -> {
-                                    if (!success) {
-                                        stuAddTakenCourseET.setError("failed to save info");
-                                        stuAddTakenCourseET.requestFocus();
-                                    } else {
-                                        Context context = getApplicationContext();
-                                        CharSequence text = "Successfully add this course!";
-                                        int duration = Toast.LENGTH_SHORT;
-                                        Toast toast = Toast.makeText(context, text, duration);
-                                        toast.show();
-                                        startActivity(new Intent(Student_Add_TakenCourses.this, Student_Add_TakenCourses.class));
-                                    }
-                                });
+//                                DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users").child(userID);
+                                model.getStudent(userID, (Student curS) -> {
+                                    curS.addTakenCourses(courseCode);
+                                    model.saveStudent(curS ,userID, (Boolean success) -> {
+                                        if (!success) {
+                                            stuAddTakenCourseET.setError("failed to save info");
+                                            stuAddTakenCourseET.requestFocus();
+                                        } else {
+//                                        Context context = getApplicationContext();
+//                                        CharSequence text = "Successfully add this course!";
+//                                        int duration = Toast.LENGTH_SHORT;
+//                                        Toast toast = Toast.makeText(context, text, duration);
+//                                        toast.show();
+//                                        startActivity(new Intent(Student_Add_TakenCourses.this,
+//                                                Student_Add_TakenCourses.class));
+                                            Toast.makeText(Student_Add_TakenCourses.this,
+                                                    "Course Added",
+                                                    Toast.LENGTH_LONG).show();
+                                        }
 
+
+                                        Toast.makeText(Student_Add_TakenCourses.this,
+                                                "Course Added",
+                                                Toast.LENGTH_LONG).show();
+                                        startActivity(new Intent(Student_Add_TakenCourses.this,
+                                                StudentListDisplay.class));
+                                    });
+                                });
                             }
-                        });
+                });
+                builder.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Toast.makeText(Student_Add_TakenCourses.this, "Fail to add course", Toast.LENGTH_LONG).show();
+                        startActivity(new Intent(Student_Add_TakenCourses.this, Student_Add_TakenCourses.class));
+                    }
+                });
+
+
+                AlertDialog dialog = builder.create();
+                dialog.show();
             });
         });
 
