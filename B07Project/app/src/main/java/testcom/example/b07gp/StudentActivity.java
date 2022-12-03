@@ -15,6 +15,7 @@ public class StudentActivity extends AppCompatActivity implements View.OnClickLi
 
     private Button stuActTakenCourseDisplayButton,
                     stuActLogOutButton,stuActGenerateTimelineButton;
+    private String userID;
 
 
     @Override
@@ -31,6 +32,9 @@ public class StudentActivity extends AppCompatActivity implements View.OnClickLi
         stuActGenerateTimelineButton = (Button) findViewById(R.id.stuActGenerateTimelineButton);
         stuActGenerateTimelineButton.setOnClickListener(this);
 
+        userID = getIntent().getStringExtra("key");
+        getIntent().putExtra("userID", userID);
+
     }
 
     @Override
@@ -41,11 +45,16 @@ public class StudentActivity extends AppCompatActivity implements View.OnClickLi
                 break;
             }
             case R.id.stuActGenerateTimelineButton:{
-                startActivity(new Intent(this,StudentTimelineDisplay2.class));
+
+                Intent intent = new Intent(this,StudentTimelineDisplay2.class);
+                intent.putExtra("userID", userID);
+                startActivity(intent);
                 break;
             }
             case R.id.stuActTakenCourseDisplayButton:{
-                startActivity(new Intent(this,StudentListDisplay.class));
+                Intent intent = new Intent(this,StudentListDisplay.class);
+                intent.putExtra("userID", userID);
+                startActivity(intent);
                 break;
             }
         }

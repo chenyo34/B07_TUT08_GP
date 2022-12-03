@@ -93,10 +93,13 @@ public class Model {
     }
 
     public void getStudent(String userID, Consumer<Student> callback) {
+        System.out.println("I am inside the get student " + userID);
         userRef.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                System.out.println("Ready to get the student");
                 Student s = snapshot.getValue(Student.class);
+                System.out.println(s.toString());
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                     callback.accept(s);
                 }
@@ -107,8 +110,8 @@ public class Model {
         });
     }
 
-    public void saveStudent(Student student, Consumer<Boolean> callback) {
-        userRef.child(student.getUTORid()).setValue(student).addOnCompleteListener(new OnCompleteListener<Void>() {
+    public void saveStudent(Student student, String userID, Consumer<Boolean> callback) {
+        userRef.child(userID).setValue(student).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
@@ -138,6 +141,8 @@ public class Model {
     }
 
     public List<Course> getCoursePath(Map<String, Course> allCourses, String courseCode) {
+
+        System.out.println("get in the coursePath with " + courseCode);
         if (!allCourses.containsKey(courseCode)) {
             return null;
         }
@@ -145,25 +150,37 @@ public class Model {
         // create the final result
         List<Course> result = new ArrayList<Course>();
 
-        //create the queue
-        Queue<String> q = new LinkedList<>();
+//        //create the queue
+//        Queue<String> q = new LinkedList<>();
+//
+//        //add that course
+//        q.offer(courseCode);
 
-        //add that course
-        q.offer(courseCode);
+//        while (!q.isEmpty()) {
+//            System.out.println("I am on the while loop");
+//            //dequeue that course
+//            String cur = q.poll();
+//            //get the course from hashmap
+//            Course curCourse = allCourses.get(cur);
+//            System.out.println(curCourse);
+//            result.add(curCourse);
+//            //for loop the pre of this course
+//            for (String next : curCourse.Precourses) {
+//                //add it into the queue
+//                q.offer(next);
+//            }
+//            System.out.println(q);
+//        }
+        Course cur = allCourses.get(courseCode);
+        result.add(cur);
 
-        while (!q.isEmpty()) {
-            //dequeue that course
-            String cur = q.poll();
-            //get the course from hashmap
-            Course curCourse = allCourses.get(cur);
-            result.add(curCourse);
-            //for loop the pre of this course
-            for (String next : curCourse.Precourses) {
-                //add it into the queue
-                q.offer(next);
+        for (String next: cur.Precourses) {
+            if (!Objects.equals(next, "") && next != null) {
+                result.addAll(getCoursePath(allCourses, next));
             }
-        }
 
+        }
+        System.out.println(result);
         return result;
     }
 
@@ -199,7 +216,7 @@ public class Model {
                             callback.accept(cns.getValue(Course.class));
                         }
                     } else {
-                        System.out.println("Problem Detected");
+//                        System.out.println("Problem Detected");
                     }
                 }
             }

@@ -24,7 +24,7 @@ public class Semester {
         int next = (sessions.indexOf(this.session)+1) % 3;
 
         //Return the next semester by checking the current session
-        if (this.session.equals("Summer")) {
+        if (this.session.equals("Fall")) {
             return new Semester(this.year+1,sessions.get(next));
         }
         return new Semester(this.year,sessions.get(next));

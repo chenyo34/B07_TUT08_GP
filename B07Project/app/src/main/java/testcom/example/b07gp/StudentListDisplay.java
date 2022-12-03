@@ -15,6 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -24,6 +25,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class StudentListDisplay extends AppCompatActivity implements View.OnClickListener{
 
@@ -34,7 +36,9 @@ public class StudentListDisplay extends AppCompatActivity implements View.OnClic
     private ListView stuTakenCoursesLV;
     private ArrayList<String> myTakenCourses = new ArrayList<>();
     ArrayAdapter<String> adapter;
-
+    Model model;
+//    Student student;
+    String userID;
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -59,6 +63,19 @@ public class StudentListDisplay extends AppCompatActivity implements View.OnClic
 
         mAuth = FirebaseAuth.getInstance();
 
+//        userID = getIntent().getStringExtra("userID"); // If you use the inherient from last page
+        userID = mAuth.getCurrentUser().getUid();
+        System.out.println(userID);
+
+//        model.getStudent(userID, (Student student) -> {
+//            System.out.println("I am getting the student by userID");
+//            myTakenCourses = student.getTakenCourses();
+//        });
+
+        ;
+//        System.out.println(test);
+
+        model = Model.getInstance();
         stuTakenCoursesLV = (ListView) findViewById(R.id.studentTakenCourseListView);
 
         //stuAddTakenCourseButton = (Button) findViewById(R.id.studentToAddTakenCourseButton);;
@@ -77,27 +94,17 @@ public class StudentListDisplay extends AppCompatActivity implements View.OnClic
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, myTakenCourses);
 
         database = FirebaseDatabase.getInstance();
-        myRef = database.getReference("Users").child(mAuth.getCurrentUser().getUid()).child("Taken Courses");
+        myRef = database.getReference("Users").child(userID);
 
-        myRef.addChildEventListener(new ChildEventListener() {
+        myRef.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                myTakenCourses.add(snapshot.getValue(String.class));
-                adapter.notifyDataSetChanged();
-            }
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if((Collection<? extends String>) snapshot.child("takenCourses").getValue() == null){
+                    myTakenCourses = new ArrayList<>();
+                } else {
+                    adapter.addAll((Collection<? extends String>) snapshot.child("takenCourses").getValue());
+                }
 
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                adapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
 
             }
 
@@ -105,6 +112,37 @@ public class StudentListDisplay extends AppCompatActivity implements View.OnClic
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
+//        myRef.addChildEventListener(new ChildEventListener() {
+//            @Override
+//            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+//
+//
+//                myTakenCourses.add();
+//                adapter.notifyDataSetChanged();
+//            }
+//
+//            @Override
+//            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+//                System.out.println("========================");
+//                System.out.println(snapshot.child("takenCourses").getValue(String.class));
+//                myTakenCourses.add(snapshot.child("takenCourses").getValue(String.class));
+//                adapter.notifyDataSetChanged();
+//            }
+//
+//            @Override
+//            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+//                adapter.notifyDataSetChanged();
+//            }
+//
+//            @Override
+//            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+//                adapter.notifyDataSetChanged();
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
         });
         stuTakenCoursesLV.setAdapter(adapter);
     }
@@ -163,7 +201,9 @@ public class StudentListDisplay extends AppCompatActivity implements View.OnClic
     public void FloatOnClick(View view) {
         switch (view.getId()) {
             case R.id.floatingActionButton:
-                startActivity(new Intent(this, Student_Add_TakenCourses.class));
+                Intent intent = new Intent(this, Student_Add_TakenCourses.class);
+                intent.putExtra("userID", mAuth.getCurrentUser().getUid());
+                startActivity(intent);
                 break;
         }
     }
