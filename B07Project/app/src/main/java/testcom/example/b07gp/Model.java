@@ -25,6 +25,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -118,7 +119,7 @@ public class Model {
     }
 
     public void getCourses(Consumer<Map<String, Course>> callback) {
-        userRef.addValueEventListener(new ValueEventListener() {
+        coursesRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 //create a hashmap
@@ -126,6 +127,9 @@ public class Model {
                 for (DataSnapshot cns : snapshot.getChildren()) {
                     Course c = cns.getValue(Course.class);
                     allCourses.put(c.getCourseCode(), c);
+                }
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    callback.accept(allCourses);
                 }
             }
             @Override
