@@ -42,7 +42,7 @@ public class ExampleUnitTest {
         String mail = "chen@stu.com";
         String password = "123123";
 
-        User student = new User();
+        User student = new Student();
         student.type = "student";
 
         Presenter presenter = new Presenter(model, view);
@@ -83,7 +83,7 @@ public class ExampleUnitTest {
         String mail = "chen@adm.com";
         String password = "123123";
 
-        User admin = new User();
+        User admin = new Admin();
         admin.type = "Admin";
 
         Presenter presenter = new Presenter(model, view);
