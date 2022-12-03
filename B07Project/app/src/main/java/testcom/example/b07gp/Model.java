@@ -123,45 +123,11 @@ public class Model {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 //create a hashmap
                 HashMap<String, Course> allCourses = new HashMap<>();
-                for(DataSnapshot cns : snapshot.getChildren()) {
+                for (DataSnapshot cns : snapshot.getChildren()) {
                     Course c = cns.getValue(Course.class);
-<<<<<<< Updated upstream
                     allCourses.put(c.getCourseCode(), c);
-=======
-<<<<<<< HEAD
-                    allCourses.put(c.CourseCode, c);
-                }
-                //create the final result
-                List<Course> result = new ArrayList<Course>();
-
-                //create the queue
-                Queue<String> q = new LinkedList<>();
-
-                //add that course
-                q.offer(courseCode);
-
-                while (!q.isEmpty()) {
-                    //dequeue that course
-                    String cur = q.poll();
-                    //get the course from hashmap
-                    Course curCourse = allCourses.get(courseCode);
-                    result.add((allCourses.get(cur)));
-                    //for loop the pre of this course
-                    for (String code : curCourse.Precourses) {
-                        //add it into the queue
-                        q.offer(code);
-                    }
-=======
-                    allCourses.put(c.getCourseCode(), c);
->>>>>>> 35f36cb3e6842778ae7897c08b51071fbef3d32c
->>>>>>> Stashed changes
-                }
-
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    callback.accept(allCourses);
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {}
         });
