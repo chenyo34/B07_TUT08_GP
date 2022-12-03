@@ -56,9 +56,11 @@ public class StudentTimelineTable2 extends AppCompatActivity {
 
         model = Model.getInstance();
         // Get the wantToTake courses from the preivous page
-        wantToTake = getIntent().getStringArrayListExtra("????");
+        wantToTake = getIntent().getStringArrayListExtra("Wanted_course");
+        System.out.println(wantToTake);
         //Get the useKey
-        userID = getIntent().getStringExtra("???");
+        userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        System.out.println(userID);
 
         model.getCourses((Map<String, Course> allCourses) -> {
             model.getStudent(userID, (Student student) -> {
@@ -106,10 +108,12 @@ public class StudentTimelineTable2 extends AppCompatActivity {
                     }
 
                     Timeline.put(curSem.toString(), courses);
+                    System.out.println(courses);
 
                     curSem = curSem.next();
 
                 }
+                System.out.println(Timeline);
             });
         });
 
@@ -188,13 +192,13 @@ public class StudentTimelineTable2 extends AppCompatActivity {
 //    public boolean onCreateOptionsMenu(Menu menu) {
 //        return true;
 //    }
-        Intent intent = getIntent();
-        ArrayList<String> arrayList = intent.getStringArrayListExtra("Wanted_course");
-
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(StudentTimelineTable2.this, android.R.layout.simple_list_item_1, arrayList);
+//        Intent intent = getIntent();
+//        ArrayList<String> arrayList = intent.getStringArrayListExtra("Wanted_course");
+//
+//        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(StudentTimelineTable2.this, android.R.layout.simple_list_item_1, arrayList);
 
        //listView = (ListView) findViewById(R.id.listview_table);
-       listView.setAdapter(arrayAdapter);
+  //     listView.setAdapter(arrayAdapter);
 //        listView.setAdapter(arrayAdapter);
     }
 }
