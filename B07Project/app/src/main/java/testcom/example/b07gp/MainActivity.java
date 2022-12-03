@@ -106,6 +106,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         email = editEmail.getText().toString().trim();
         password = editPassword.getText().toString().trim();
 
+        //violation
+        if(email.isEmpty() && password.isEmpty()) {
+            editEmail.setError("email is required!");
+            editPassword.setError("password is required!");
+            editEmail.requestFocus();
+            editPassword.requestFocus();
+        }
+
+        if (email.isEmpty()) {
+            editEmail.setError("email is required!");
+            editEmail.requestFocus();
+            return;
+        }
+
+        if (password.isEmpty()) {
+            editPassword.setError("password is required!");
+            editPassword.requestFocus();
+            return;
+        }
+
         //editor.putBoolean("rememberBox", rememberBox);
         editor.putString("email", email);
         editor.putString("password", password);

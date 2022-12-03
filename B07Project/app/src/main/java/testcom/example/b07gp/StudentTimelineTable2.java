@@ -193,7 +193,7 @@ public class StudentTimelineTable2 extends AppCompatActivity {
 
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(StudentTimelineTable2.this, android.R.layout.simple_list_item_1, arrayList);
 
-       listView = (ListView) findViewById(R.id.listview_table);
+       //listView = (ListView) findViewById(R.id.listview_table);
        listView.setAdapter(arrayAdapter);
 //        listView.setAdapter(arrayAdapter);
     }
