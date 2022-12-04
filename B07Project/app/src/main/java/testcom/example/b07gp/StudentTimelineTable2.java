@@ -83,7 +83,7 @@ public class StudentTimelineTable2 extends AppCompatActivity {
 
                 List<String> fakeTaken = new ArrayList<>(student.getTakenCourses());
                 HashSet<Course> coursePath = new HashSet<>();
-                HashMap<String, ArrayList<String>> Timeline = new HashMap<>();
+                LinkedHashMap<String, ArrayList<String>> Timeline = new LinkedHashMap<>();
                 Semester curSem = new Semester();
 
 //                 Get all the courses maybe needed
@@ -112,7 +112,6 @@ public class StudentTimelineTable2 extends AppCompatActivity {
 
                 while( coursePath.size() > 0) {
 
-
                     // Condition check:
                     // 1) Can I take this course
                     // & 2) Does the Institution offer this course?
@@ -123,19 +122,13 @@ public class StudentTimelineTable2 extends AppCompatActivity {
                         boolean cond1 = Student.canTake(fakeTaken, c);
                         boolean cond2 = c.hasOffer(curSem);
 
-//                        if(Student.canTake(fakeTaken, c) //Cond 1
-//                                && c.hasOffer(curSem)){  //Cond 2
                         if (cond1 && cond2){
                             // If so
                             // Add it to current seesion courses
                             newcourses.add(c.CourseCode);
 
-
-                            // and remove from the coursePath
-//                            coursePath.remove(c);
                         }
 
-//                        break;
                     }
 
                     for(String deleteC: newcourses) {
@@ -145,7 +138,6 @@ public class StudentTimelineTable2 extends AppCompatActivity {
                     // Add it to fakeTake
                     fakeTaken.addAll(newcourses);
                     System.out.println(newcourses);
-
 
                     Timeline.put(curSem.toString(), (ArrayList<String>) newcourses.clone());
 
@@ -157,7 +149,7 @@ public class StudentTimelineTable2 extends AppCompatActivity {
 
                 }
                 System.out.println("timeline: ");
-                System.out.println(Timeline);
+                System.out.println();
 
                 for (String key: Timeline.keySet()){
                     if (Timeline.get(key).isEmpty()){
@@ -167,7 +159,6 @@ public class StudentTimelineTable2 extends AppCompatActivity {
                         session_and_course.add(key + "        " + Timeline.get(key));
                     }
                 }
-                Collections.reverse(session_and_course);
 
 
                 ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(StudentTimelineTable2.this,
@@ -175,8 +166,6 @@ public class StudentTimelineTable2 extends AppCompatActivity {
                 listView = (ListView) findViewById(R.id.listview_table);
                 listView.setAdapter(arrayAdapter);
 
-//                        recyclerView = findViewById(R.id.recycler_course_table);
-//        setRecyclerView();
                 print_table();
             });
         });
