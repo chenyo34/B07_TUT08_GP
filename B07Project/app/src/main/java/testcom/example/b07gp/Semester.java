@@ -7,6 +7,12 @@ public class Semester {
     int year;
     String session;
 
+
+    @Override
+    public String toString() {
+        return year + " " + session;
+    }
+
     public Semester() {
         this.year = 2022;
         this.session = "Fall";
