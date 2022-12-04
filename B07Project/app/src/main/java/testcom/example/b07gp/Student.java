@@ -7,15 +7,16 @@ import java.util.List;
 
 public class Student extends User {
 
-    private ArrayList<String> TakenCourses;
+    ArrayList<String> TakenCourses;
 //    public String session;
 //    public int year;
-    Semester semester;
+//    Semester semester = new Semester();
 
 
 
     public Student() {
         TakenCourses = new ArrayList<>();
+//        semester = new Semester();
     }
 
     @Override
@@ -36,7 +37,7 @@ public class Student extends User {
 
         super(name, email, password, type, UTROid);
         this.TakenCourses = new ArrayList<>();
-        this.semester = new Semester();
+//        this.semester = new Semester();
     }
 
     public ArrayList<String> getTakenCourses() {
@@ -64,6 +65,7 @@ public class Student extends User {
 
     public static boolean canTake(List<String> fakeTaken, Course course) {
         for (String pre: course.getPrecourses()) {
+            if (pre.isEmpty()) continue;
             if (!fakeTaken.contains(pre))
                 return false;
         }
