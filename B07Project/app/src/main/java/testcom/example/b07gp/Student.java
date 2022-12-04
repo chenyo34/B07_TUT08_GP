@@ -71,4 +71,9 @@ public class Student extends User {
         }
         return true;
     }
+
+    public void removeTaken(String code){
+            TakenCourses.remove(code);
+    }
+
 }

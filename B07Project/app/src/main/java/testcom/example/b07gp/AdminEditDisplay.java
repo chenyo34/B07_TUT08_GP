@@ -101,6 +101,8 @@ public class AdminEditDisplay extends AppCompatActivity implements View.OnClickL
                         deteleFailed();
                     } else {
                         deleteCompleted(deletecode);
+                        model.DeleteCourseUpdate(deletecode, (String dc) ->{
+                        });
                     }
                 });
                 break;
