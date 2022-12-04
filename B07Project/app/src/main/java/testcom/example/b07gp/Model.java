@@ -307,6 +307,32 @@ public class Model {
         dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.DKGRAY);
     }
 
+    public void DeleteCourseUpdate(String code, Consumer<String> callback) {
+        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot user_snapshot : snapshot.getChildren()) {
+                    if (user_snapshot.hasChild("takenCourses")) {
+                        String id = user_snapshot.getKey().toString();
+                        getStudent(id, (Student student) -> {
+                            if (student.TakenCourses.contains(code)) {
+                                student.removeTaken(code);
+                                saveStudent(student, id, (Boolean success) -> {
+                                });
+                            }
+                        });
+                    }
 
+                }
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    callback.accept(code);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+    }
 
 }
