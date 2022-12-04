@@ -27,8 +27,6 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
     private String adminMail, adminName;
     private FirebaseDatabase database;
     private DatabaseReference myRef;
-
-
     private FirebaseUser user;
     private String Uid;
 

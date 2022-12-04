@@ -41,11 +41,15 @@
     <!-- String used for admin list display pages -->
     <string name="admin_list_display_add_course">Add Course</string>
     <string name="admin_list_display_course_textview">Courses</string>
+    <string name="userName">User Name</string>
+    <string name="userMail">User Mail</string>
+
+
+
     <string name="register">Register</string>
     <string name="timeline_submit_button2">Submit</string>
     <string name="timelinetable_textview">Your timeline</string>
-    <string name="adminName">TextView</string>
-    <string name="adminMail">TextView</string>
+
 
 
 </resources>
