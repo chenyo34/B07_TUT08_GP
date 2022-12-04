@@ -25,6 +25,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -159,7 +160,7 @@ public class AdminAddCourses extends AppCompatActivity implements View.OnClickLi
         } else {
             for (String precourse : newCourse.getPrecourses()) {
                 //editor: Rebecca/frank
-                model.getCourses((Map<String, Course> allCourse) -> {
+                model.getCourses((HashMap<String, Course> allCourse) -> {
                     //boolean for existence for precourse
                     boolean preCourseExist = false;
                     //boolean for existence for coursecode
