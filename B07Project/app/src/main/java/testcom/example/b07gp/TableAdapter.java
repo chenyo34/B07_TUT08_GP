@@ -7,35 +7,36 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.tabs.TabLayout;
 
 import java.util.List;
 
-public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder> {
+public class TableAdapter extends RecyclerView.Adapter<TableAdapter.ViewHolder> {
 
     Context context;
-    List<Course> courseList;
+    List<Table> tableList;
 
-    public CourseAdapter (Context context, List<Course> courseList){
+    public TableAdapter(Context context, List<Table> tableList){
         this.context = context;
-        this.courseList = courseList;
+        this.tableList = tableList;
 
     }
 
     @NonNull
     @Override
-    public CourseAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public TableAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.item_layout, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CourseAdapter.ViewHolder holder, int position) {
-        if (courseList != null && courseList.size() > 0){
-            Course course = courseList.get(position);
-            holder.table_course.setText(course.getCourseCode());
-            holder.table_session.setText(course.getOfferingSessions().toString());
+    public void onBindViewHolder(@NonNull TableAdapter.ViewHolder holder, int position) {
+        if (tableList != null && tableList.size() > 0){
+            Table table = tableList.get(position);
+            holder.table_course.setText(table.courses);
+            holder.table_session.setText(table.session);
         }
         else{
             return;
@@ -44,7 +45,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
 
     @Override
     public int getItemCount() {
-        return courseList.size();
+        return tableList.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -52,7 +53,6 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-
             table_course = itemView.findViewById(R.id.table_course);
             table_session = itemView.findViewById(R.id.table_session);
         }
