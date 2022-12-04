@@ -101,7 +101,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".MainActivity2"
+            android:name=".RegisterActivity"
             android:exported="false"
             android:label="Sign-up Page">
             <meta-data

@@ -3,6 +3,7 @@ package testcom.example.b07gp;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
@@ -11,11 +12,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 //import android.widget.ProgressBar;
 import android.widget.ProgressBar;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,20 +22,16 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import org.w3c.dom.Text;
+import java.util.Objects;
 
 
-public class MainActivity2 extends AppCompatActivity implements View.OnClickListener{
+public class RegisterActivity extends AppCompatActivity implements View.OnClickListener{
 
 
-    private TextView signup;
-    private Button btnRegister;
     private EditText TextName, TextEmail, TextPassWord;
     private ProgressBar progressBar;
-    private CheckBox adminOrNot;
     private FirebaseAuth mAuth;
     boolean isAdmin;
 
@@ -67,13 +62,13 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        signup = (TextView) findViewById(R.id.signup);
+        TextView signup = (TextView) findViewById(R.id.signup);
         signup.setOnClickListener(this);
 
-        btnRegister = (Button) findViewById(R.id.register_user);
+        Button btnRegister = (Button) findViewById(R.id.register_user);
         btnRegister.setOnClickListener(this);
 
-        adminOrNot = (CheckBox) findViewById(R.id.checkboxRemember);
+        CheckBox adminOrNot = (CheckBox) findViewById(R.id.checkboxRemember);
         adminOrNot.setOnClickListener(this);
 
         TextName = (EditText) findViewById(R.id.editTextFullName);
@@ -106,6 +101,16 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
         String password = TextPassWord.getText().toString().trim();
 
         //check the violation
+        if(name.isEmpty() && email.isEmpty() && password.isEmpty()) {
+            TextName.setError("Name is required!");
+            TextPassWord.setError("password is required!");
+            TextEmail.setError("Email is required!");
+            TextName.requestFocus();
+            TextEmail.requestFocus();
+            TextPassWord.requestFocus();
+            return;
+        }
+
         if (name.isEmpty()) {
             TextName.setError("Name is required!");
             TextName.requestFocus();
@@ -119,13 +124,13 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
         }
 
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            TextEmail.setError("Please provide valid email!");
+            TextEmail.setError("Please provide a valid email !");
             TextEmail.requestFocus();
             return;
         }
 
         if (password.isEmpty()) {
-            TextPassWord.setError("password is required!");
+            TextPassWord.setError("Please provide a password !");
             TextPassWord.requestFocus();
             return;
         }
@@ -146,23 +151,43 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
                             String type = (isAdmin) ? ("admin") : ("student");
                             User user = new User(name, email, password, type);
                             FirebaseDatabase.getInstance().getReference("Users")
-                                    .child(mAuth.getCurrentUser().getUid())
+                                    .child(Objects.requireNonNull(mAuth.getCurrentUser()).getUid())
                                     .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if (task.isSuccessful()) {
-                                                Toast.makeText(MainActivity2.this, "user has been registered successfully", Toast.LENGTH_LONG).show();
+                                                //set up the message
+                                                CharSequence text = "User has been registered successfully";
+                                                //set the duration time
+                                                int duration = Toast.LENGTH_LONG;
+                                                //get the Context
+                                                Context register = RegisterActivity.this;
+                                                //set up the toast
+                                                Toast toast1 = Toast.makeText(register, text, duration);
+                                                //make it show
+                                                toast1.show();
                                                 progressBar.setVisibility((View.GONE));
-                                                startActivity(new Intent(MainActivity2.this, MainActivity.class));
+                                                Intent success = new Intent(RegisterActivity.this, MainActivity.class);
+                                                RegisterActivity.this.startActivity(success);
                                             } else {
-                                                Toast.makeText(MainActivity2.this, "Fail to create a user", Toast.LENGTH_LONG).show();
+                                                //set up the message
+                                                CharSequence txt = "Fail to create a user";
+                                                //set the duration time
+                                                int duration = Toast.LENGTH_LONG;
+                                                //get the Context
+                                                Context register = RegisterActivity.this;
+                                                //set up the toast
+                                                Toast toast2 = Toast.makeText(register, txt, duration);
+                                                //make it show
+                                                toast2.show();
                                                 progressBar.setVisibility((View.GONE));
-                                                startActivity(new Intent(MainActivity2.this, MainActivity2.class));
+                                                Intent fail = new Intent(RegisterActivity.this, RegisterActivity.class);
+                                                RegisterActivity.this.startActivity(fail);
                                             }
                                         }
                                     });
                         } else {
-                            Toast.makeText(MainActivity2.this, "Fail to register", Toast.LENGTH_LONG).show();
+                            Toast.makeText(RegisterActivity.this, "Fail to register", Toast.LENGTH_LONG).show();
                             progressBar.setVisibility(View.GONE);
                         }
                     }
