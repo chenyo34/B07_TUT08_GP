@@ -27,6 +27,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.sql.SQLOutput;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -91,7 +92,7 @@ public class Student_Add_TakenCourses extends AppCompatActivity implements View.
         }
 
         //now try to get the course
-        model.getCourses((Map<String, Course> allCourses) -> {
+        model.getCourses((HashMap<String, Course> allCourses) -> {
 
             System.out.println("Try to get the course");
             //find the class corresponding to this course
