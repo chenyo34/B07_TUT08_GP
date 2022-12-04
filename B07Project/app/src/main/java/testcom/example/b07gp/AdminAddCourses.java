@@ -157,6 +157,42 @@ public class AdminAddCourses extends AppCompatActivity implements View.OnClickLi
         StringBuilder strPrecourses = new StringBuilder();
         if ((newCourse.Precourses.size() == 1) && (newCourse.Precourses.get(0) == "")) {
             strPrecourses = new StringBuilder("No Prerequisites are needed. ");
+            model.getCourses((HashMap<String, Course> allCourse) -> {
+                //boolean for existence for coursecode
+                boolean courseCodeExist = false;
+
+                for (Map.Entry<String, Course> set : allCourse.entrySet()) {
+                    if(set.getKey().equals(newCourse.CourseCode)){
+                        courseCodeExist = true;
+                    }
+                }
+
+                if(courseCodeExist){
+                    pop.set(0);
+                    AlertDialog.Builder builder1 = new AlertDialog.Builder(AdminAddCourses.this);
+                    builder1.setCancelable(true);
+                    builder1.setTitle("Some errors happens... ");
+                    builder1.setMessage("This course code has already existed... ");
+
+
+                    builder1.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            CharSequence text = "The operation has been cancelled.";
+                            Toast.makeText(AdminAddCourses.this, text, Toast.LENGTH_LONG).show();
+                            Intent intent = new Intent(AdminAddCourses.this, AdminAddCourses.class);
+                            startActivity(intent);
+                            return;
+                        }
+                    });
+
+                    AlertDialog dialog1 = builder1.create();
+                    dialog1.show();
+                    dialog1.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.DKGRAY);
+                }
+            });
+
+
         } else {
             for (String precourse : newCourse.getPrecourses()) {
                 //editor: Rebecca/frank
@@ -213,58 +249,110 @@ public class AdminAddCourses extends AppCompatActivity implements View.OnClickLi
                 strPrecourses.append(precourse).append(" ");
             }
 
-            AlertDialog.Builder builder = new AlertDialog.Builder(AdminAddCourses.this);
+//            AlertDialog.Builder builder = new AlertDialog.Builder(AdminAddCourses.this);
+//
+//            builder.setCancelable(true);
+//            builder.setTitle("Confirm information of New Course");
+//            String confirmInfo = "Course Code is: " + "<font color = '#E10C0C'>" + newCourse.getCourseCode() + "</font>" +
+//                    "Course Name is: " + "<font color = '#E10C0C'>" + newCourse.getCourseName() + "</font>" +
+//                    "It will be offered in " + "<font color = '#E10C0C'>" + strOfferSession + "</font>" + "Those are precourses:" +
+//                    "<font color = '#E10C0C'>" + strPrecourses + "</font>";
+//            builder.setMessage(Html.fromHtml(confirmInfo));
+//
+//            builder.setPositiveButton("Confirm",
+//                    new DialogInterface.OnClickListener() {
+//                        @Override
+//                        public void onClick(DialogInterface dialog, int which) {
+//                            myref.child(Coursecode).setValue(newCourse).
+//                                    addOnCompleteListener(new OnCompleteListener<Void>() {
+//                                        @Override
+//                                        public void onComplete(@NonNull Task<Void> task) {
+//                                            if (task.isSuccessful()) {
+//
+//                                                // Actual Action after user's double-confirmed
+//                                                Toast.makeText(AdminAddCourses.this,
+//                                                        "Course:" + Coursecode + "Added",
+//                                                        Toast.LENGTH_LONG).show();
+//
+//                                                startActivity(new Intent(AdminAddCourses.this, AdminAddCourses.class));
+//                                            } else {
+//                                                Toast.makeText(AdminAddCourses.this,
+//                                                        "Fail to add current course.",
+//                                                        Toast.LENGTH_LONG).show();
+//                                            }
+//                                        }
+//                                    });
+//                        }
+//                    });
+//
+//            builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+//                @Override
+//                public void onClick(DialogInterface dialog, int which) {
+//                    Toast.makeText(AdminAddCourses.this,
+//                            "The operation has been cancelled.",
+//                            Toast.LENGTH_LONG
+//                    ).show();
+//                }
+//            });
+//
+//            if (pop.get() == 1){
+//                AlertDialog dialog = builder.create();
+//                dialog.show();
+//                dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.DKGRAY);
+//                dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.DKGRAY);
+//            }
+        }
+        AlertDialog.Builder builder = new AlertDialog.Builder(AdminAddCourses.this);
 
-            builder.setCancelable(true);
-            builder.setTitle("Confirm information of New Course");
-            String confirmInfo = "Course Code is: " + "<font color = '#E10C0C'>" + newCourse.getCourseCode() + "</font>" +
-                    "Course Name is: " + "<font color = '#E10C0C'>" + newCourse.getCourseName() + "</font>" +
-                    "It will be offered in " + "<font color = '#E10C0C'>" + strOfferSession + "</font>" + "Those are precourses:" +
-                    "<font color = '#E10C0C'>" + strPrecourses + "</font>";
-            builder.setMessage(Html.fromHtml(confirmInfo));
+        builder.setCancelable(true);
+        builder.setTitle("Confirm information of New Course");
+        String confirmInfo = "Course Code is: " + "<font color = '#E10C0C'>" + newCourse.getCourseCode() + "</font>" +
+                "Course Name is: " + "<font color = '#E10C0C'>" + newCourse.getCourseName() + "</font>" +
+                "It will be offered in " + "<font color = '#E10C0C'>" + strOfferSession + "</font>" + "Those are precourses:" +
+                "<font color = '#E10C0C'>" + strPrecourses + "</font>";
+        builder.setMessage(Html.fromHtml(confirmInfo));
 
-            builder.setPositiveButton("Confirm",
-                    new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            myref.child(Coursecode).setValue(newCourse).
-                                    addOnCompleteListener(new OnCompleteListener<Void>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
-                                            if (task.isSuccessful()) {
+        builder.setPositiveButton("Confirm",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        myref.child(Coursecode).setValue(newCourse).
+                                addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if (task.isSuccessful()) {
 
-                                                // Actual Action after user's double-confirmed
-                                                Toast.makeText(AdminAddCourses.this,
-                                                        "Course:" + Coursecode + "Added",
-                                                        Toast.LENGTH_LONG).show();
+                                            // Actual Action after user's double-confirmed
+                                            Toast.makeText(AdminAddCourses.this,
+                                                    "Course:" + Coursecode + "Added",
+                                                    Toast.LENGTH_LONG).show();
 
-                                                startActivity(new Intent(AdminAddCourses.this, AdminAddCourses.class));
-                                            } else {
-                                                Toast.makeText(AdminAddCourses.this,
-                                                        "Fail to add current course.",
-                                                        Toast.LENGTH_LONG).show();
-                                            }
+                                            startActivity(new Intent(AdminAddCourses.this, AdminAddCourses.class));
+                                        } else {
+                                            Toast.makeText(AdminAddCourses.this,
+                                                    "Fail to add current course.",
+                                                    Toast.LENGTH_LONG).show();
                                         }
-                                    });
-                        }
-                    });
+                                    }
+                                });
+                    }
+                });
 
-            builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    Toast.makeText(AdminAddCourses.this,
-                            "The operation has been cancelled.",
-                            Toast.LENGTH_LONG
-                    ).show();
-                }
-            });
-
-            if (pop.get() == 1){
-                AlertDialog dialog = builder.create();
-                dialog.show();
-                dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.DKGRAY);
-                dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.DKGRAY);
+        builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(AdminAddCourses.this,
+                        "The operation has been cancelled.",
+                        Toast.LENGTH_LONG
+                ).show();
             }
+        });
+
+        if (pop.get() == 1){
+            AlertDialog dialog = builder.create();
+            dialog.show();
+            dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.DKGRAY);
+            dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.DKGRAY);
         }
     }
 }
