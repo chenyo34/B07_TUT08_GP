@@ -121,4 +121,13 @@ public class Course {
     public boolean hasOffer(Semester semester) {
         return this.OfferingSessions.contains(semester.session);
     }
+
+    public Course removePre(String deleteCode){
+        if(this.Precourses.size()==1){
+            this.Precourses.remove(deleteCode);
+            this.Precourses.add("");
+        }
+        else{this.Precourses.remove(deleteCode);}
+        return this;
+    }
 }

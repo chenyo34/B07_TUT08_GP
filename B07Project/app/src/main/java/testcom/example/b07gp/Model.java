@@ -267,9 +267,17 @@ public class Model {
 //                        System.out.println(code);
 //                        System.out.println(snapshot.hasChild("MATA67"));
                         if (snapshot.hasChild(code)) {
+                            System.out.println("HAHAHAHAHA");
                             coursesRef.child(code).removeValue();
+                            System.out.println("YOOOOOOOOOOOOOO");
+                            getCourses((HashMap<String, Course> allCourses) -> {
+                                for (Map.Entry<String, Course> c: allCourses.entrySet()) {
+                                    if (c.getValue().Precourses.contains(code)){
+                                        coursesRef.child(c.getValue().getCourseCode()).setValue(c.getValue().removePre(code));
+                                    }
+                                }
+                            });
 
-                            getCourses((hHa));
                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                                 callback.accept(code);
                             }
@@ -307,23 +315,6 @@ public class Model {
         dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.DKGRAY);
     }
 
-    public void changeCourseInfo(String code, Context view, Consumer<Course> callback) {
-        System.out.println("updating");
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(view);
-
-        builder.setCancelable(true);
-        builder.setTitle("The course will be removed permanently.");
-        builder.setMessage(Html.fromHtml("<font color=#00000>"+code+"</font>"));
-
-        builder.setPositiveButton("Apply the changes",
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-
-                    }
-                });
-    }
 
 
 }
