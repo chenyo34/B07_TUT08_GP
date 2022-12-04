@@ -267,9 +267,7 @@ public class Model {
 //                        System.out.println(code);
 //                        System.out.println(snapshot.hasChild("MATA67"));
                         if (snapshot.hasChild(code)) {
-                            coursesRef.child(code).removeValue();
 
-                            getCourses((hHa));
                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                                 callback.accept(code);
                             }
