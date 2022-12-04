@@ -34,6 +34,7 @@
         android:id="@+id/studentAddTakenCourseButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:backgroundTint="#1E316C"
         android:layout_centerInParent="true"
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="10dp"
@@ -42,6 +43,7 @@
 
     <Button
         android:id="@+id/studentAddTakenCourseReturn"
+        android:backgroundTint="#1E316C"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

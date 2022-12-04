@@ -20,17 +20,6 @@
         android:textSize="34sp"
         android:textStyle="bold" />
 
-    <!--button for return to student activity layout-->
-    <Button
-        android:id="@+id/studentTakenCourseReturnButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="12dp"
-        android:layout_marginBottom="16dp"
-        android:text="Previous" />
-
     <!--list view to display list of completed courses-->
     <ListView
         android:id="@+id/studentTakenCourseListView"
