@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -30,7 +31,8 @@ import java.util.concurrent.atomic.AtomicReference;
 public class AdminEditDisplay extends AppCompatActivity implements View.OnClickListener{
 
     private Button changeSave, coursesDelete, ShowInfo;
-    EditText edTxtCode, edTxtName, edTxtPrep;
+    EditText edTxtName, edTxtPrep;
+    TextView edTxtCode;
     CheckBox Summer, Fall, Winter;
     String code;
     Model model;
@@ -77,11 +79,11 @@ public class AdminEditDisplay extends AppCompatActivity implements View.OnClickL
         Winter = findViewById(R.id.checkBoxWinter);
 
         code = getIntent().getStringExtra("code").trim();
+        edTxtCode.setText(code);
         String oriName = String.valueOf(FirebaseDatabase.getInstance().getReference("CurrentProvidedCourses").child(code).child("courseName").get().toString());
         System.out.println(oriName);
         model = new Model();
 
-        edTxtCode.setText(code);
         oldCourse = new Course();
         oldCourse.setCourseCode(code);
         model.getCourseByCode(code, (Course oldC) -> {

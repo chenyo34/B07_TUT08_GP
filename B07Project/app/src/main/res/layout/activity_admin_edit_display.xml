@@ -6,15 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".AdminEditDisplay">
 
-    <EditText
+    <TextView
         android:id="@+id/adminEditTargetCourseCode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:ems="10"
-        android:hint="adminEditCourseCode"
         android:inputType="textPersonName"
         android:minHeight="48dp"
+        android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/adminEditCourseCodeTextview" />
 
