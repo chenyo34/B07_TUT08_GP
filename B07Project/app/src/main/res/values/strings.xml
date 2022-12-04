@@ -49,7 +49,10 @@
     <string name="register">Register</string>
     <string name="timeline_submit_button2">Submit</string>
     <string name="timelinetable_textview">Your timeline</string>
-
+    <string name="admin_course_list_display">admin Course List Display</string>
+    <string name="hello">Hello,</string>
+    <string name="mailing_address">Mailing Address:</string>
+    <string name="logout">logOut</string>
 
 
 </resources>
