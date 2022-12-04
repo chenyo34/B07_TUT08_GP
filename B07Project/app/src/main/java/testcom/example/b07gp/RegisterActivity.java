@@ -24,15 +24,14 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.Objects;
+
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener{
 
 
-    private TextView signup;
-    private Button btnRegister;
     private EditText TextName, TextEmail, TextPassWord;
     private ProgressBar progressBar;
-    private CheckBox adminOrNot;
     private FirebaseAuth mAuth;
     boolean isAdmin;
 
@@ -63,13 +62,13 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        signup = (TextView) findViewById(R.id.signup);
+        TextView signup = (TextView) findViewById(R.id.signup);
         signup.setOnClickListener(this);
 
-        btnRegister = (Button) findViewById(R.id.register_user);
+        Button btnRegister = (Button) findViewById(R.id.register_user);
         btnRegister.setOnClickListener(this);
 
-        adminOrNot = (CheckBox) findViewById(R.id.checkboxRemember);
+        CheckBox adminOrNot = (CheckBox) findViewById(R.id.checkboxRemember);
         adminOrNot.setOnClickListener(this);
 
         TextName = (EditText) findViewById(R.id.editTextFullName);
@@ -102,6 +101,16 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         String password = TextPassWord.getText().toString().trim();
 
         //check the violation
+        if(name.isEmpty() && email.isEmpty() && password.isEmpty()) {
+            TextName.setError("Name is required!");
+            TextPassWord.setError("password is required!");
+            TextEmail.setError("Email is required!");
+            TextName.requestFocus();
+            TextEmail.requestFocus();
+            TextPassWord.requestFocus();
+            return;
+        }
+
         if (name.isEmpty()) {
             TextName.setError("Name is required!");
             TextName.requestFocus();
@@ -115,13 +124,13 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         }
 
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            TextEmail.setError("Please provide valid email!");
+            TextEmail.setError("Please provide a valid email !");
             TextEmail.requestFocus();
             return;
         }
 
         if (password.isEmpty()) {
-            TextPassWord.setError("password is required!");
+            TextPassWord.setError("Please provide a password !");
             TextPassWord.requestFocus();
             return;
         }
@@ -142,7 +151,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                             String type = (isAdmin) ? ("admin") : ("student");
                             User user = new User(name, email, password, type);
                             FirebaseDatabase.getInstance().getReference("Users")
-                                    .child(mAuth.getCurrentUser().getUid())
+                                    .child(Objects.requireNonNull(mAuth.getCurrentUser()).getUid())
                                     .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
