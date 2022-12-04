@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/wechatimg604"
     tools:context=".AdminListDisplay">
 
 <!--    <Button-->
@@ -30,6 +31,7 @@
         android:id="@+id/adminListDisplayTextView"
         android:text="Courses"
         android:textSize="32sp"
+        android:textStyle="bold"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
@@ -43,7 +45,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/adminListDisplayTextView"
-        android:layout_marginTop="2dp" />
+        android:layout_marginTop="-12dp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/test"
