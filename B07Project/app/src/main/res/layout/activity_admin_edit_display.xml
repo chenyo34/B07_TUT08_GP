@@ -10,11 +10,10 @@
         android:id="@+id/adminEditTargetCourseCode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
+        android:layout_marginStart="16dp"
         android:ems="10"
         android:hint="adminEditCourseCode"
         android:inputType="textPersonName"
-        app:layout_constraintHorizontal_bias="0.128"
         android:minHeight="48dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/adminEditCourseCodeTextview" />
@@ -23,7 +22,7 @@
         android:id="@+id/coursePre"
         android:layout_width="368dp"
         android:layout_height="53dp"
-        android:layout_marginStart="36dp"
+        android:layout_marginStart="16dp"
         android:ems="10"
         android:hint="adminEditCoursePrereq"
         android:inputType="textPersonName"
@@ -33,22 +32,26 @@
 
     <Button
         android:id="@+id/adminCourseDelete"
-        android:layout_width="137dp"
+        android:layout_width="129dp"
         android:layout_height="49dp"
+        android:backgroundTint="#1E316C"
         android:text="Delete"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="@+id/ChangesSaver"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.983" />
 
     <EditText
         android:id="@+id/adminEditTargetCourseName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
+        android:layout_marginStart="16dp"
         android:ems="10"
         android:hint="adminEditCourseName"
         android:inputType="textPersonName"
         android:minHeight="48dp"
-        app:layout_constraintHorizontal_bias="0.128"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/adminEditCourseNameTextview" />
 
@@ -56,11 +59,11 @@
         android:id="@+id/adminEditCourseCodeTextview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="168dp"
         android:text="Course Code"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.128"
+        app:layout_constraintHorizontal_bias="0.054"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -68,11 +71,11 @@
         android:id="@+id/adminEditCourseNameTextview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="28dp"
         android:text="Course Name"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.128"
+        app:layout_constraintHorizontal_bias="0.055"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/adminEditTargetCourseCode" />
 
@@ -80,11 +83,11 @@
         android:id="@+id/adminEditCourseOfferingTextview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="28dp"
         android:text="Course Offering"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.128"
+        app:layout_constraintHorizontal_bias="0.059"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/adminEditTargetCourseName" />
 
@@ -92,31 +95,32 @@
         android:id="@+id/adminEditCoursePrereqTextview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="28dp"
         android:text="Course Pre Requirement"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.186"
+        app:layout_constraintHorizontal_bias="0.082"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/checkBoxFall" />
 
     <Button
         android:id="@+id/ShowInfoBt"
-        android:layout_width="126dp"
+        android:layout_width="135dp"
         android:layout_height="48dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginEnd="5dp"
+        android:backgroundTint="#1E316C"
         android:text="@string/previous"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/ChangesSaver"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/adminCourseDelete" />
+        app:layout_constraintEnd_toEndOf="@+id/ChangesSaver"
+        app:layout_constraintHorizontal_bias="0.541"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.982" />
 
     <CheckBox
         android:id="@+id/checkBoxWinter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="30dp"
+        android:layout_marginEnd="64dp"
         android:text="Winter"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/adminEditCourseOfferingTextview" />
@@ -125,9 +129,8 @@
         android:id="@+id/checkBoxSummer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
+        android:layout_marginStart="16dp"
         android:text="Summer"
-        app:layout_constraintHorizontal_bias="0.128"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/adminEditCourseOfferingTextview" />
 
@@ -139,15 +142,33 @@
         android:layout_marginEnd="20dp"
         android:text="Fall"
         app:layout_constraintEnd_toStartOf="@+id/checkBoxWinter"
+        app:layout_constraintHorizontal_bias="0.45"
         app:layout_constraintStart_toEndOf="@+id/checkBoxSummer"
         app:layout_constraintTop_toBottomOf="@+id/adminEditCourseOfferingTextview" />
 
     <Button
         android:id="@+id/ChangesSaver"
-        android:layout_width="140dp"
+        android:layout_width="111dp"
         android:layout_height="48dp"
+        android:backgroundTint="#1E316C"
         android:text="Save"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.982" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="378dp"
+        android:layout_height="121dp"
+        app:layout_constraintBottom_toBottomOf="@+id/ShowInfoBt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.484"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.011"
+        app:srcCompat="@drawable/uoft" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

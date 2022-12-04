@@ -7,15 +7,15 @@
     android:orientation="vertical"
     tools:context=".AdminListDisplay">
 
-    <Button
-        android:id="@+id/admitCourseListDisplayPreviousButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/previous"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="12dp"
-        android:layout_marginBottom="16dp" />
+<!--    <Button-->
+<!--        android:id="@+id/admitCourseListDisplayPreviousButton"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="@string/previous"-->
+<!--        android:layout_alignParentStart="true"-->
+<!--        android:layout_alignParentBottom="true"-->
+<!--        android:layout_marginStart="12dp"-->
+<!--        android:layout_marginBottom="16dp" />-->
 
 <!--    <Button-->
 <!--        android:id="@+id/adminListDisplayAddCourseButton"-->
