@@ -1,6 +1,8 @@
 package testcom.example.b07gp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -27,11 +29,16 @@ import java.util.Map;
 
 public class StudentTimelineTable2 extends AppCompatActivity {
 
+//    RecyclerView recyclerView;
+//    TableAdapter adapter;
+    ArrayList<String> session_and_course = new ArrayList<>();
+ //   ArrayList<String> course_table = new ArrayList<>();
+    private ListView listView;
     private Model model;
     private String userID;
     private List<String> wantToTake;
-    private ListView listView;
     private FirebaseAuth mAuth;
+
     Student student;
 
     @Override
@@ -76,7 +83,7 @@ public class StudentTimelineTable2 extends AppCompatActivity {
 
                 List<String> fakeTaken = new ArrayList<>(student.getTakenCourses());
                 HashSet<Course> coursePath = new HashSet<>();
-                Map<String, ArrayList<String>> Timeline = new HashMap<>();
+                HashMap<String, ArrayList<String>> Timeline = new HashMap<>();
                 Semester curSem = new Semester();
 
 //                 Get all the courses maybe needed
@@ -139,6 +146,7 @@ public class StudentTimelineTable2 extends AppCompatActivity {
                     fakeTaken.addAll(newcourses);
                     System.out.println(newcourses);
 
+
                     Timeline.put(curSem.toString(), (ArrayList<String>) newcourses.clone());
 
                     // clean the new courses
@@ -150,6 +158,26 @@ public class StudentTimelineTable2 extends AppCompatActivity {
                 }
                 System.out.println("timeline: ");
                 System.out.println(Timeline);
+
+                for (String key: Timeline.keySet()){
+                    if (Timeline.get(key).isEmpty()){
+                        session_and_course.add(key+ "        " + "");
+                    }
+                    else {
+                        session_and_course.add(key + "        " + Timeline.get(key));
+                    }
+                }
+                Collections.reverse(session_and_course);
+
+
+                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(StudentTimelineTable2.this,
+                        android.R.layout.simple_list_item_1, session_and_course);
+                listView = (ListView) findViewById(R.id.listview_table);
+                listView.setAdapter(arrayAdapter);
+
+//                        recyclerView = findViewById(R.id.recycler_course_table);
+//        setRecyclerView();
+                print_table();
             });
         });
 //
@@ -159,9 +187,28 @@ public class StudentTimelineTable2 extends AppCompatActivity {
 //        model.getStudent(userID, (Student student) -> {
 //            this.student = student;
 //        });
-
-
     }
+
+    public void print_table(){
+        for (int i=0; i<session_and_course.size(); i++)
+        System.out.println(session_and_course.get(i));
+    }
+
+//    private void setRecyclerView(){
+//        recyclerView.setHasFixedSize(true);
+//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+//        adapter = new TableAdapter(this, getlist());
+//        recyclerView.setAdapter(adapter);
+//    }
+//
+//    private List<Table> getlist(){
+//        List<Table> tableList = new ArrayList<>();
+//        for (int i=0; i<session_table.size(); i++){
+//            tableList.add(new Table(session_table.get(i), course_table.get(i)));
+//        }
+//
+//        return tableList;
+//    }
 
 
 

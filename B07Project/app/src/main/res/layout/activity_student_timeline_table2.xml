@@ -1,60 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:stretchColumns="1,2"
-    android:layout_margin="8dp"
+    android:orientation="vertical"
     tools:context=".StudentTimelineTable2">
 
-    <TableRow>
 
-        <TextView
-            android:layout_column="1"
-            android:padding="10dp"
-            android:text="Course"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:layout_gravity="center"
-            android:textStyle="bold" />
-
-        <TextView
-            android:layout_column="1"
-            android:padding="10dp"
-            android:text="Session"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:layout_gravity="center"
-            android:textStyle="bold" />
-    </TableRow>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_course_table"
+    <TextView
+        android:id="@+id/student_timeline_table"
+        android:text="Your timeline"
+        android:textSize="32sp"
         android:layout_width="match_parent"
+        android:gravity="center"
         android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="12dp"
         />
 
+    <ListView
+        android:id="@+id/listview_table"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/student_timeline_table" />
 
-<!--    <TextView-->
-<!--        android:id="@+id/table_textview"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginStart="12dp"-->
-<!--        android:layout_marginTop="12dp"-->
-<!--        android:layout_marginEnd="12dp"-->
-<!--        android:layout_marginBottom="12dp"-->
-<!--        android:gravity="center"-->
-<!--        android:text="Your Timeline"-->
-<!--        android:textColor="@color/black"-->
-<!--        android:textSize="32sp"-->
-<!--        android:textStyle="bold" />-->
-
-<!--    <ListView-->
-<!--        android:id="@+id/listview_table"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:layout_below="@id/table_textview" /> -->
-
-
-</TableLayout>
+</RelativeLayout>
