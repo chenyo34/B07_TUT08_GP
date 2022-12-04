@@ -129,11 +129,6 @@ public class AdminEditDisplay extends AppCompatActivity implements View.OnClickL
                 });
                 break;
             case R.id.ChangesSaver:
-//                Course tem = new Course(code,
-//                        edTxtName.toString(),
-//                        offSessions,
-//                        new ArrayList<>(List.of(Prerequisite))
-//                );
                 changeCourseInfo();
                 break;
         }
