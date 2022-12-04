@@ -263,16 +263,11 @@ public class Model {
                 coursesRef.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                        System.out.println("inside the data changes");
-//                        System.out.println(code);
-//                        System.out.println(snapshot.hasChild("MATA67"));
                         if (snapshot.hasChild(code)) {
-                            System.out.println("HAHAHAHAHA");
                             coursesRef.child(code).removeValue();
-                            System.out.println("YOOOOOOOOOOOOOO");
                             getCourses((HashMap<String, Course> allCourses) -> {
-                                for (Map.Entry<String, Course> c: allCourses.entrySet()) {
-                                    if (c.getValue().Precourses.contains(code)){
+                                for (Map.Entry<String, Course> c : allCourses.entrySet()) {
+                                    if (c.getValue().Precourses.contains(code)) {
                                         coursesRef.child(c.getValue().getCourseCode()).setValue(c.getValue().removePre(code));
                                     }
                                 }
@@ -286,7 +281,6 @@ public class Model {
                                 callback.accept(null);
                             }
                         }
-
                     }
 
                     @Override
@@ -295,10 +289,8 @@ public class Model {
                     }
                 });
             };
-
-
-
         });
+
         builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int i) {

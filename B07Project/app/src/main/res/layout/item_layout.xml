@@ -8,20 +8,20 @@
     <TableRow>
 
         <TextView
-            android:id="@+id/table_course"
+            android:id="@+id/table_session"
             android:layout_column="1"
             android:padding="10dp"
-            android:text="Course"
+            android:text="Session"
             android:textColor="@color/black"
             android:textSize="20sp"
             android:layout_gravity="center"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/table_session"
+            android:id="@+id/table_course"
             android:layout_column="1"
             android:padding="10dp"
-            android:text="Session"
+            android:text="Course"
             android:textColor="@color/black"
             android:textSize="20sp"
             android:layout_gravity="center"

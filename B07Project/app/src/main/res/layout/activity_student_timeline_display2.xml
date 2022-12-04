@@ -39,6 +39,5 @@
         android:choiceMode="multipleChoice"
         android:layout_below="@id/student_timeline_DisplayTextView"
         android:layout_above="@id/timeline_submit_button2" />
-<!--        android:layout_marginTop="-39dp">-->
 
 </RelativeLayout>
