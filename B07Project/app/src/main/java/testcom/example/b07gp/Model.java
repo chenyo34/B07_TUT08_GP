@@ -121,7 +121,7 @@ public class Model {
         });
     }
 
-    public void getCourses(Consumer<Map<String, Course>> callback) {
+    public void getCourses(Consumer<HashMap<String, Course>> callback) {
         coursesRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -139,6 +139,25 @@ public class Model {
             public void onCancelled(@NonNull DatabaseError error) {}
         });
     }
+
+//    public void getCourses(Consumer<Map<String, Course>> callback) {
+//        coursesRef.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                //create a hashmap
+//                HashMap<String, Course> allCourses = new HashMap<>();
+//                for (DataSnapshot cns : snapshot.getChildren()) {
+//                    Course c = cns.getValue(Course.class);
+//                    allCourses.put(c.getCourseCode(), c);
+//                }
+//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+//                    callback.accept(allCourses);
+//                }
+//            }
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {}
+//        });
+//    }
 
     public List<Course> getCoursePath(Map<String, Course> allCourses, String courseCode) {
 
@@ -249,6 +268,8 @@ public class Model {
 //                        System.out.println(snapshot.hasChild("MATA67"));
                         if (snapshot.hasChild(code)) {
                             coursesRef.child(code).removeValue();
+
+                            getCourses((hHa));
                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                                 callback.accept(code);
                             }
