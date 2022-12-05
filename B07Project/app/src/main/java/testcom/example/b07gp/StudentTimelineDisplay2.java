@@ -116,7 +116,7 @@ public class StudentTimelineDisplay2 extends AppCompatActivity implements View.O
                             !(selected_courses.contains(course))){
                         selected_courses.add(course);
                     }
-                    else if(!(listView.isItemChecked(i))){
+                    else {
                         selected_courses.remove(listView.getItemAtPosition(i).toString());
                     }
                 }

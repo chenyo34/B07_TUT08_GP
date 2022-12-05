@@ -87,20 +87,6 @@ public class StudentTimelineTable2 extends AppCompatActivity {
                 Semester curSem = new Semester();
 
 //                 Get all the courses maybe needed
-//                for (String courseCode: wantToTake) {
-//                    coursePath.addAll(model.getCoursePath(allCourses,courseCode));
-//                }
-
-//                 Remove the courses has been taken from the CouresPath
-//                for (Course c: coursePath) {
-////                    if (!student.getTakenCourses().contains(c.CourseCode)) continue;
-////                    coursePath.remove(c);
-//                    System.out.println(c.CourseCode);
-//                    System.out.println(student.TakenCourses);
-//                    if (student.TakenCourses.contains(c.CourseCode)){
-//                        coursePath.remove(c);
-//                    }
-//                }
 
                 for (String courseCode: wantToTake) {
                     for (Course c: model.getCoursePath(allCourses,courseCode)){

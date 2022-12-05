@@ -34,22 +34,25 @@
         android:id="@+id/studentAddTakenCourseButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="#1E316C"
         android:layout_centerInParent="true"
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="10dp"
-        android:text="Submit"
-        />
+        android:backgroundTint="#1E316C"
+        android:text="Submit" />
 
     <Button
         android:id="@+id/studentAddTakenCourseReturn"
-        android:backgroundTint="#1E316C"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/studentAddTakenCourseButton"
+        android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
-        android:layout_margin="16dp"
-        android:text="Previous"
-        />
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="287dp"
+        android:layout_marginTop="277dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="#1E316C"
+        android:text="Previous" />
 
 </RelativeLayout>
