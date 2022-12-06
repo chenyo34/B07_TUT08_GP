@@ -138,11 +138,21 @@ public class StudentTimelineTable2 extends AppCompatActivity {
                 System.out.println();
 
                 for (String key: Timeline.keySet()){
+                    String makeup = new String();
+                    if (key.contains("Winter")) {
+                        makeup = "      |"; // 5 space
+                    } else if (key.contains("Summer")) {
+                        makeup = "  |"; // 4 space
+                    } else {
+                        makeup = "           |"; // 6 space
+                    }
                     if (Timeline.get(key).isEmpty()){
-                        session_and_course.add(key+ "        " + "");
+                        session_and_course.add(key+ makeup);
                     }
                     else {
-                        session_and_course.add(key + "        " + Timeline.get(key));
+                        session_and_course.add(key + makeup + Timeline.get(key).toString()
+                                .replace("[","")
+                                .replace("]", ""));
                     }
                 }
 
