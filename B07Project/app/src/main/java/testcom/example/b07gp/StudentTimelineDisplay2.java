@@ -123,6 +123,7 @@ public class StudentTimelineDisplay2 extends AppCompatActivity implements View.O
                 Intent intent = new Intent(this,StudentTimelineTable2.class);
                 intent.putStringArrayListExtra("Wanted_course", selected_courses);
                 startActivity(intent);
+                selected_courses.clear();
                 break;
         }
     }
